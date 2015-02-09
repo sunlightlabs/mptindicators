@@ -1,0 +1,18 @@
+{% extends "scorecard/base.html" %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    {% regroup object.indicator_scores.all by indicator.subsection.section as section_list %}
+    {% for section in section_list %}
+        <h2>{{ section.grouper }}</h2>
+        {% regroup section.list by indicator.subsection as subsection_list %}
+        {% for subsection in subsection_list %}
+            <h3>{{ subsection.grouper }}</h3>
+            <ul>
+                {% for indicator_score in subsection.list %}
+                    <li>{{ indicator_score.indicator.number }} {{ indicator_score.score }} {{ indicator_score.indicator.name }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
