@@ -1,0 +1,41 @@
+{% extends "scorecard/base.html" %}
+
+{% block sidebar %}
+    <ul>
+        {% for section in sections %}
+            <li>
+                <a href="{% url 'scorecard_section' section.number %}">{{ section.name }}</a>
+                <ul>
+                    {% for subsection in section.subsections.all %}
+                        <li>
+                            <a href="{% url 'scorecard_subsection' section.number subsection.number %}">{{ subsection }}</a>
+                            <ul>
+                                {% for indicator in subsection.indicators.all %}
+                                    <li>
+                                        <a href="{% url 'scorecard_indicator' indicator.number %}">{{ indicator.number }}. {{ indicator.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <p>
+        <a href="{% url 'scorecard_section' object.subsection.section.number %}">{{ object.subsection.section.name }}</a>
+        /
+        <a href="{% url 'scorecard_subsection' object.subsection.section.number object.subsection.number %}">{{ object.subsection.name }}</a>
+    <h1>{{ object.number }}. {{ object.name }}</h1>
+    <ul>
+        {% for indicator_score in object.indicator_scores.all %}
+            <li>
+                <a href="{% url 'scorecard_country' indicator_score.country.slug %}">{{ indicator_score.country }}</a>
+                {{ indicator_score.score }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

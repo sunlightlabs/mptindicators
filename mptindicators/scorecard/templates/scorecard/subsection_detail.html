@@ -1,0 +1,39 @@
+{% extends "scorecard/base.html" %}
+
+{% block sidebar %}
+    <ul>
+        {% for section in sections %}
+            <li>
+                <a href="{% url 'scorecard_section' section.number %}">{{ section.name }}</a>
+                <ul>
+                    {% for subsection in section.subsections.all %}
+                        <li>
+                            <a href="{% url 'scorecard_subsection' section.number subsection.number %}">{{ subsection }}</a>
+                            <ul>
+                                {% for indicator in subsection.indicators.all %}
+                                    <li>
+                                        <a href="{% url 'scorecard_indicator' indicator.number %}">{{ indicator.number }}. {{ indicator.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h1>
+        <a href="{% url 'scorecard_section' object.section.number %}">{{ object.section.name }}</a>
+        /
+        {{ object.name }}</h1>    
+    <ul>
+        {% for indicator in subsection.indicators.all %}
+            <li>
+                <a href="{% url 'scorecard_indicator' indicator.number %}">{{ indicator.number }}. {{ indicator.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

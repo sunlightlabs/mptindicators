@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mptindicators.scorecard',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (

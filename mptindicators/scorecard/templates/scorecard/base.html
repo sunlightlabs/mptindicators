@@ -2,8 +2,22 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/4.2.4/basscss.min.css" rel="stylesheet">
     </head>
     <body>
-        {% block content %}{% endblock %}
+        <div class="container">
+            <div class="clearfix border-bottom m2">
+                <a href="{% url 'scorecard_countries' %}" class="left button button-nav-tab">Country</a>
+                <a href="{% url 'scorecard_sections' %}" class="left button button-nav-tab">Indicators</a>
+            </div>
+            <div class="clearfix mxn2">
+                <div class="sm-col sm-col-4 p2 bg-light-gray">
+                    {% block sidebar %}{% endblock %}
+                </div>
+                <div class="sm-col sm-col-8 px2">
+                    {% block content %}{% endblock %}
+                </div>
+        </div>
     </body>
 </html>
