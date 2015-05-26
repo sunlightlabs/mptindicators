@@ -76,3 +76,24 @@ a:hover, a:focus {
 .side-nav li {
 	list-style-type: none;
 }
+
+
+.your-accordion-navigation-class {
+  @include accordion-navigation($bg:red, $hover-bg:red);
+}
+
+
+
+//  Mixin: accordion-navigation( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size, $font-family) {
+//    @params $bg-color: [ color or string ]: Specify the background color for the navigation element
+//    @params $hover-bg-color [ color or string ]: Specify the background color for the navigation element when hovered
+//    @params $active-bg [ color or string ]: Specify the background color for the navigation element when clicked and not released.
+//    @params $active_class [ string ]: Specify the class name used to keep track of which accordion tab should be visible
+//    @params $font-color [ color or string ]: Color of the font for accordion
+//    @params $font-size [ number ]: Specifiy the font-size of the text inside the navigation element
+//    @params $font-family [ string ]: Specify the font family for the text of the navigation of the accorion
+
+
+
+
+
