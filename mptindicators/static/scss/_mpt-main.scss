@@ -30,20 +30,39 @@ a:hover, a:focus {
 	display: block;
 	text-indent: -9999em;
 	width: 259px;
-	height: 71px;
+	height: 2.25em;
 	position: relative;
 	z-index: 200;
+	margin: 0;
+}
+.top-bar-section ul.meta-nav li>a {
+	text-transform: uppercase;
 }
 .mpt-side-nav {
 	width: 300px;
 	float: left;
-	background-color: $clr-green-base;
+	background-color: $clr-green-dark;
 	z-index: 200;
 	position: absolute;
+	.tabs .tab-title {
+		width: 50%;
+	}
+}
+.page-header {
+	.row {
+		background-color: $clr-green-base;
+	}
+	.social-share {
+		float: right;
+		li {
+			list-style-type: none;
+			display: inline-block;
+		}
+	}
 }
 .mpt-content-area {
 	float: left;
-	background-color: $clr-yellow-base;
+	// background-color: $clr-yellow-base; *** To Test floating
 }
 .row{
   &.full-width{
@@ -53,4 +72,7 @@ a:hover, a:focus {
 		padding-left: 300px;
 		box-sizing: border-box;
 	}
+}
+.side-nav li {
+	list-style-type: none;
 }

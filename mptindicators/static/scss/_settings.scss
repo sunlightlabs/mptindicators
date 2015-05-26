@@ -1165,12 +1165,12 @@ $include-html-global-classes: $include-html-classes;
 // $side-nav-padding: rem-calc(14 0);
 
 // We use these to control list styles.
-// $side-nav-list-type: none;
+   $side-nav-list-type: none;
 // $side-nav-list-position: outside;
 // $side-nav-list-margin: rem-calc(0 0 7 0);
 
 // We use these to control link styles.
-// $side-nav-link-color: $primary-color;
+   $side-nav-link-color: $clr-green-text;
 // $side-nav-link-color-active: scale-color($side-nav-link-color, $lightness: 30%);
 // $side-nav-link-color-hover: scale-color($side-nav-link-color, $lightness: 30%);
 // $side-nav-link-bg-hover: hsla(0, 0, 0, .025);
@@ -1338,8 +1338,8 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-tabs-classes: $include-html-classes;
 
 // $tabs-navigation-padding: rem-calc(16);
-// $tabs-navigation-bg-color: $silver;
-// $tabs-navigation-active-bg-color: $white;
+   $tabs-navigation-bg-color: $clr-green-base;
+   $tabs-navigation-active-bg-color: $clr-green-dark;
 // $tabs-navigation-hover-bg-color: scale-color($tabs-navigation-bg-color, $lightness: -6%);
 // $tabs-navigation-font-color: $jet;
 // $tabs-navigation-active-font-color: $tabs-navigation-font-color;
@@ -1422,7 +1422,7 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-link-bg: $topbar-bg;
    $topbar-link-bg-hover: $clr-green-dark;
 // $topbar-link-bg-color-hover: $charcoal;
-// $topbar-link-bg-active: $primary-color;
+   $topbar-link-bg-active: $clr-blue-base;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
 // $topbar-link-text-transform: none;
