@@ -50,7 +50,7 @@
 				<nav class="top-bar">
 						<div class="top-bar-section large-12 columns">
 							<ul>
-								<li><a href="/"><h1 class="logo">Money, Politics and Transparency</h1></a></li>
+								<li class="logo"><a href="/"><h1>Money, Politics and Transparency</h1></a></li>
 								<li><a href="/casestudies">Case Studies</a></li>
 								<li><a href="/data">Data</a></li>
 								<li><a href="/resources">Resources</a></li>
@@ -73,48 +73,66 @@
 			</ul>
 			<div class="tabs-content">
 				<div class="nav-indicators content active" id="panel1">
-					<form>
+					<form class="search">
 					    <!--  <label>Search Documentation</label> -->
 					    <input id="autocomplete" type="search" placeholder="Search indicators" autocomplete="off">
-				  </form>
-					<ul class="side-nav accordion" data-accordion role="navigation" title="Link List">
-					   <li class="your-accordion-navigation-class"><a href="#nav1a">Direct Public Funding</a>
-					   		<div id="nav1a" class="content active">
-					   		<ul>
-					   			<li><a href="">In law, there is direct public funding for electoral campaigns.</a></li>
-					   			<li><a href="">In law, there is a transparent and equitable mechanism to determine direct public funding for electoral campaigns.</a></li>
-					   			<li><a href="">In practice, to what extent is the mechanism to determine direct public funding for electoral campaigns transparent, equitable and consistently applied?</a></li>
-					   			<li><a href="">In practice, to what extent does the entity in charge of public funding make disbursement information publicly available?</a></li>
-					   		</ul>
-					   		</div>
-					   </li>
-					   <li class="accordion-navigation"><a href="#nav2a">Indirect Public Funding</a>
-					   		<div id="nav2a" class="content">
-					   		<ul>
-					   			<li><a href="">In law, use of state resources in favor of or against political parties and individual candidates is prohibited.</a></li>
-					   			<li><a href="">In practice, to what extent are no state resources used in favor of or against political parties and individual candidates' electoral campaigns?</a></li>
-					   			<li><a href="">In law, political parties and individual candidates have free or subsidized access to equitable air time for electoral campaigns?</a></li>
-					   			<li><a href="">In practice, to what extent is free or subsidized access to air time provided in a transparent, equitable way to political parties and individual candidates for electoral campaigns?</a></li>
-					   		</ul>
-					   		</div>
-					   </li>
-					   <li><a href="">2.1 General Rules on Electoral Campaign Contributions</a>
-					   		<ul>
-					   			<li><a href="">In law, cash contributions are banned.</a></li>
-					   			<li><a href="">In law, there is a ban on anonymous contributions.</a></li>
-					   			<li><a href="">In law, in-kind donations to political parties and individual candidates must be reported.</a></li>
-					   			<li><a href="">In law, loans to political parties and individual candidates must be reported.</a></li>
-					   		</ul>
-					   </li>
-					   <li><a href="">Indirect Public Funding</a>
-					   		<ul>
-					   			<li><a href="">In law, use of state resources in favor of or against political parties and individual candidates is prohibited.</a></li>
-					   			<li><a href="">In practice, to what extent are no state resources used in favor of or against political parties and individual candidates' electoral campaigns?</a></li>
-					   			<li><a href="">In law, political parties and individual candidates have free or subsidized access to equitable air time for electoral campaigns?</a></li>
-					   			<li><a href="">In practice, to what extent is free or subsidized access to air time provided in a transparent, equitable way to political parties and individual candidates for electoral campaigns?</a></li>
-					   		</ul>
-					   </li>
+					    <button></button>
+					</form>
 
+					
+
+
+					<ul class="side-nav accordion" data-accordion>
+					  <li class="accordion-navigation">
+					    <a class="expand" href="#nav1a">expand button!</a>
+						<a class="section" href="#">Direct Public Funding</a>
+					    <div id="nav1a" class="content active">
+					      <ul class="accordion" data-accordion>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav1b">expand button!</a>
+								<a class="section" href="#">Subsection 1b</a>
+							    <div id="nav1b" class="content">
+							     	<ul>
+							     		<li><a href="">1 Indicator number 1</a></li>
+							     		<li><a href="">2 Indicator number 2</a></li>
+							     		<li><a href="">3 Indicator number 3</a></li>
+							     		<li><a href="">4 Indicator number 4</a></li>
+							     		<li><a href="">5 Indicator number 5</a></li>
+							     		<li><a href="">6 Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav2b">expand button!</a>
+								<a class="section" href="#">Subsection 2b</a>
+							    <div id="nav2b" class="content">
+							    	<ul>
+							     		<li><a href="">1 Indicator number 1</a></li>
+							     		<li><a href="">2 Indicator number 2</a></li>
+							     		<li><a href="">3 Indicator number 3</a></li>
+							     		<li><a href="">4 Indicator number 4</a></li>
+							     		<li><a href="">5 Indicator number 5</a></li>
+							     		<li><a href="">6 Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							</ul>
+					    </div>
+					  </li>
+					  <li class="accordion-navigation">
+					    <a class="expand" href="#nav2a">expand button!</a>
+						<a class="section" href="#">Second section</a>
+					    <div id="nav2a" class="content">
+					      Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					    </div>
+					  </li>
+					  <li class="accordion-navigation">
+					    <a class="expand" href="#nav3a">expand button!</a>
+						<a class="section" href="#">Third Section</a>
+					    <div id="nav3a" class="content">
+					      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					    </div>
+					  </li>
 					</ul>
 				</div>
 				<div class="nav-country content" id="panel2">
@@ -151,7 +169,26 @@
 				  <li class="accordion-navigation">
 				    <a href="#panel1a">Accordion 1</a>
 				    <div id="panel1a" class="content active">
-				      Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				      <ul class="accordion" data-accordion>
+						  <li class="accordion-navigation">
+						    <a href="#panel1b">Accordion 1</a>
+						    <div id="panel1b" class="content active">
+						      Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						    </div>
+						  </li>
+						  <li class="accordion-navigation">
+						    <a href="#panel2b">Accordion 2</a>
+						    <div id="panel2b" class="content">
+						      Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						    </div>
+						  </li>
+						  <li class="accordion-navigation">
+						    <a href="#panel3b">Accordion 3</a>
+						    <div id="panel3b" class="content">
+						      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						    </div>
+						  </li>
+						</ul>
 				    </div>
 				  </li>
 				  <li class="accordion-navigation">
@@ -172,6 +209,21 @@
 		</div>
 		<script>
 		  $(document).foundation();
-		</script>		
+		</script>
+		<script>
+			$(document).foundation({
+			  accordion: {
+			    // specify the class used for accordion panels
+			    content_class: 'content',
+			    // specify the class used for active (or open) accordion panels
+			    active_class: 'active',
+			    // allow multiple accordion panels to be active at the same time
+			    multi_expand: true,
+			    // allow accordion panels to be closed by clicking on their headers
+			    // setting to false only closes accordion panels when another is opened
+			    toggleable: true
+			  }
+			});
+		</script		
 	</body>
 </html>

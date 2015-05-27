@@ -24,9 +24,12 @@ a {
 a:hover, a:focus {
 	color: #568c49;
 }
-
-.logo, .logo h1 {
-	background: url('../img/mpt-logo.png')center center no-repeat;
+.top-bar-section ul li.logo:hover>a {
+	background: inherit;
+	background-color: inherit;
+}
+.logo h1 {
+	background: url('../img/mpt-logo.png') center center no-repeat;
 	display: block;
 	text-indent: -9999em;
 	width: 259px;
@@ -46,11 +49,24 @@ a:hover, a:focus {
 	position: absolute;
 	.tabs .tab-title {
 		width: 50%;
+		line-height: 1em;
+		&:focus {
+			outline: 0;
+		}
+		a {
+			color: $clr-green-text;
+			text-transform: uppercase;
+			font-size: .8rem;
+		}
+		&.active a{
+			color: white;
+		}
 	}
 }
 .page-header {
 	.row {
 		background-color: $clr-green-base;
+		height: 96px;
 	}
 	.social-share {
 		float: right;
@@ -77,9 +93,84 @@ a:hover, a:focus {
 	list-style-type: none;
 }
 
+.tabs-content .content {
+	padding: 0;
+}
+.side-nav.accordion {
+	padding-top: 0;
+	.accordion-navigation {
+	  @include accordion-navigation($bg:$clr-green-dark, $hover-bg:$clr-green-base);
+	}
+	.content {
+		@include accordion-content($bg:$clr-green-dark);
+	}
+	a.expand {
+		background: url('../img/expand-large.png') left top no-repeat;
+		text-indent: -9999em;
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		padding: 0;
+		&:hover {
+			background: url('../img/expand-large.png') left bottom no-repeat;
+		}
+		&.active {
+			background-position: right top;
+			&:hover {
+				background-position: right bottom;
+			}
+		}
+	}
+	a.section {
+		display: inline-block
+	}
+}
 
-.your-accordion-navigation-class {
-  @include accordion-navigation($bg:red, $hover-bg:red);
+.nav-indicators .search {
+	input{
+		box-shadow: none;
+		background-color: inherit;
+		border: 0;
+		border-bottom: 2px solid white;
+		margin: 0 20px;
+		width: 210px;
+		display: inline-block;
+		font-family: $font-serif;
+		font-family: italic;
+		color: $clr-green-text;
+	}
+	button {
+		background: url('../img/search.png') center top no-repeat;
+		width: 32px;
+		height: 32px;
+		margin: 0;
+		padding: 0;
+		top: 13px;
+		&:hover {
+			background-position: center bottom;
+		}
+	}
+	::-webkit-input-placeholder {
+	  color: $clr-green-text;
+	  font-style: italic;
+	}
+
+	:-moz-placeholder {
+	  /* Firefox 18- */
+	  color: $clr-green-text;
+	  font-style: italic; 
+	}
+
+	::-moz-placeholder {
+	  /* Firefox 19+ */
+	  color: $clr-green-text;
+	  font-style: italic;
+	}
+
+	:-ms-input-placeholder {
+	  color: $clr-green-text;
+	  font-style: italic;
+	}
 }
 
 
