@@ -41,6 +41,12 @@ a:hover, a:focus {
 .top-bar-section ul.meta-nav li>a {
 	text-transform: uppercase;
 }
+.top-bar-section ul li>a {
+	-webkit-transition: background-color 300ms ease-out;
+	-moz-transition: background-color 300ms ease-out;
+	transition: background-color 300ms ease-out;
+}
+
 .mpt-side-nav {
 	width: 300px;
 	float: left;
@@ -98,19 +104,31 @@ a:hover, a:focus {
 }
 .side-nav.accordion {
 	padding-top: 0;
+	margin-left: 20px;
 	.accordion-navigation {
-	  @include accordion-navigation($bg:$clr-green-dark, $hover-bg:$clr-green-base);
+		@include accordion-navigation($bg:$clr-green-dark, $hover-bg:rgba(0,0,0,0.025), $active-bg:inherit, $font-color:clr-green-text, $padding:5px, $font-size:.8rem);
+		text-transform: uppercase;
+		&.active>.expand{
+	  		background-position: right top;
+			&:hover {
+				background-position: right bottom;
+			}
+	  }
+	  
 	}
 	.content {
-		@include accordion-content($bg:$clr-green-dark);
+		@include accordion-content($bg:inherit);
+		padding-right: 0;
 	}
-	a.expand {
+	.accordion-navigation>a.expand {
 		background: url('../img/expand-large.png') left top no-repeat;
 		text-indent: -9999em;
-		display: inline-block;
+		display: block;
+		float: left;
 		width: 22px;
 		height: 22px;
 		padding: 0;
+		margin: 6px 6px 0 6px ;
 		&:hover {
 			background: url('../img/expand-large.png') left bottom no-repeat;
 		}
@@ -122,7 +140,34 @@ a:hover, a:focus {
 		}
 	}
 	a.section {
-		display: inline-block
+		display: block;
+	}
+	.indicator-num {
+		background: $clr-green-text;
+		color: $clr-green-dark;
+		font-weight: bold;
+		font-size: 1rem;
+		width: 25px;
+		height: 25px;
+		display: inline-block;
+		text-align: center;
+	}
+}
+.side-nav.accordion .accordion .accordion-navigation>a {
+	color: $clr-text;
+	&.expand {
+		background: url('../img/expand-small.png') left top no-repeat;
+		width: 15px;
+		height: 15px;
+		&:hover {
+			background: url('../img/expand-small.png') left bottom no-repeat;
+		}
+		&.active {
+			background-position: right top;
+			&:hover {
+				background-position: right bottom;
+			}
+		}
 	}
 }
 
