@@ -47,28 +47,45 @@ a:hover, a:focus {
 	transition: background-color 300ms ease-out;
 }
 
-.mpt-side-nav {
-	width: 300px;
-	float: left;
-	background-color: $clr-green-dark;
-	z-index: 200;
-	position: absolute;
-	.tabs .tab-title {
-		width: 50%;
-		line-height: 1em;
-		&:focus {
-			outline: 0;
-		}
-		a {
-			color: $clr-green-text;
-			text-transform: uppercase;
-			font-size: .8rem;
-		}
-		&.active a{
-			color: white;
-		}
+
+/* GENERAL - social media */
+.twitter {
+	background: url(../img/twitter.png) left top no-repeat;
+}
+.twitter.color {
+	background: url(../img/twitter-color.png) left top no-repeat;	
+}
+.facebook{
+	background: url(../img/facebook.png) left top no-repeat;
+}
+.facebook.button, .twitter.button{
+	background-position: 10px center;
+}
+.button.twitter {
+	background-color: #00aced;
+}
+.button.twitter:hover, .button.twitter:focus {
+	background-color: #008cba;
+}
+.button.facebook {
+	background-color: #3b5998;
+}
+.button.facebook:hover, .button.facebook:focus {
+	background-color: #2f497e;
+}
+.social-share {
+	li {
+		list-style-type: none;
+		display: inline-block;
+	}
+	a {
+		display: block;
+		text-indent: -9999em;
 	}
 }
+
+
+
 .page-header {
 	.row {
 		background-color: $clr-green-base;
@@ -76,10 +93,6 @@ a:hover, a:focus {
 	}
 	.social-share {
 		float: right;
-		li {
-			list-style-type: none;
-			display: inline-block;
-		}
 	}
 }
 .mpt-content-area {
@@ -95,10 +108,34 @@ a:hover, a:focus {
 		box-sizing: border-box;
 	}
 }
-.side-nav li {
-	list-style-type: none;
+.mpt-side-nav {
+	width: 300px;
+	float: left;
+	background-color: $clr-green-dark;
+	z-index: 200;
+	position: absolute;
+	font-family: $font-sans;
+	font-size: .8rem;
+	ul {
+		list-style-type: none;
+		font-size: .8rem;
+		text-transform: uppercase;
+	}
+	.tabs .tab-title {
+		width: 50%;
+		line-height: 1em;
+		&:focus {
+			outline: 0;
+		}
+		a {
+			color: $clr-green-text;
+			font-size: .8rem;
+		}
+		&.active a{
+			color: white;
+		}
+	}
 }
-
 .tabs-content .content {
 	padding: 0;
 }
@@ -106,8 +143,7 @@ a:hover, a:focus {
 	padding-top: 0;
 	margin-left: 20px;
 	.accordion-navigation {
-		@include accordion-navigation($bg:$clr-green-dark, $hover-bg:rgba(0,0,0,0.025), $active-bg:inherit, $font-color:clr-green-text, $padding:5px, $font-size:.8rem);
-		text-transform: uppercase;
+		@include accordion-navigation($bg:$clr-green-dark, $hover-bg:rgba(0,0,0,0.025), $active-bg:inherit, $font-color:$clr-green-text, $padding:5px, $font-size:.8rem);
 		&.active>.expand{
 	  		background-position: right top;
 			&:hover {
@@ -177,7 +213,7 @@ a:hover, a:focus {
 		background-color: inherit;
 		border: 0;
 		border-bottom: 2px solid white;
-		margin: 0 20px;
+		margin: 0 10px 0 20px;
 		width: 210px;
 		display: inline-block;
 		font-family: $font-serif;
@@ -215,6 +251,77 @@ a:hover, a:focus {
 	:-ms-input-placeholder {
 	  color: $clr-green-text;
 	  font-style: italic;
+	}
+}
+.expand-all {
+	background-color: $clr-green-base;
+	padding: 8px 5px 8px 5px;
+	display: block;
+	line-height: .9rem;
+	font-family: $font-sans;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	text-align: center;
+	color: $clr-green-text;
+	margin: 20px;
+	&:hover {
+		color: #ffffff;
+	}
+	span {
+		background: url('../img/expand-all.png') left top no-repeat;
+		width: 18px;
+		height: 15px;
+		text-indent: -9999em;
+		display: inline-block;
+		margin-right: 5px;
+	}
+	&:hover span{
+		background: url('../img/expand-all.png') left bottom no-repeat;
+	}
+	&.active span {
+		background: url('../img/expand-all.png') right top no-repeat;
+	}
+	&.active:hover span{
+		background: url('../img/expand-all.png') right bottom no-repeat;
+	}
+}
+.nav-country {
+	margin-top: 20px;
+	a {
+		color: $clr-green-text;
+		display: block;
+		line-height: 1.2rem;
+		font-family: $font-sans;
+		font-size: 0.8rem;
+		padding: 5px;
+	}
+	a:hover {
+		color: #ffffff;
+		background-color: rgba(0,0,0,0.025);
+	}
+	
+}
+.meta-nav-indicators {
+
+}
+.mpt-side-nav .meta-nav-indicators {
+	margin: 20px;
+	background-color: $clr-green-base;
+	padding: 20px;
+	ul {
+		margin: 0;
+	}
+	a {
+		color: $clr-green-text;
+	}
+	a:hover {
+		color: #ffffff;
+	}
+}
+.partner-logos {
+	margin: 20px;
+	li {
+		margin: 20px 0;
 	}
 }
 
