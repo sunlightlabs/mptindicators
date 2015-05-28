@@ -1,13 +1,5 @@
 {% extends "scorecard/base.html" %}
 
-{% block sidebar %}
-    <ul>
-        {% for country in object_list %}
-            <li><a href="{% url 'scorecard_country' country.slug %}">{{ country }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}
-
 {% block content %}
     <h1>Countries</h1>
     <ul>

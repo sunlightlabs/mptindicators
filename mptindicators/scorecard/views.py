@@ -1,33 +1,36 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.views.generic import View, DetailView, ListView
 from .models import Country, Section, Subsection, Indicator
 
 
-class CountryList(ListView):
-    model = Country
-
-
-class CountryDetail(DetailView):
-    model = Country
-
+class MPTView(View):
     def get_context_data(self, **kwargs):
-        context = super(CountryDetail, self).get_context_data(**kwargs)
-        context["countries"] = Country.objects.all()
+        context = super(MPTView, self).get_context_data(**kwargs)
+        context['countries'] = Country.objects.all()
+        context['sections'] = Section.objects.all()
         return context
 
 
-class IndicatorList(ListView):
+class CountryList(MPTView, ListView):
+    model = Country
+
+
+class CountryDetail(MPTView, DetailView):
+    model = Country
+
+
+class IndicatorList(MPTView, ListView):
     model = Indicator
 
 
-class SectionList(ListView):
+class SectionList(MPTView, ListView):
     model = Section
 
     def get_queryset(self):
         return Section.objects.prefetch_related("subsections__indicators")
 
 
-class SectionDetail(DetailView):
+class SectionDetail(MPTView, DetailView):
     model = Section
     slug_field = "number"
     slug_url_kwarg = "section"
@@ -35,13 +38,8 @@ class SectionDetail(DetailView):
     def get_queryset(self):
         return Section.objects.prefetch_related("subsections__indicators")
 
-    def get_context_data(self, **kwargs):
-        context = super(SectionDetail, self).get_context_data(**kwargs)
-        context["sections"] = self.get_queryset()
-        return context
 
-
-class SubsectionDetail(DetailView):
+class SubsectionDetail(MPTView, DetailView):
     model = Subsection
     slug_field = "number"
     slug_url_kwarg = "subsection"
@@ -49,21 +47,11 @@ class SubsectionDetail(DetailView):
     def get_queryset(self):
         return Subsection.objects.prefetch_related("indicators").select_related("section")
 
-    def get_context_data(self, **kwargs):
-        context = super(SubsectionDetail, self).get_context_data(**kwargs)
-        context["sections"] = Section.objects.prefetch_related("subsections__indicators")
-        return context
 
-
-class IndicatorDetail(DetailView):
+class IndicatorDetail(MPTView, DetailView):
     model = Indicator
     slug_field = "number"
     slug_url_kwarg = "number"
 
     def get_queryset(self):
         return Indicator.objects.prefetch_related("indicator_scores").select_related("subsection__section")
-
-    def get_context_data(self, **kwargs):
-        context = super(IndicatorDetail, self).get_context_data(**kwargs)
-        context["sections"] = Section.objects.prefetch_related("subsections__indicators")
-        return context

@@ -1,23 +1,273 @@
+{% load staticfiles %}
+
 <!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}{% endblock %}</title>
-        <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/4.2.4/basscss.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <div class="clearfix border-bottom m2">
-                <a href="{% url 'scorecard_countries' %}" class="left button button-nav-tab">Country</a>
-                <a href="{% url 'scorecard_sections' %}" class="left button button-nav-tab">Indicators</a>
-            </div>
-            <div class="clearfix mxn2">
-                <div class="sm-col sm-col-4 p2 bg-light-gray">
-                    {% block sidebar %}{% endblock %}
-                </div>
-                <div class="sm-col sm-col-8 px2">
-                    {% block content %}{% endblock %}
-                </div>
-        </div>
-    </body>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title{% block title %}Money, Politics and Transparency{% endblock %}</title>
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/static/icons/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/static/icons/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/static/icons/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/static/icons/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/static/icons/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/static/icons/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/static/icons/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/static/icons/favicon-196x196.png" sizes="196x196">
+		<link rel="icon" type="image/png" href="/static/icons/favicon-160x160.png" sizes="160x160">
+		<link rel="icon" type="image/png" href="/static/icons/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/static/icons/favicon-16x16.png" sizes="16x16">
+		<link rel="icon" type="image/png" href="/static/icons/favicon-32x32.png" sizes="32x32">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="msapplication-TileImage" content="/static/icons/mstile-144x144.png">
+
+		<!-- open graph tags -->
+		<meta property="og:site_name" content="Money, Politics and Transparency">
+		<meta property="og:locale" content="en_US">
+		<meta property="og:image" content="http://moneypoliticstransparency.org/static/img/fb-mpt.png">
+		<meta property="og:type" content="website">
+
+		<link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+		<script src="{% static 'foundation/js/vendor/modernizr.js' %}"></script>
+		<script src="{% static 'foundation/js/vendor/jquery.js' %}"></script>
+		<script src="{% static 'foundation/js/vendor/fastclick.js' %}"></script>
+		<script src="{% static 'foundation/js/foundation.min.js' %}"></script>
+
+		<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+		<script type="text/javascript" src="//use.typekit.net/djk1gww.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	</head>
+	<body class="">
+		<header>
+			<div class="main-nav hide-for-small">
+				<nav class="top-bar" data-topbar role="navigation">
+						<div class="top-bar-section large-12 columns">
+							<ul>
+								<li class="logo"><a href="/"><h1>Money, Politics and Transparency</h1></a></li>
+								<li><a href="http://moneypoliticstransparency.org/casestudies">Case Studies</a></li>
+								<li><a class="active" href="#">Data</a></li>
+								<li><a href="http://moneypoliticstransparency.org/resources">Resources</a></li>
+								<li><a href="http://moneypoliticstransparency.org/norms">Norms</a></li>
+								<li><a href="http://moneypoliticstransparency.org/networking">Networking</a></li>
+							</ul>
+							<ul class="meta-nav">
+								<li><a href="http://moneypoliticstransparency.org/about">about</a></li>
+								<li><a href="http://moneypoliticstransparency.org/contact">contact</a></li>
+							</ul>
+						</div>
+				</nav>
+			</div>
+		</header>
+		<div class="mpt-side-nav">
+			<ul class="tabs" data-tab>
+			  <li class="tab-title active"><a href="#panel1">Indicators</a></li>
+			  <li class="tab-title"><a href="#panel2">Countries</a></li>
+			</ul>
+			<div class="tabs-content">
+				<div class="nav-indicators content active" id="panel1">
+					<form class="search">
+					    <!--  <label>Search Documentation</label> -->
+					    <input id="autocomplete" type="search" placeholder="Search indicators" autocomplete="off">
+					    <button></button>
+					</form>
+
+					<a class="expand-all"><span>expand-icon</span>Expand All</a>
+
+
+					<ul class="side-nav accordion" data-accordion>
+					  {% for section in sections %}
+						  <li class="accordion-navigation">
+						    <a class="expand" href="#nav-{{ section.number }}">expand button!</a>
+								<a class="section" href="{% url 'scorecard_section' section.number %}">{{ section.name }}</a>
+						    <div id="nav-{{ section.number }}" class="content active">
+						    	<ul class="accordion" data-accordion>
+						    		{% for subsection in section.subsections.all %}
+							    		<li class="accordion-navigation">
+								    		<a class="expand" href="#nav-{{ section.number }}-{{ subsection.number }}">expand button!</a>
+												<a class="section" href="{% url 'scorecard_subsection' section.number subsection.number %}">{{ subsection.name }}</a>
+								    		<div id="nav-{{ section.number }}-{{ subsection.number }}" class="content">
+								     			<ul>
+								     				{% for indicator in subsection.indicators.all %}
+								     					<li>
+								     						<a href="{% url 'scorecard_indicator' indicator.number %}">
+								     							<span class="indicator-num">{{ indicator.number }}</span> {{ indicator.name }}
+								     						</a>
+								     					</li>
+								     				{% endfor %}
+								     			</ul>
+								    		</div>
+								  		</li>
+								  	{% endfor %}
+						    	</ul>
+						    </div>
+						  </li>
+					  {% endfor %}
+
+					  <!--
+					  <li class="accordion-navigation">
+					    <a class="expand" href="#nav1">expand button!</a>
+							<a class="section" href="#">Direct Public Funding</a>
+					    <div id="nav1" class="content active">
+					      <ul class="accordion" data-accordion>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav1a">expand button!</a>
+								<a class="section" href="#">Subsection 1b</a>
+							    <div id="nav1a" class="content">
+							     	<ul>
+							     		<li><a href=""><span class="indicator-num">1</span> Indicator number 1</a></li>
+							     		<li><a href=""><span class="indicator-num">2</span> Indicator number 2</a></li>
+							     		<li><a href=""><span class="indicator-num">3</span> Indicator number 3</a></li>
+							     		<li><a href=""><span class="indicator-num">4</span> Indicator number 4</a></li>
+							     		<li><a href=""><span class="indicator-num">5</span> Indicator number 5</a></li>
+							     		<li><a href=""><span class="indicator-num">6</span> Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav1b">expand button!</a>
+								<a class="section" href="#">Subsection 2b</a>
+							    <div id="nav1b" class="content">
+							    	<ul>
+							     		<li><a href=""><span class="indicator-num">7</span> Indicator number 1</a></li>
+							     		<li><a href=""><span class="indicator-num">8</span> Indicator number 2</a></li>
+							     		<li><a href=""><span class="indicator-num">9</span> Indicator number 3</a></li>
+							     		<li><a href=""><span class="indicator-num">10</span> Indicator number 4</a></li>
+							     		<li><a href=""><span class="indicator-num">11</span> Indicator number 5</a></li>
+							     		<li><a href=""><span class="indicator-num">12</span> Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							</ul>
+					    </div>
+					  </li>
+					  <li class="accordion-navigation">
+					    <a class="expand" href="#nav2">expand button!</a>
+						<a class="section" href="#">Second section</a>
+					    <div id="nav2" class="content">
+					      <ul class="accordion" data-accordion>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav2a">expand button!</a>
+								<a class="section" href="#">Subsection 1b</a>
+							    <div id="nav2a" class="content">
+							     	<ul>
+							     		<li><a href=""><span class="indicator-num">1</span> Indicator number 1</a></li>
+							     		<li><a href=""><span class="indicator-num">2</span> Indicator number 2</a></li>
+							     		<li><a href=""><span class="indicator-num">3</span> Indicator number 3</a></li>
+							     		<li><a href=""><span class="indicator-num">4</span> Indicator number 4</a></li>
+							     		<li><a href=""><span class="indicator-num">5</span> Indicator number 5</a></li>
+							     		<li><a href=""><span class="indicator-num">6</span> Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav2b">expand button!</a>
+								<a class="section" href="#">Subsection 2b</a>
+							    <div id="nav2b" class="content">
+							    	<ul>
+							     		<li><a href=""><span class="indicator-num">7</span> Indicator number 1</a></li>
+							     		<li><a href=""><span class="indicator-num">8</span> Indicator number 2</a></li>
+							     		<li><a href=""><span class="indicator-num">9</span> Indicator number 3</a></li>
+							     		<li><a href=""><span class="indicator-num">10</span> Indicator number 4</a></li>
+							     		<li><a href=""><span class="indicator-num">11</span> Indicator number 5</a></li>
+							     		<li><a href=""><span class="indicator-num">12</span> Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							</ul>
+					    </div>
+					  </li>
+					  <li class="accordion-navigation">
+					    <a class="expand" href="#nav3">expand button!</a>
+						<a class="section" href="#">Third Section</a>
+					    <div id="nav3" class="content">
+					      <ul class="accordion" data-accordion>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav3a">expand button!</a>
+								<a class="section" href="#">Subsection 1b</a>
+							    <div id="nav3a" class="content">
+							     	<ul>
+							     		<li><a href=""><span class="indicator-num">1</span> Indicator number 1</a></li>
+							     		<li><a href=""><span class="indicator-num">2</span> Indicator number 2</a></li>
+							     		<li><a href=""><span class="indicator-num">3</span> Indicator number 3</a></li>
+							     		<li><a href=""><span class="indicator-num">4</span> Indicator number 4</a></li>
+							     		<li><a href=""><span class="indicator-num">5</span> Indicator number 5</a></li>
+							     		<li><a href=""><span class="indicator-num">6</span> Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							  <li class="accordion-navigation">
+							    <a class="expand" href="#nav3b">expand button!</a>
+								<a class="section" href="#">Subsection 2b</a>
+							    <div id="nav3b" class="content">
+							    	<ul>
+							     		<li><a href=""><span class="indicator-num">7</span> Indicator number 1</a></li>
+							     		<li><a href=""><span class="indicator-num">8</span> Indicator number 2</a></li>
+							     		<li><a href=""><span class="indicator-num">9</span> Indicator number 3</a></li>
+							     		<li><a href=""><span class="indicator-num">10</span> Indicator number 4</a></li>
+							     		<li><a href=""><span class="indicator-num">11</span> Indicator number 5</a></li>
+							     		<li><a href=""><span class="indicator-num">12</span> Indicator number 6</a></li>
+							     	</ul>
+							    </div>
+							  </li>
+							</ul>
+					    </div>
+					  </li>
+					  -->
+					</ul>
+				</div>
+				<div class="nav-country content" id="panel2">
+					<ul>
+						{% for country in countries %}
+							<li><a href="{% url 'scorecard_country' country.slug %}">{{ country.name }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="meta-nav-indicators">
+				<h3>Learn more</h3>
+				<ul>
+					<li><a href="{% url 'scorecard_methodology' %}">Methodology</a></li>
+					<li><a href="{% url 'scorecard_contributors' %}">Contributors</a></li>
+					<li><a href="{% url 'scorecard_faq' %}">FAQ</a></li>
+					<li><a class="download" href="">Download PDF Analysis</a></li>
+				</ul>
+			</div>
+			<ul class="partner-logos">
+				<li>
+					<a href="http://www.globalintegrity.org/"><img src="../../static/img/global-integrity-logo.png"></a>
+				</li>
+				<li>
+					<a href="http://sunlightfoundation.com/"><img src="../../static/img/sunlight-foundation-logo.png"></a>
+				</li>
+				<li>
+					<a href="http://www.electoralintegrityproject.com/"><img src="../../static/img/electoral-integrity-logo.png"></a>
+				</li>
+			</ul>
+			{% block sidebar %}{% endblock %}
+		</div>
+		<div class="mpt-content-area row full-width">
+			{% block content %}{% endblock %}
+		</div>
+		<script>
+		  $(document).foundation();
+		</script>
+		<script>
+			$(document).foundation({
+			  accordion: {
+			    // specify the class used for accordion panels
+			    content_class: 'content',
+			    // specify the class used for active (or open) accordion panels
+			    active_class: 'active',
+			    // allow multiple accordion panels to be active at the same time
+			    multi_expand: true,
+			    // allow accordion panels to be closed by clicking on their headers
+			    // setting to false only closes accordion panels when another is opened
+			    toggleable: true
+			  }
+			});
+		</script
+	</body>
 </html>
