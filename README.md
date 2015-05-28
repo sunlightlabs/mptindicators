@@ -4,12 +4,13 @@ A project of [Money, Politics and Transparency](http://moneypoliticstransparency
 
 ## Static Assets
 
-Setup
+### Setup
 
-1. `npm install -g bower`
+1. `npm install -g bower grunt`
 1. `python manage.py bower install`
 1. `npm install`
 
-Develop
+### Develop
 
-1. `grunt`
+Run `grunt` to only watch for file changes or `python manage.py gruntserver` to
+watch for changes AND run the Django dev server.

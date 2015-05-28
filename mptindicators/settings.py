@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'mptindicators.scorecard',
     'debug_toolbar',
     'djangobower',
+    'grunt',
 )
 
 MIDDLEWARE_CLASSES = (
