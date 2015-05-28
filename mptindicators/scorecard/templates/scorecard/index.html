@@ -1,0 +1,59 @@
+{% extends "scorecard/base.html" %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+	<div class="xlarge-12 columns">
+		<div class="page-header">
+			<div class="row">
+				<div class="social-share">
+					<ul class="share">
+						<li class=""><a href="https://twitter.com/intent/tweet?related=MPTransparency&amp;url={{ "http://moneypoliticstransparency.org"|urlencode }}&amp;text={{ ".@MPTransparency seeks to improve global political finance transparency. Join the conversation! #MPTransparency"|urlencode }}" class="small button twitter">Share</a></li>
+						<li class=""><a href="#" class="small button facebook">Like</a></li>
+					</ul>
+				</div>
+				<h2 class="small-7 medium-8 medium-centered columns">Title</h2>
+			</div>
+		</div>
+		<ul class="accordion" data-accordion>
+		  <li class="accordion-navigation">
+		    <a href="#panel1a">Accordion 1</a>
+		    <div id="panel1a" class="content active">
+		      <ul class="accordion" data-accordion>
+				  <li class="accordion-navigation">
+				    <a href="#panel1b">Accordion 1</a>
+				    <div id="panel1b" class="content active">
+				      Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				    </div>
+				  </li>
+				  <li class="accordion-navigation">
+				    <a href="#panel2b">Accordion 2</a>
+				    <div id="panel2b" class="content">
+				      Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				    </div>
+				  </li>
+				  <li class="accordion-navigation">
+				    <a href="#panel3b">Accordion 3</a>
+				    <div id="panel3b" class="content">
+				      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				    </div>
+				  </li>
+				</ul>
+		    </div>
+		  </li>
+		  <li class="accordion-navigation">
+		    <a href="#panel2a">Accordion 2</a>
+		    <div id="panel2a" class="content">
+		      Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		    </div>
+		  </li>
+		  <li class="accordion-navigation">
+		    <a href="#panel3a">Accordion 3</a>
+		    <div id="panel3a" class="content">
+		      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		    </div>
+		  </li>
+		</ul>
+	</div>
+{% endblock %}

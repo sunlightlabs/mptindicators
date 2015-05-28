@@ -1,30 +1,46 @@
 {% extends "scorecard/base.html" %}
 
-{% block sidebar %}
-    <ul>
-        {% for country in countries %}
-            <li><a href="{% url 'scorecard_country' country.slug %}">{{ country }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}
-
 {% block content %}
-    <h1>{{ object.name }}</h1>
-    {% regroup object.indicator_scores.all by indicator.subsection.section as section_list %}
-    {% for section in section_list %}
-        <h2><a href="{% url 'scorecard_section' section.grouper.number %}">{{ section.grouper.name }}</a></h2>
-        {% regroup section.list by indicator.subsection as subsection_list %}
-        {% for subsection in subsection_list %}
-            <h3><a href="{% url 'scorecard_subsection' section.grouper.number subsection.grouper.number %}">{{ subsection.grouper.name }}</a></h3>
-            <ul>
-                {% for indicator_score in subsection.list %}
-                    <li>
-                        <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">{{ indicator_score.indicator.number }}</a>
-                        {{ indicator_score.score }}
-                        {{ indicator_score.indicator.name }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endfor %}
-    {% endfor %}
+	<div class="xlarge-12 columns">
+		<div class="page-header">
+			<div class="row">
+				<div class="social-share">
+					<ul class="share">
+						<li class=""><a href="https://twitter.com/intent/tweet?related=MPTransparency&amp;url={{ "http://moneypoliticstransparency.org"|urlencode }}&amp;text={{ ".@MPTransparency seeks to improve global political finance transparency. Join the conversation! #MPTransparency"|urlencode }}" class="small button twitter">Share</a></li>
+						<li class=""><a href="#" class="small button facebook">Like</a></li>
+					</ul>
+				</div>
+				<h2 class="small-7 medium-8 medium-centered columns">{{ object.name }}</h2>
+			</div>
+		</div>
+
+		<ul class="accordion" data-accordion>
+   		{% regroup object.indicator_scores.all by indicator.subsection.section as section_list %}
+   		{% for section in section_list %}
+			  <li class="accordion-navigation">
+			    <a href="#panel-{{ section.grouper.number }}">{{ section.grouper.name }}</a>
+			    <div id="panel-{{ section.grouper.number }}" class="content active">
+			      <ul class="accordion" data-accordion>
+			      	{% regroup section.list by indicator.subsection as subsection_list %}
+			      	{% for subsection in subsection_list %}
+			      		<li class="accordion-navigation">
+					    		<a href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">{{ subsection.grouper.name }}</a>
+					    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="content active">
+					      		<p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					      		{% for indicator_score in subsection.list %}
+	                    <p>
+	                        <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">{{ indicator_score.indicator.number }}</a>
+	                        {{ indicator_score.score }}
+	                        {{ indicator_score.indicator.name }}
+	                    </p>
+                		{% endfor %}
+					    		</div>
+					  		</li>
+			      	{% endfor %}
+						</ul>
+			    </div>
+			  </li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endblock %}
