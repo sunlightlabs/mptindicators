@@ -1,46 +1,113 @@
 {% extends "scorecard/base.html" %}
 
+{% block pagetitle %}{{ object.name }}{% endblock %}
+
 {% block content %}
-	<div class="xlarge-12 columns">
-		<div class="page-header">
-			<div class="row">
-				<div class="social-share">
-					<ul class="share">
-						<li class=""><a href="https://twitter.com/intent/tweet?related=MPTransparency&amp;url={{ "http://moneypoliticstransparency.org"|urlencode }}&amp;text={{ ".@MPTransparency seeks to improve global political finance transparency. Join the conversation! #MPTransparency"|urlencode }}" class="small button twitter">Share</a></li>
-						<li class=""><a href="#" class="small button facebook">Like</a></li>
+<div class="row">
+	<div class="columns small-8">
+		<div class="country-score four">
+			<dl class="score">
+			<dt>composite</dt>
+			<dd>36</dd>
+			</dl>
+			<div class="country-meta clearfix">
+				<span class="chart">
+	                <span class="count">36</span>
+	                <span class="index" style="width: 63%"></span>
+	                <span class="ticks"></span>
+	            </span>
+            
+	            <h3>Bangladesh</h3>
+	            <dl class="score-breakdown">
+	            	<dt>In law</dt>
+	            	<dd><span class="two">23</span></dd>
+	            	<dt>In practice</dt>
+	            	<dd><span class="four">56</span></dd>
+	            </dl>
+            </div>
+		</div>
+		<div class="country-summary">
+			<p>
+				Robust kopi-luwak acerbic breve robust qui crema mazagran medium. Ut, instant brewed espresso, organic irish that beans chicory. White qui plunger pot cultivar saucer grinder robusta.
+			</p>
+			<p>
+				Dark fair trade, wings rich et fair trade est rich. Irish, ut, aged acerbic saucer steamed body turkish. Robusta java, turkish body breve est seasonal.
+			</p>
+			<p>
+				Siphon, turkish, organic brewed, percolator, et to go, qui rich cortado café au lait froth. Et extra beans, filter, foam caramelization galão acerbic whipped aftertaste carajillo that. Latte foam percolator crema, coffee caffeine strong whipped sugar.
+			</p>
+			<p>
+				Irish id organic, as coffee lungo café au lait cup spoon rich pumpkin spice. Con panna espresso pumpkin spice cup mocha and frappuccino. Grinder est fair trade acerbic extraction half and half espresso café au lait strong and french press.
+			</p>
+		</div>
+	
+	</div>
+	<div class="columns small-4">
+		<aside class="aside-content-block meta-nav-indicators">
+			<h3>Learn more</h3>
+			<ul>
+				<li><a href="{% url 'scorecard_methodology' %}">Methodology</a></li>
+				<li><a href="{% url 'scorecard_contributors' %}">Contributors</a></li>
+				<li><a href="{% url 'scorecard_faq' %}">FAQ</a></li>
+				<li><a class="download" href="">Download PDF Analysis</a></li>
+			</ul>
+		</aside>
+	</div>
+</div>
+<div class="row">
+	<div class="columns small-12">
+
+		<ul class="tabs" data-tab>
+			  <li class="tab-title active"><a href="#indicators">Indicators</a></li>
+			  <li class="tab-title"><a href="#summary">Electoral System Summary</a></li>
+			</ul>
+			<div class="tabs-content">
+				<div class="country-indicators content active" id="indicators">
+					<ul class="accordion" data-accordion>
+						{% regroup object.indicator_scores.all by indicator.subsection.section as section_list %}
+						{% for section in section_list %}
+						  <li class="accordion-navigation">
+						    <a href="#panel-{{ section.grouper.number }}">{{ section.grouper.name }}</a>
+						    <div id="panel-{{ section.grouper.number }}" class="content active">
+						      <ul class="accordion" data-accordion>
+						      	{% regroup section.list by indicator.subsection as subsection_list %}
+						      	{% for subsection in subsection_list %}
+						      		<li class="accordion-navigation">
+								    		<a href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">{{ subsection.grouper.name }}</a>
+								    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="content active">
+								      		<p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								      		{% for indicator_score in subsection.list %}
+					                <p>
+					                    <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">{{ indicator_score.indicator.number }}</a>
+					                    {{ indicator_score.score }}
+					                    {{ indicator_score.indicator.name }}
+					                </p>
+					        		{% endfor %}
+								    		</div>
+								  		</li>
+						      	{% endfor %}
+									</ul>
+						    </div>
+						  </li>
+						{% endfor %}
 					</ul>
 				</div>
-				<h2 class="small-7 medium-8 medium-centered columns">{{ object.name }}</h2>
-			</div>
-		</div>
+				<div class="electoral-summary content active" id="summary">
+					<p>
+						Robust kopi-luwak acerbic breve robust qui crema mazagran medium. Ut, instant brewed espresso, organic irish that beans chicory. White qui plunger pot cultivar saucer grinder robusta.
+					</p>
+					<p>
+						Dark fair trade, wings rich et fair trade est rich. Irish, ut, aged acerbic saucer steamed body turkish. Robusta java, turkish body breve est seasonal.
+					</p>
+					<p>
+						Siphon, turkish, organic brewed, percolator, et to go, qui rich cortado café au lait froth. Et extra beans, filter, foam caramelization galão acerbic whipped aftertaste carajillo that. Latte foam percolator crema, coffee caffeine strong whipped sugar.
+					</p>
+					<p>
+						Irish id organic, as coffee lungo café au lait cup spoon rich pumpkin spice. Con panna espresso pumpkin spice cup mocha and frappuccino. Grinder est fair trade acerbic extraction half and half espresso café au lait strong and french press.
+					</p>
+				</div>
 
-		<ul class="accordion" data-accordion>
-   		{% regroup object.indicator_scores.all by indicator.subsection.section as section_list %}
-   		{% for section in section_list %}
-			  <li class="accordion-navigation">
-			    <a href="#panel-{{ section.grouper.number }}">{{ section.grouper.name }}</a>
-			    <div id="panel-{{ section.grouper.number }}" class="content active">
-			      <ul class="accordion" data-accordion>
-			      	{% regroup section.list by indicator.subsection as subsection_list %}
-			      	{% for subsection in subsection_list %}
-			      		<li class="accordion-navigation">
-					    		<a href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">{{ subsection.grouper.name }}</a>
-					    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="content active">
-					      		<p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					      		{% for indicator_score in subsection.list %}
-	                    <p>
-	                        <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">{{ indicator_score.indicator.number }}</a>
-	                        {{ indicator_score.score }}
-	                        {{ indicator_score.indicator.name }}
-	                    </p>
-                		{% endfor %}
-					    		</div>
-					  		</li>
-			      	{% endfor %}
-						</ul>
-			    </div>
-			  </li>
-			{% endfor %}
-		</ul>
+			</div>
 	</div>
+</div>
 {% endblock %}

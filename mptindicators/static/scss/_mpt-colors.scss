@@ -30,3 +30,14 @@ $clr-blue-text: ; /* For text on *** blue *** base/dark background */
 $clr-green-text: #ecf5c6; /* For text on *** green *** base/dark background */
 $clr-yellow-text: ; /* For text on *** yellow *** base/dark background */
 $clr-sec-blue-text: #daf2f7; /* For text on *** secondary blue *** base/dark background */
+
+
+/* Chart colors */
+$clr-chart-green: #098d45;
+$clr-chart-yellow: #f7e205;
+
+$clr-chart-one: $clr-chart-yellow;
+$clr-chart-two: mix($clr-chart-green, $clr-chart-yellow, 15%);
+$clr-chart-three: mix($clr-chart-green, $clr-chart-yellow);
+$clr-chart-four: mix($clr-chart-green, $clr-chart-yellow, 70%);
+$clr-chart-five: $clr-chart-green;

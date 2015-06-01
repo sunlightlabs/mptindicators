@@ -1,17 +1,10 @@
 body {
-	background-color: #e5f4f7;
+	background-color: $clr-blue-light;
 	color: #2c4f52;
 	font-family: "kepler-std-extended", georgia, serif;
 }
 h1, h2, h3, h4, h5, h6 {
 	color: #2c4f52;
-}
-h2 {
-	text-align: center;
-	font-family: "kepler-std-extended", georgia, serif;
-	color: #fff;
-	font-weight: 300;
-	font-style: italic;
 }
 p{
 	font-size: 18px;
@@ -24,6 +17,32 @@ a {
 a:hover, a:focus {
 	color: #568c49;
 }
+
+.alpha {
+	font-family: $font-serif;
+	color: #fff;
+	font-weight: 300;
+	font-style: italic;
+}
+.beta {
+	font-family: $font-sans;
+	font-weight: 200;
+}
+.gamma {
+
+}
+.delta {
+
+}
+.epsilon {
+
+}
+.zeta {
+
+}
+
+
+
 .top-bar-section ul li.logo:hover>a {
 	background: inherit;
 	background-color: inherit;
@@ -46,7 +65,9 @@ a:hover, a:focus {
 	-moz-transition: background-color 300ms ease-out;
 	transition: background-color 300ms ease-out;
 }
-
+.small-12 {
+	min-width: 700px;
+}
 
 /* GENERAL - social media */
 .twitter {
@@ -94,10 +115,23 @@ a:hover, a:focus {
 	.social-share {
 		float: right;
 	}
+	h2 {
+		line-height: 2.3em;
+	}
 }
 .mpt-content-area {
 	float: left;
 	// background-color: $clr-yellow-base; *** To Test floating
+}
+.page-content {
+	padding: 30px 20px;
+}
+.aside-content-block {
+	background-color: $clr-blue-base;
+	padding: 20px;
+	ul{
+		list-style-type: none;
+	}
 }
 .row{
   &.full-width{
@@ -138,6 +172,9 @@ a:hover, a:focus {
 }
 .tabs-content .content {
 	padding: 0;
+}
+.accordion {
+	margin-left: 0;
 }
 .side-nav.accordion {
 	padding-top: 0;
@@ -324,7 +361,160 @@ a:hover, a:focus {
 		margin: 20px 0;
 	}
 }
+.country-meta {
+	margin-right: 85px;
+	padding-right: .6%;
 
+	h3 {
+		float: left;
+		line-height: 3.4rem;
+	}
+}
+.country-score {
+	.chart {
+		display: block;
+		height: 10px;
+		background-color: $clr-blue-dark;
+		position: relative;
+		margin-top: 4px;
+	}
+	.count {
+		display: none;
+	}
+	.index {
+		top: 0;
+		position: absolute;
+		z-index: 5;
+		display: block;
+		height: 18px;
+		margin-right: 85px;
+		margin-top: -4px;
+	}
+	.ticks {
+		top: 0;
+		position: relative;
+		z-index: 10;
+		display: block;
+		height: 18px;
+		top: -4px;
+		background: -webkit-gradient(linear, left top, right top, 
+			color-stop(0%,rgba(255,255,255,0)), 
+			color-stop(19.6%,rgba(255,255,255,0)), 
+			color-stop(19.6%,rgba(255,255,255,1)), 
+			color-stop(20.5%,rgba(255,255,255,1)), 
+			color-stop(20.5%,rgba(255,255,255,0)), 
+			color-stop(39.5%,rgba(255,255,255,0)), 
+			color-stop(39.5%,rgba(255,255,255,1)), 
+			color-stop(40.5%,rgba(255,255,255,1)), 
+			color-stop(40.5%,rgba(255,255,255,0)),
+			color-stop(59.5%,rgba(255,255,255,0)), 
+			color-stop(59.5%,rgba(255,255,255,1)), 
+			color-stop(60.5%,rgba(255,255,255,1)), 
+			color-stop(60.5%,rgba(255,255,255,0)), 
+			color-stop(79.5%,rgba(255,255,255,0)), 
+			color-stop(79.5%,rgba(255,255,255,1)), 
+			color-stop(80.4%,rgba(255,255,255,1)), 
+			color-stop(80.4%,rgba(255,255,255,0)), 
+			color-stop(100%,rgba(255,255,255,0))); 
+		/* Chrome,Safari4+ */
+	}
+	.score {
+		width: 85px;
+		height: 83px;
+		color: #ffffff;
+		float: right;
+		text-align: center;
+		position: relative;
+		font-family: $font-sans;
+		dd{
+			position: absolute;
+			top: 0;
+			text-align: center;
+			width: 100%;
+			font-size: 2.5rem;
+		}
+		dt {
+			bottom: 0;
+			position: absolute;
+			width: 100%;
+			text-transform: uppercase;
+			font-weight: 200;
+			font-size: .8rem;
+		}
+	}
+	dl.score-breakdown {
+		text-align: right;
+		float: right;
+		font-family: $font-sans;
+		dt {
+			float: left;
+			clear: left;
+			width: 100px;
+			text-align: right;
+			font-weight: normal;
+			margin: 5px 0;
+			line-height: 1.85rem;
+		}
+		dt:after {
+			content: "";
+		}
+		dd {
+			margin: 5px 0 5px 110px;
+			padding: 0 0 0.5em 0;
+			line-height: 1.85rem;
+			padding: 0;
+			color: #ffffff;
+		}
+		dd span{
+			display: inline-block;
+			width: 30px;
+			text-align: center;
+			&.one {
+				background-color: $clr-chart-one;
+			}
+			&.two {
+				background-color: $clr-chart-two;
+			}
+			&.three {
+				background-color: $clr-chart-three;
+			}
+			&.four {
+				background-color: $clr-chart-four;
+			}
+			&.five {
+				background-color: $clr-chart-five;
+			}	
+		}
+	}
+}
+.score, .index {
+
+	.one & {
+		background-color: $clr-chart-one;
+	}
+	.two & {
+		background-color: $clr-chart-two;
+	}
+	.three & {
+		background-color: $clr-chart-three;
+	}
+	.four & {
+		background-color: $clr-chart-four;
+	}
+	.five & {
+		background-color: $clr-chart-five;
+	}
+}
+.page-content .tabs .tab-title {
+	width: 50%;
+	text-align: center;
+	a {
+		color: $clr-green-text;
+	}
+	&.active a{
+		color: #ffffff;
+	}
+}
 
 
 //  Mixin: accordion-navigation( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size, $font-family) {

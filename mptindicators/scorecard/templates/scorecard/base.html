@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title{% block title %}Money, Politics and Transparency{% endblock %}</title>
+		<title>{% block title %}Money, Politics and Transparency{% endblock %}</title>
 
 		<link rel="apple-touch-icon" sizes="57x57" href="/static/icons/apple-touch-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="114x114" href="/static/icons/apple-touch-icon-114x114.png">
@@ -234,22 +234,37 @@
 					<li><a href="{% url 'scorecard_faq' %}">FAQ</a></li>
 					<li><a class="download" href="">Download PDF Analysis</a></li>
 				</ul>
+                <ul class="partner-logos">
+                    <li>
+                        <a href="http://www.globalintegrity.org/"><img src="../../static/img/global-integrity-logo.png"></a>
+                    </li>
+                    <li>
+                        <a href="http://sunlightfoundation.com/"><img src="../../static/img/sunlight-foundation-logo.png"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.electoralintegrityproject.com/"><img src="../../static/img/electoral-integrity-logo.png"></a>
+                    </li>
+                </ul>
 			</div>
-			<ul class="partner-logos">
-				<li>
-					<a href="http://www.globalintegrity.org/"><img src="../../static/img/global-integrity-logo.png"></a>
-				</li>
-				<li>
-					<a href="http://sunlightfoundation.com/"><img src="../../static/img/sunlight-foundation-logo.png"></a>
-				</li>
-				<li>
-					<a href="http://www.electoralintegrityproject.com/"><img src="../../static/img/electoral-integrity-logo.png"></a>
-				</li>
-			</ul>
 			{% block sidebar %}{% endblock %}
 		</div>
 		<div class="mpt-content-area row full-width">
-			{% block content %}{% endblock %}
+            <div class="small-12 columns">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="social-share">
+                            <ul class="share">
+                                <li class=""><a href="https://twitter.com/intent/tweet?related=MPTransparency&amp;url={{ "http://moneypoliticstransparency.org"|urlencode }}&amp;text={{ ".@MPTransparency seeks to improve global political finance transparency. Join the conversation! #MPTransparency"|urlencode }}" class="small button twitter">Share</a></li>
+                                <li class=""><a href="#" class="small button facebook">Like</a></li>
+                            </ul>
+                        </div>
+                        <h2 class="small-10 columns alpha">{% block pagetitle %}{% endblock %}</h2>
+                    </div>
+                </div>
+                <div class="page-content">
+			     {% block content %}{% endblock %}
+                </div>
+            </div>
 		</div>
 		<script>
 		  $(document).foundation();
