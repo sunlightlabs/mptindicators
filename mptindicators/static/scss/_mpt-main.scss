@@ -537,12 +537,20 @@ dl.breakdown {
 		display: inline-block;
 		font-weight: bold;
 	}
+	h5 {
+		display: inline-block;
+		font-weight: normal;
+	}
 	dl {
 		display: inline-block;
 		float: right;
 		position: relative;
+		margin-bottom: 0;
 		dd, dt {
 		}
+	}
+	dt:last-of-type {
+		margin-bottom: 0;
 	}
 	dt.composite {
 		display: table-cell;
@@ -590,11 +598,15 @@ dl.breakdown {
 		display: block;
 		background-color: $clr-blue-dark;
 		line-height: 4.6rem;
+		border-bottom: 2px solid $clr-blue-base;
 		a {
 			font-size: .8rem;
 			text-transform: uppercase;
 			font-family: $font-sans;
-		}
+		}	
+	}
+	.accordion .section {
+		background-color: $clr-blue-base;
 	}
 	.indicator-num {
 		background: $clr-green-text;
@@ -622,6 +634,7 @@ dl.breakdown {
 		background: url('../img/expand-small.png') left top no-repeat;
 		width: 15px;
 		height: 15px;
+		margin: 27px 9px 0 10px;
 		&:hover {
 			background: url('../img/expand-small.png') left bottom no-repeat;
 		}

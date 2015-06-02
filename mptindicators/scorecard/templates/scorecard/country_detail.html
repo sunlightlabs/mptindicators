@@ -93,16 +93,35 @@
 										<a class="expand" href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">expand button!</a>
 											<div class="section four">
 								    			<h5>{{ subsection.grouper.name }}</h5>
+								    			<a href="">More about category</a>
 								    		</div>
 								    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="content active">
-								      		<p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 								      		{% for indicator_score in subsection.list %}
-					                <p>
-					                    <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">{{ indicator_score.indicator.number }}</a>
-					                    {{ indicator_score.score }}
-					                    {{ indicator_score.indicator.name }}
-					                </p>
-					        		{% endfor %}
+								                <span class="indicator-num">{{ indicator_score.indicator.number }}</span>
+								                    
+							                    <h6>{{ indicator_score.indicator.name }}</h6>
+							                    <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a>
+							                    <dl>
+							                    	<dt>
+							                    		Score
+							                    	</dt>
+							                    	<dd>
+							                    	{{ indicator_score.score }}
+							                    	</dd>
+							                    </dl>
+							                    <div class="comment">
+								                    <p>
+								                    	Comment
+								                    </p>
+							                    </div>
+							                    <div class="sources">
+							                    	<ul>
+								                    	<li>source 1</li>
+								                    	<li>source 2</li>
+							                    	</ul>
+							                    </div>
+								                    
+					        				{% endfor %}
 								    		</div>
 								  		</li>
 						      	{% endfor %}
