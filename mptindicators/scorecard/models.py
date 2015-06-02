@@ -26,7 +26,7 @@ class Country(models.Model):
 
 class Section(models.Model):
     number = models.PositiveSmallIntegerField(default=0)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True)
 
     class Meta:
         ordering = ('number',)
@@ -48,12 +48,26 @@ class Subsection(models.Model):
 
 
 class Indicator(models.Model):
+
+    UNKNOWN_TYPE = 0
+    IN_LAW_TYPE = 1
+    IN_PRACTICE_TYPE = 2
+    OPEN_TYPE = 3
+
+    TYPES = (
+        (UNKNOWN_TYPE, 'unknown'),
+        (IN_LAW_TYPE, 'in law'),
+        (IN_PRACTICE_TYPE, 'in practice'),
+        (OPEN_TYPE, 'open question'),
+    )
+
     subsection = models.ForeignKey(Subsection, related_name='indicators')
     number = models.PositiveSmallIntegerField(default=0)
     name = models.TextField()
     description = models.TextField(blank=True)
     comment = models.TextField(blank=True)
     references = models.TextField(blank=True)
+    type = models.PositiveSmallIntegerField(choices=TYPES, default=UNKNOWN_TYPE)
 
     class Meta:
         ordering = ('number',)
@@ -66,6 +80,8 @@ class IndicatorScore(models.Model):
     indicator = models.ForeignKey(Indicator, related_name="indicator_scores")
     country = models.ForeignKey(Country, related_name="indicator_scores")
     score = models.PositiveSmallIntegerField(blank=True, null=True)
+    comment = models.TextField(blank=True)
+    sources = models.TextField(blank=True)
 
     class Meta:
         ordering = ('country__name', 'indicator__number')
