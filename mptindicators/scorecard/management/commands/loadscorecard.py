@@ -8,6 +8,14 @@ from mptindicators.scorecard.models import (
     Country, Section, Subsection, Indicator, IndicatorScore)
 
 SECTION_RE = re.compile('(?:Section )?(\d).(\d)? (.*)')
+SECTIONS = {
+    1: 'Direct and Indirect Public Funding',
+    2: 'Contribution and Expenditure Restrictions',
+    3: 'Reporting and Public Disclosure',
+    4: 'Third Party Actors',
+    5: 'Monitoring and Enforcement',
+}
+
 
 #
 # type definitions
@@ -137,7 +145,8 @@ class Command(BaseCommand):
             try:
                 section = Section.objects.get(number=record.section)
             except Section.DoesNotExist:
-                section = Section.objects.create(number=record.section)
+                section = Section.objects.create(number=record.section,
+                                                 name=SECTIONS[record.section])
 
             Subsection.objects.create(section=section,
                                       number=record.subsection,
@@ -190,6 +199,3 @@ class Command(BaseCommand):
                                               score=value,
                                               comment=score.comment,
                                               sources=score.sources)
-
-
-
