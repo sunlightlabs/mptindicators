@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="columns small-8">
 		<div class="country-score four">
-			<dl class="score">
+			<dl class="score composite">
 			<dt>composite</dt>
 			<dd>36</dd>
 			</dl>
@@ -18,11 +18,11 @@
 	            </span>
             
 	            <h3>Bangladesh</h3>
-	            <dl class="score-breakdown">
+	            <dl class="breakdown">
 	            	<dt>In law</dt>
-	            	<dd><span class="two">23</span></dd>
+	            	<dd><span class="score two">23</span></dd>
 	            	<dt>In practice</dt>
-	            	<dd><span class="four">56</span></dd>
+	            	<dd><span class="score four">56</span></dd>
 	            </dl>
             </div>
 		</div>
@@ -46,10 +46,9 @@
 		<aside class="aside-content-block meta-nav-indicators">
 			<h3>Learn more</h3>
 			<ul>
-				<li><a href="{% url 'scorecard_methodology' %}">Methodology</a></li>
-				<li><a href="{% url 'scorecard_contributors' %}">Contributors</a></li>
-				<li><a href="{% url 'scorecard_faq' %}">FAQ</a></li>
-				<li><a class="download" href="">Download PDF Analysis</a></li>
+				<li><a class="icon download" href="{% url 'scorecard_methodology' %}">Download data</a></li>
+				<li><a class="icon country-details" href="{% url 'scorecard_contributors' %}">Country details</a></li>
+
 			</ul>
 		</aside>
 	</div>
@@ -67,13 +66,34 @@
 						{% regroup object.indicator_scores.all by indicator.subsection.section as section_list %}
 						{% for section in section_list %}
 						  <li class="accordion-navigation">
-						    <a href="#panel-{{ section.grouper.number }}">{{ section.grouper.name }}</a>
+						    
+							<a class="expand" href="#panel-{{ section.grouper.number }}">expand button!</a>
+							<div class="section four">
+								<h4>{{ section.grouper.name }}</h4>
+								<a href="">More about category</a>
+								<dl class="composite score">
+									<dt>composite</dt>
+									<dd>36</dd>
+								</dl>
+								<dl class="breakdown">
+					            	<dt>In law</dt>
+					            	<dd><span class="score two">23</span></dd>
+					            	<dt>In practice</dt>
+					            	<dd><span class="score four">56</span></dd>
+					            </dl>
+					            
+				            </div>
+
 						    <div id="panel-{{ section.grouper.number }}" class="content active">
 						      <ul class="accordion" data-accordion>
 						      	{% regroup section.list by indicator.subsection as subsection_list %}
 						      	{% for subsection in subsection_list %}
 						      		<li class="accordion-navigation">
-								    		<a href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">{{ subsection.grouper.name }}</a>
+								    		
+										<a class="expand" href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">expand button!</a>
+											<div class="section four">
+								    			<h5>{{ subsection.grouper.name }}</h5>
+								    		</div>
 								    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="content active">
 								      		<p>Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 								      		{% for indicator_score in subsection.list %}
@@ -92,7 +112,7 @@
 						{% endfor %}
 					</ul>
 				</div>
-				<div class="electoral-summary content active" id="summary">
+				<div class="electoral-summary content" id="summary">
 					<p>
 						Robust kopi-luwak acerbic breve robust qui crema mazagran medium. Ut, instant brewed espresso, organic irish that beans chicory. White qui plunger pot cultivar saucer grinder robusta.
 					</p>

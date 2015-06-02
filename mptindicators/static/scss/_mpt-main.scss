@@ -339,7 +339,22 @@ a:hover, a:focus {
 	
 }
 .meta-nav-indicators {
-
+	font-family: $font-sans;
+	li {
+		text-transform: uppercase;
+		font-size: 0.8rem;
+	}
+	.icon {
+		height: 32px;
+		display: block;
+		padding-left: 40px;
+	}
+	.country-details {
+		background: url('../img/country-details.png') left center no-repeat;
+	}
+	.download {
+		background: url('../img/download.png') left center no-repeat;
+	}
 }
 .mpt-side-nav .meta-nav-indicators {
 	margin: 20px;
@@ -418,73 +433,73 @@ a:hover, a:focus {
 			color-stop(100%,rgba(255,255,255,0))); 
 		/* Chrome,Safari4+ */
 	}
-	.score {
-		width: 85px;
-		height: 83px;
-		color: #ffffff;
-		float: right;
+}
+.composite.score {
+	width: 85px;
+	height: 83px;
+	color: #ffffff;
+	float: right;
+	text-align: center;
+	position: relative;
+	font-family: $font-sans;
+	dd{
+		position: absolute;
+		top: 0;
 		text-align: center;
-		position: relative;
-		font-family: $font-sans;
-		dd{
-			position: absolute;
-			top: 0;
-			text-align: center;
-			width: 100%;
-			font-size: 2.5rem;
-		}
-		dt {
-			bottom: 0;
-			position: absolute;
-			width: 100%;
-			text-transform: uppercase;
-			font-weight: 200;
-			font-size: .8rem;
-		}
+		width: 100%;
+		font-size: 2.5rem;
 	}
-	dl.score-breakdown {
+	dt {
+		bottom: 0;
+		position: absolute;
+		width: 100%;
+		text-transform: uppercase;
+		font-weight: 200;
+		font-size: .8rem;
+	}
+}
+dl.breakdown {
+	text-align: right;
+	float: right;
+	font-family: $font-sans;
+	dt {
+		float: left;
+		clear: left;
+		width: 100px;
 		text-align: right;
-		float: right;
-		font-family: $font-sans;
-		dt {
-			float: left;
-			clear: left;
-			width: 100px;
-			text-align: right;
-			font-weight: normal;
-			margin: 5px 0;
-			line-height: 1.85rem;
+		font-weight: normal;
+		margin: 5px 0;
+		line-height: 1.85rem;
+	}
+	dt:after {
+		content: "";
+	}
+	dd {
+		margin: 5px 0 5px 110px;
+		padding: 0 0 0.5em 0;
+		line-height: 1.85rem;
+		padding: 0;
+		color: #ffffff;
+	}
+	dd span{
+		display: inline-block;
+		width: 30px;
+		text-align: center;
+		&.one {
+			background-color: $clr-chart-one;
 		}
-		dt:after {
-			content: "";
+		&.two {
+			background-color: $clr-chart-two;
 		}
-		dd {
-			margin: 5px 0 5px 110px;
-			padding: 0 0 0.5em 0;
-			line-height: 1.85rem;
-			padding: 0;
-			color: #ffffff;
+		&.three {
+			background-color: $clr-chart-three;
 		}
-		dd span{
-			display: inline-block;
-			width: 30px;
-			text-align: center;
-			&.one {
-				background-color: $clr-chart-one;
-			}
-			&.two {
-				background-color: $clr-chart-two;
-			}
-			&.three {
-				background-color: $clr-chart-three;
-			}
-			&.four {
-				background-color: $clr-chart-four;
-			}
-			&.five {
-				background-color: $clr-chart-five;
-			}	
+		&.four {
+			background-color: $clr-chart-four;
 		}
+		&.five {
+			background-color: $clr-chart-five;
+		}	
 	}
 }
 .score, .index {
@@ -515,6 +530,110 @@ a:hover, a:focus {
 		color: #ffffff;
 	}
 }
+.country-indicators .accordion {
+	padding-top: 0;
+	margin-left: 0;
+	h4 {
+		display: inline-block;
+		font-weight: bold;
+	}
+	dl {
+		display: inline-block;
+		float: right;
+		position: relative;
+		dd, dt {
+		}
+	}
+	dt.composite {
+		display: table-cell;
+		position: absolute;
+		background-color: blue;
+		top: 0;
+		right: 0;
+		width: 100px;
+		height: 100px;
+	}
+	.accordion-navigation {
+		@include accordion-navigation($bg: $clr-blue-dark, $hover-bg:rgba(0,0,0,0.025), $active-bg:inherit, $font-color:$clr-green-text, $padding:5px, $font-size:.8rem);
+		color: $clr-text;
+		&.active>.expand{
+	  		background-position: right top;
+			&:hover {
+				background-position: right bottom;
+			}
+	  }
+	}
+	.content {
+		@include accordion-content($bg:inherit, $padding: 0);
+		padding-right: 0;
+	}
+	.accordion-navigation>a.expand {
+		background: url('../img/expand-large.png') left top no-repeat;
+		text-indent: -9999em;
+		display: block;
+		float: left;
+		width: 22px;
+		height: 22px;
+		padding: 0;
+		margin: 21px 6px 0 6px ;
+		&:hover {
+			background: url('../img/expand-large.png') left bottom no-repeat;
+		}
+		&.active {
+			background-position: right top;
+			&:hover {
+				background-position: right bottom;
+			}
+		}
+	}
+	.section {
+		display: block;
+		background-color: $clr-blue-dark;
+		line-height: 4.6rem;
+		a {
+			font-size: .8rem;
+			text-transform: uppercase;
+			font-family: $font-sans;
+		}
+	}
+	.indicator-num {
+		background: $clr-green-text;
+		color: $clr-green-dark;
+		font-weight: bold;
+		font-size: 1rem;
+		width: 25px;
+		height: 25px;
+		display: inline-block;
+		text-align: center;
+	}
+	.composite.score {
+		margin-left: 5px;
+		height: 73px;
+		dd {
+			font-size: 2rem;
+		}
+	}
+
+}
+
+.country-indicators .accordion .accordion .accordion-navigation>a {
+	color: $clr-text;
+	&.expand {
+		background: url('../img/expand-small.png') left top no-repeat;
+		width: 15px;
+		height: 15px;
+		&:hover {
+			background: url('../img/expand-small.png') left bottom no-repeat;
+		}
+		&.active {
+			background-position: right top;
+			&:hover {
+				background-position: right bottom;
+			}
+		}
+	}
+}
+
 
 
 //  Mixin: accordion-navigation( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size, $font-family) {
