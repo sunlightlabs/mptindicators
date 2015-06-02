@@ -44,6 +44,13 @@ class SubsectionDetail(MPTView, DetailView):
     slug_field = "number"
     slug_url_kwarg = "subsection"
 
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+        snum = self.kwargs.get('section', None)
+        ssnum = self.kwargs.get('subsection', None)
+        return queryset.get(section__number=snum, number=ssnum)
+
     def get_queryset(self):
         return Subsection.objects.prefetch_related("indicators").select_related("section")
 
