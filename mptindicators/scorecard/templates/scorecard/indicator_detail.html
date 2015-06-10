@@ -1,17 +1,72 @@
 {% extends "scorecard/base.html" %}
 
+{% block pagetitle %}{{ object.number }}. {{ object.name }}{% endblock %}
+
 {% block content %}
-    <p>
-        <a href="{% url 'scorecard_section' object.subsection.section.number %}">{{ object.subsection.section.name }}</a>
-        /
-        <a href="{% url 'scorecard_subsection' object.subsection.section.number object.subsection.number %}">{{ object.subsection.name }}</a>
-    <h1>{{ object.number }}. {{ object.name }}</h1>
-    <ul>
-        {% for indicator_score in object.indicator_scores.all %}
-            <li>
-                <a href="{% url 'scorecard_country' indicator_score.country.slug %}">{{ indicator_score.country }}</a>
-                {{ indicator_score.score }}
-            </li>
-        {% endfor %}
-    </ul>
+<div class="mpt-content-area row full-width index">
+    <div class="small-12 columns">
+        <div class="page-content">
+            <div class="row">
+                <div class="columns small-8">
+                    <aside class="aside-content-block meta-nav-indicators inline">
+                        <h3>Learn more</h3>
+                        <form> 
+                            <label>Select Box
+                                <select>
+                                    <option value="husker">Husker</option>
+                                    <option value="starbuck">Starbuck</option>
+                                    <option value="hotdog">Hot Dog</option>
+                                    <option value="apollo">Apollo</option>
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                <div class="columns small-4">
+                    <aside class="aside-content-block meta-nav-indicators inline">
+                        <a class="icon download" href="{% url 'scorecard_methodology' %}">Download PDF analysis</a>
+                    </aside>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns small-8">
+                    <ul>
+                        {% for indicator_score in object.indicator_scores.all %}
+                            <li>
+                                <div class="country-score four">
+                                    <dl class="score composite">
+                                    <dt>composite</dt>
+                                    <dd>36</dd>
+                                    </dl>
+                                    <div class="country-meta clearfix">
+                                        <span class="chart">
+                                            <span class="count">{{ indicator_score.score }}</span>
+                                            <span class="index" style="width: 63%"></span>
+                                            <span class="ticks"></span>
+                                        </span>
+                                    
+                                        <h3>{{ indicator_score.country }}</h3>
+                                        <dl class="breakdown">
+                                            <dt>In law</dt>
+                                            <dd><span class="score two">23</span></dd>
+                                            <dt>In practice</dt>
+                                            <dd><span class="score four">56</span></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="columns small-4">
+                    <aside class="aside-content-block meta-nav-indicators">
+                        <h3>Scoring Criteria</h3>
+                        <p>
+                            Lorem
+                        </p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

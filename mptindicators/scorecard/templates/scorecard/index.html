@@ -6,45 +6,303 @@
 {% block pagetitle %}{% endblock %}
 
 {% block content %}
-	
-		<ul class="accordion" data-accordion>
-		  <li class="accordion-navigation">
-		    <a href="#panel1a">Accordion 1</a>
-		    <div id="panel1a" class="content active">
-		      <ul class="accordion" data-accordion>
-				  <li class="accordion-navigation">
-				    <a href="#panel1b">Accordion 1</a>
-				    <div id="panel1b" class="content active">
-				      Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				    </div>
-				  </li>
-				  <li class="accordion-navigation">
-				    <a href="#panel2b">Accordion 2</a>
-				    <div id="panel2b" class="content">
-				      Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				    </div>
-				  </li>
-				  <li class="accordion-navigation">
-				    <a href="#panel3b">Accordion 3</a>
-				    <div id="panel3b" class="content">
-				      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				    </div>
-				  </li>
-				</ul>
-		    </div>
-		  </li>
-		  <li class="accordion-navigation">
-		    <a href="#panel2a">Accordion 2</a>
-		    <div id="panel2a" class="content">
-		      Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-		    </div>
-		  </li>
-		  <li class="accordion-navigation">
-		    <a href="#panel3a">Accordion 3</a>
-		    <div id="panel3a" class="content">
-		      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-		    </div>
-		  </li>
-		</ul>
+<div class="mpt-content-area row full-width index">
+    <div class="small-12 columns map-intro">
+		<div class="map-content">
+			<img src="../../static/img/map.svg">
+			<div class="map-notes">
+				<div class="fact-one">
+					<p>Each country scorecard consists of 50 indicator questions.</p>
+				</div>
+				<div class="fact-two">
+					<p>54 countries</p>
+					<p>The MPT research covered a diverse array of countries across the world.</p>
+				</div>
+				<div class="fact-three">
+					<p>Country scorecards include 23 de jure indicators, 20 de facto indicators, and 7 open text questions.</p>
+					<p>Each scorecard presents a broad assessment of how political finance is regulated and enforced at the country level.</p>
+				</div>
+			</div>
+		</div>
 	</div>
+	<div class="small-12 columns">
+		<div class="page-content">
+			<div class="row">
+				<div class="columns small-4">
+					<h3>Integrity Indicators</h3>
+					<p>
+						Each integrity indicator is composed of three components:
+					</p>
+					<ul>
+						<li>A quantitative score, selected in accordance with strict scoring conditions that ensure the cross-country comparability of the information presented</li>
+						<li>An explanatory comment</li>
+						<li>A list of sources that provides the evidence upon which the score and comment are based</li>
+					</ul>
+				</div>
+				<div class="columns small-4">
+					<h3>Research Methodology</h3>
+					<p>
+						The research on the MPT Integrity Indicators was conducted between July and December 2014.  The period of study for the research is January 2013 – July 2014, or where applicable, the most recent national level elections held within a country.  Global Integrity worked closely with locally based experts and reviewers to gather the data, fact check the scores, comments, and sources, and compile each country scorecard.
+					</p>
+				</div>
+				<div class="columns small-4">
+					<h3>Analyzing Results</h3>
+					<p>
+						The MPT dataset documents the diversity of political finance systems across the world.  Indicator scores enable comparisons across countries, while comments and sources for each indicator provide a unique window into the realities of regulation and enforcement in each country covered.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					<aside class="aside-content-block meta-nav-indicators inline">
+						<h3>Learn more</h3>
+						<ul>
+							
+							<li><a href="{% url 'scorecard_methodology' %}">Methodology</a></li>
+							<li><a href="{% url 'scorecard_contributors' %}">Contributors</a></li>
+							<li><a href="{% url 'scorecard_faq' %}">FAQ</a></li>
+							<li><a class="icon download" href="{% url 'scorecard_methodology' %}">Download PDF analysis</a></li>
+
+						</ul>
+					</aside>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns small-8">
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+					<div class="country-score four">
+						<dl class="score composite">
+						<dt>composite</dt>
+						<dd>36</dd>
+						</dl>
+						<div class="country-meta clearfix">
+							<span class="chart">
+				                <span class="count">36</span>
+				                <span class="index" style="width: 63%"></span>
+				                <span class="ticks"></span>
+				            </span>
+			            
+				            <h3>Bangladesh</h3>
+				            <dl class="breakdown">
+				            	<dt>In law</dt>
+				            	<dd><span class="score two">23</span></dd>
+				            	<dt>In practice</dt>
+				            	<dd><span class="score four">56</span></dd>
+				            </dl>
+			            </div>
+					</div>
+				</div>
+				<div class="columns small-4">
+					<aside class="aside-content-block meta-nav-indicators">
+						<h3>Understanding a Country’s Scores</h3>
+						<p>
+							Scorecards are divided into 5 sections:
+						</p>
+						<ul>
+							<li>Direct and Indirect Public Funding during Campaigns</li>
+							<li>Restrictions on Contribution and Expenditure</li>
+							<li>Reporting Requirements and Public Disclosure</li>
+							<li>Third Party Actors</li>
+							<li>Monitoring and Enforcement</li>
+						</ul>
+						<p>
+							A country’s in law score is the unweighted average of the scores on all 23 de jure indicators in a country scorecard: it provides an indication of how stringently a country’s laws regulate political finance.  The in practice score is the unweighted average of the scores on all 20 de facto indicators.  This measure assesses practical enforcement within a country.  The composite score is the average of all scores on a given country scorecard, weighted by each of the scorecard’s five sections.  
+						</p>
+						<p>
+							Note that quantitative scores fail to capture the scope of an indicator answer or full country scorecard, as do aggregated scores.  Data users should always refer to the comments and sources in order to grasp what a given score or scores signify at the country level.
+						</p>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

@@ -67,20 +67,24 @@ a:hover, a:focus {
 }
 .small-12 {
 	min-width: 700px;
+	max-width: 1140px;
 }
 
 /* GENERAL - social media */
 .twitter {
-	background: url(../img/twitter.png) left top no-repeat;
+	background: url(../img/twitter.png) center top no-repeat;
 }
 .twitter.color {
-	background: url(../img/twitter-color.png) left top no-repeat;	
+	background: url(../img/twitter-color.png) center top no-repeat;	
 }
 .facebook{
-	background: url(../img/facebook.png) left top no-repeat;
+	background: url(../img/facebook.png) center top no-repeat;
 }
 .facebook.button, .twitter.button{
 	background-position: 10px center;
+}
+.email {
+	background: url(../img/email.png) center top no-repeat;
 }
 .button.twitter {
 	background-color: #00aced;
@@ -93,6 +97,12 @@ a:hover, a:focus {
 }
 .button.facebook:hover, .button.facebook:focus {
 	background-color: #2f497e;
+}
+.button.email {
+	background-color: $clr-yellow-base;
+}
+.button.email:hover, .button.facebook:focus {
+	background-color: $clr-yellow-dark;
 }
 .social-share {
 	li {
@@ -112,11 +122,12 @@ a:hover, a:focus {
 		background-color: $clr-green-base;
 		height: 96px;
 	}
-	.social-share {
+	.social-share ul {
 		float: right;
 	}
 	h2 {
 		line-height: 2.3em;
+		padding-left: 40px;
 	}
 }
 .mpt-content-area {
@@ -131,6 +142,19 @@ a:hover, a:focus {
 	padding: 20px;
 	ul{
 		list-style-type: none;
+	}
+	&.inline {
+		margin-bottom: 30px;
+		h3, ul {
+			display: inline-block;
+		}
+
+		li{
+			display: inline-block;
+		}
+		li:last-of-type {
+			float: right;
+		}
 	}
 }
 .row{
@@ -646,8 +670,63 @@ dl.breakdown {
 		}
 	}
 }
+.tabs-content .content.electoral-summary {
+	padding: 30px;
+	background: $clr-blue-base;
+}
+.mpt-content-area.row.full-width.index {
+	top: 196px;
+}
+.map-intro {
+	background: $clr-blue-base;
+	position: relative;
+}
 
-
+.map-content img {
+	width: 80%;
+	margin: 0 auto;
+	display: block;
+	z-index: 1;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.map-notes{
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%
+}
+.fact-one, .fact-two, .fact-three {
+	position: absolute;
+}
+.fact-one {
+	top: 0;
+	left: 0;
+	background: $clr-sec-blue-base;
+	width: 160px;
+	height: 160px;
+	border-radius: 80px;
+	padding: 23px;
+}
+.fact-two {
+	bottom: 0;
+	left: 0;
+	background: $clr-yellow-base;
+	width: 214px;
+	height: 214px;
+	border-radius: 107px;
+	padding: 23px;
+}
+.fact-three {
+	top: 40%;
+	right: 30px;
+	background: $clr-green-base;
+	width: 180px;
+	height: 180px;
+	border-radius: 90px;
+	padding: 23px;
+}
 
 //  Mixin: accordion-navigation( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size, $font-family) {
 //    @params $bg-color: [ color or string ]: Specify the background color for the navigation element
