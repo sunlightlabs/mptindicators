@@ -59,6 +59,7 @@ a:hover, a:focus {
 }
 .top-bar-section ul.meta-nav li>a {
 	text-transform: uppercase;
+	font-size: 14px;
 }
 .top-bar-section ul li>a {
 	-webkit-transition: background-color 300ms ease-out;
@@ -124,10 +125,33 @@ a:hover, a:focus {
 	}
 	.social-share ul {
 		float: right;
+		display: table-cell;
+		vertical-align: middle;
+		height: 100%;
+	}
+	.indicator-num {
+		display: table-cell;
+		color: #ecf5c6;
+		font-family: 'helvetica neue',arial,sans-serif;
+		font-size: 2rem;
+		height: 95px;
+		vertical-align: middle;
+		font-weight: 400;
+		font-style: normal;
+	}
+	.alpha {
+		height: 95px;
 	}
 	h2 {
-		line-height: 2.3em;
+		line-height: 1.2em;
 		padding-left: 40px;
+		display: table-cell;
+		vertical-align: middle;
+		span {
+			font-size: 45%;
+			display: block;
+			line-height: 1.2em;
+		}
 	}
 }
 .mpt-content-area {
@@ -200,7 +224,11 @@ a:hover, a:focus {
 .accordion {
 	margin-left: 0;
 }
+.side-nav li {
+	font-size: .8rem;
+}
 .side-nav.accordion {
+	font-size: 13px;
 	padding-top: 0;
 	margin-left: 20px;
 	.accordion-navigation {
@@ -216,6 +244,9 @@ a:hover, a:focus {
 	.content {
 		@include accordion-content($bg:inherit);
 		padding-right: 0;
+		&.active {
+			padding: .2rem;
+		}
 	}
 	.accordion-navigation>a.expand {
 		background: url('../img/expand-large.png') left top no-repeat;
@@ -249,6 +280,9 @@ a:hover, a:focus {
 		display: inline-block;
 		text-align: center;
 	}
+}
+.mpt-side-nav ul ul ul {
+	margin-left: 14px;
 }
 .side-nav.accordion .accordion .accordion-navigation>a {
 	color: $clr-text;
@@ -370,8 +404,9 @@ a:hover, a:focus {
 	}
 	.icon {
 		height: 32px;
-		display: block;
+		display: table-cell;
 		padding-left: 40px;
+		vertical-align: middle;
 	}
 	.country-details {
 		background: url('../img/country-details.png') left center no-repeat;
@@ -543,6 +578,12 @@ dl.breakdown {
 	.five & {
 		background-color: $clr-chart-five;
 	}
+	.no-score & {
+		background-color: $clr-blue-base;
+	}
+}
+.no-score .index {
+	display: none;
 }
 .page-content .tabs .tab-title {
 	width: 50%;
@@ -727,6 +768,33 @@ dl.breakdown {
 	border-radius: 90px;
 	padding: 23px;
 }
+
+.indicator-scores {
+	ul {
+		list-style-type: none;
+		margin: 0;
+	}
+	h3, form {
+		display: block;
+		float: left;
+		width: 50%;
+		box-sizing: border-box;
+	}
+	form {
+	}
+}
+select {
+	font-family: $font-sans;
+	background-color: $clr-blue-base;
+	border: 0;
+	font-size: 1.6875rem;
+	height: 3rem;
+	color: $clr-text;
+	&:hover {
+		background-color: $clr-blue-dark;
+	}
+}
+
 
 //  Mixin: accordion-navigation( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size, $font-family) {
 //    @params $bg-color: [ color or string ]: Specify the background color for the navigation element

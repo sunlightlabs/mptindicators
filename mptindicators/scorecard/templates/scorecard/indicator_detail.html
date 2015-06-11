@@ -1,38 +1,25 @@
 {% extends "scorecard/base.html" %}
 
-{% block pagetitle %}{{ object.number }}. {{ object.name }}{% endblock %}
+{% block pagetitle %}<span class="indicator-num">36.</span>  <h2 class="alpha">In practice, to what extent can journalists <span>and citizens easily access the financial information of third party actors, including the political spending of those actors in support of political parties and individual candidates?</span></h2>{% endblock %}
 
 {% block content %}
 <div class="mpt-content-area row full-width index">
     <div class="small-12 columns">
         <div class="page-content">
             <div class="row">
-                <div class="columns small-8">
-                    <aside class="aside-content-block meta-nav-indicators inline">
-                        <h3>Learn more</h3>
+                <div class="columns small-8 indicator-scores">
+                        <h3>Integrity Indicator Scores</h3>
                         <form> 
-                            <label>Select Box
-                                <select>
-                                    <option value="husker">Husker</option>
-                                    <option value="starbuck">Starbuck</option>
-                                    <option value="hotdog">Hot Dog</option>
-                                    <option value="apollo">Apollo</option>
-                                </select>
-                            </label>
+                            <select>
+                                <option value="husker">Alphabetically</option>
+                                <option value="starbuck">Ascending</option>
+                                <option value="hotdog">Descending</option>
+                            </select>
                         </form>
-                    </div>
-                <div class="columns small-4">
-                    <aside class="aside-content-block meta-nav-indicators inline">
-                        <a class="icon download" href="{% url 'scorecard_methodology' %}">Download PDF analysis</a>
-                    </aside>
-                </div>
-            </div>
-            <div class="row">
-                <div class="columns small-8">
-                    <ul>
+                    <ul class="clearfix">
                         {% for indicator_score in object.indicator_scores.all %}
                             <li>
-                                <div class="country-score four">
+                                <div class="country-score no-score">
                                     <dl class="score composite">
                                     <dt>composite</dt>
                                     <dd>36</dd>
@@ -58,6 +45,9 @@
                     </ul>
                 </div>
                 <div class="columns small-4">
+                    <aside class="aside-content-block meta-nav-indicators inline">
+                        <a class="icon download" href="{% url 'scorecard_methodology' %}">Download PDF analysis</a>
+                    </aside>
                     <aside class="aside-content-block meta-nav-indicators">
                         <h3>Scoring Criteria</h3>
                         <p>
