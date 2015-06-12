@@ -1,19 +1,62 @@
 {% extends "scorecard/base.html" %}
 
+{% block pagetitle %}<h2 class="alpha">{{ object.name }}</h2>{% endblock %}
+
 {% block content %}
-    <h1>{{ object.name }}</h1>
-    <ul>
-        {% for subsection in object.subsections.all %}
-            <li>
-                <a href="{% url 'scorecard_subsection' section.number subsection.number %}">{{ subsection }}</a>
-                <ul>
-                    {% for indicator in subsection.indicators.all %}
-                        <li>
-                            <a href="{% url 'scorecard_indicator' indicator.number %}">{{ indicator.number }}. {{ indicator.name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
+<div class="mpt-content-area row full-width index">
+    <div class="small-12 columns">
+        <div class="page-content">
+            <div class="row">
+                <div class="columns small-8 indicator-scores">
+                    <h3>Integrity Indicator Scores</h3>
+                    <form> 
+                        <select>
+                            <option value="husker">Alphabetically</option>
+                            <option value="starbuck">Ascending</option>
+                            <option value="hotdog">Descending</option>
+                        </select>
+                    </form>
+                    <ul class="clearfix">
+                        {% for indicator_score in object.indicator_scores.all %}
+                            <li>
+                                <div class="country-score no-score">
+                                    <dl class="score composite">
+                                    <dt>composite</dt>
+                                    <dd>36</dd>
+                                    </dl>
+                                    <div class="country-meta clearfix">
+                                        <span class="chart">
+                                            <span class="count">{{ indicator_score.score }}</span>
+                                            <span class="index" style="width: 63%"></span>
+                                            <span class="ticks"></span>
+                                        </span>
+                                    
+                                        <h3>{{ indicator_score.country }}</h3>
+                                        <dl class="breakdown">
+                                            <dt>In law</dt>
+                                            <dd><span class="score two">23</span></dd>
+                                            <dt>In practice</dt>
+                                            <dd><span class="score four">56</span></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="columns small-4">
+                    <aside class="aside-content-block meta-nav-indicators inline">
+                        <a class="icon download" href="{% url 'scorecard_methodology' %}">Download PDF analysis</a>
+                    </aside>
+                    <aside class="aside-content-block meta-nav-indicators">
+                        <h3>Scoring Criteria</h3>
+                        <p>
+                            Lorem
+                        </p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

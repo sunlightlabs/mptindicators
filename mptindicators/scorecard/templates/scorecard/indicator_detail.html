@@ -8,14 +8,14 @@
         <div class="page-content">
             <div class="row">
                 <div class="columns small-8 indicator-scores">
-                        <h3>Integrity Indicator Scores</h3>
-                        <form> 
-                            <select>
-                                <option value="husker">Alphabetically</option>
-                                <option value="starbuck">Ascending</option>
-                                <option value="hotdog">Descending</option>
-                            </select>
-                        </form>
+                    <h3>Integrity Indicator Scores</h3>
+                    <form> 
+                        <select>
+                            <option value="husker">Alphabetically</option>
+                            <option value="starbuck">Ascending</option>
+                            <option value="hotdog">Descending</option>
+                        </select>
+                    </form>
                     <ul class="clearfix">
                         {% for indicator_score in object.indicator_scores.all %}
                             <li>
