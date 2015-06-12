@@ -81,13 +81,19 @@
 					  {% for section in sections %}
 						  <li class="accordion-navigation">
 						    <a class="expand" href="#nav-{{ section.number }}">expand button!</a>
-								<a class="section" href="{% url 'scorecard_section' section.number %}">{{ section.name }}</a>
+						    <div class="section">
+						    	<a href="{% url 'scorecard_section' section.number %}">{{ section.name }}</a>
+						    </div>
+
+							
 						    <div id="nav-{{ section.number }}" class="content active">
 						    	<ul class="accordion" data-accordion>
 						    		{% for subsection in section.subsections.all %}
 							    		<li class="accordion-navigation">
 								    		<a class="expand" href="#nav-{{ section.number }}-{{ subsection.number }}">expand button!</a>
-												<a class="section" href="{% url 'scorecard_subsection' section.number subsection.number %}">{{ subsection.name }}</a>
+								    		<div class="section">
+												<a href="{% url 'scorecard_subsection' section.number subsection.number %}">{{ subsection.name }}</a>
+											</div>
 								    		<div id="nav-{{ section.number }}-{{ subsection.number }}" class="content">
 								     			<ul>
 								     				{% for indicator in subsection.indicators.all %}
