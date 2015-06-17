@@ -1,11 +1,13 @@
 import re
 from collections import defaultdict, namedtuple
+from decimal import Decimal, ROUND_HALF_UP
 
 import xlrd
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.text import slugify
+from mptindicators.scorecard.core import COUNTRIES
 from mptindicators.scorecard.models import (
-    Country, Section, Subsection, Indicator, IndicatorScore)
+    Country, Section, Subsection, Indicator, IndicatorScore, Aggregate)
 
 SECTION_RE = re.compile('(?:Section )?(\d).(\d)? (.*)')
 SECTIONS = {
@@ -22,7 +24,7 @@ SECTIONS = {
 #
 
 CountryRecord = namedtuple('CountryRecord',
-    ('name', 'column'))
+    ('name', 'column', 'code'))
 SectionRecord = namedtuple('SectionRecord',
     ('section', 'subsection', 'title', 'row'))
 QuestionRecord = namedtuple('QuestionRecord',
@@ -35,11 +37,18 @@ ScoreRecord = namedtuple('ScoreRecord',
 # data methods
 #
 
+# class DataSheet(object):
+#     def __init__(self, sheet):
+#         self.sheet = sheet
+
 def countries_iter(sheet):
     for col, cell in enumerate(sheet.row(1)):
         if col > 3:
             name = cell.value.split('-')[0].strip()
-            yield CountryRecord(name, col)
+            if name == 'Korea (Republic of)':
+                name = 'South Korea'
+            code = COUNTRIES.get(name, None)
+            yield CountryRecord(name, col, code)
 
 
 def questions_iter(sheet):
@@ -87,12 +96,29 @@ def get_score(sheet, country, question):
     return ScoreRecord(country, question, score, comment, sources, row, col)
 
 
+def get_aggregates(sheet):
 
+    aggs = {}
+    fields = ('composite', 'in_law', 'in_practice',
+              '1', '1.1', '1.2',
+              '2', '2.1', '2.2',
+              '3', '3.1', '3.2',
+              '4',
+              '5', '5.1', '5.2')
 
+    for row in range(1, 55):
 
+        name = sheet.cell(row, 1).value.strip()
+        data = {}
 
+        for col in range(len(fields)):
+            val = Decimal(sheet.cell(row, col + 2).value).quantize(
+                Decimal('.01'), rounding=ROUND_HALF_UP)
+            data[fields[col]] = val
 
+        aggs[name] = data
 
+    return aggs
 
 
 class Command(BaseCommand):
@@ -105,11 +131,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         book = xlrd.open_workbook(options['path'])
-        sheet = book.sheets()[0]
+        data_sheet = book.sheets()[0]
+        agg_sheet = book.sheets()[1]
 
-        countries = list(countries_iter(sheet))
-        questions = list(questions_iter(sheet))
-        sections = list(sections_iter(sheet))
+        countries = list(countries_iter(data_sheet))
+        questions = list(questions_iter(data_sheet))
+        sections = list(sections_iter(data_sheet))
 
         def get_section(question):
             qsection = None
@@ -119,6 +146,13 @@ class Command(BaseCommand):
                 qsection = section
             return qsection
 
+        #
+        # load aggregates
+        #
+
+        print "loading aggregates..."
+
+        aggregates = get_aggregates(agg_sheet)
 
         #
         # load countries
@@ -129,8 +163,13 @@ class Command(BaseCommand):
         Country.objects.all().delete()
 
         for record in countries:
+            aggs = aggregates.get(record.name)
             Country.objects.create(name=record.name,
-                                   slug=slugify(record.name))
+                                   code=record.code,
+                                   slug=slugify(record.name),
+                                   aggregate_score=int(aggs['composite']),
+                                   in_law_score=int(aggs['in_law']),
+                                   in_practice_score=int(aggs['in_practice']))
 
         #
         # load sections
@@ -152,6 +191,33 @@ class Command(BaseCommand):
                                       number=record.subsection,
                                       name=record.title)
 
+        #
+        # load section and subsection aggregates
+        #
+
+        print "loading section and subsection aggregates..."
+
+        Aggregate.objects.all().delete()
+
+        for country in Country.objects.all():
+            for section in Section.objects.all():
+
+                key = '{}'.format(section.number)
+                val = aggregates[country.name][key]
+
+                Aggregate.objects.create(country=country,
+                                         section=section,
+                                         subsection=None,
+                                         score=int(val))
+
+                for subsection in section.subsections.all():
+                    key = '{}.{}'.format(section.number, subsection.number)
+                    aggs = aggregates.get(country.name)
+                    val = int(aggs[key]) if aggs and 'key' in aggs else None
+                    Aggregate.objects.create(country=country,
+                                             section=section,
+                                             subsection=subsection,
+                                             score=val)
 
         #
         # load indicators
@@ -187,7 +253,7 @@ class Command(BaseCommand):
         for country in countries:
             print '  {}'.format(country.name)
             for question in questions:
-                score = get_score(sheet, country, question)
+                score = get_score(data_sheet, country, question)
 
                 value = None if score.score == '' else score.score
 

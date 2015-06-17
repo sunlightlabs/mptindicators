@@ -1,4 +1,5 @@
 {% extends "scorecard/base.html" %}
+{% load scorecard_tags %}
 
 {% block pagetitle %}<h2 class="alpha">{{ object.name }}</h2>{% endblock %}
 
@@ -9,24 +10,24 @@
 		<div class="page-content">
 			<div class="row">
 				<div class="columns small-8">
-					<div class="country-score four">
+					<div class="country-score {% score_class country.aggregate_score %}">
 						<dl class="score composite">
 						<dt>composite</dt>
-						<dd>36</dd>
+						<dd>{{ country.aggregate_score }}</dd>
 						</dl>
 						<div class="country-meta clearfix">
 							<span class="chart">
-				                <span class="count">36</span>
-				                <span class="index" style="width: 63%"></span>
+				                <span class="count">{{ country.aggregate_score }}</span>
+				                <span class="index" style="width: {{ country.aggregate_score }}%"></span>
 				                <span class="ticks"></span>
 				            </span>
-			            
-				            <h3>Bangladesh</h3>
+
+				            <h3>{{ country.name }}</h3>
 				            <dl class="breakdown">
 				            	<dt>In law</dt>
-				            	<dd><span class="score two">23</span></dd>
+				            	<dd><span class="score {% score_class country.in_law_score %}">{{ country.in_law_score }}</span></dd>
 				            	<dt>In practice</dt>
-				            	<dd><span class="score four">56</span></dd>
+				            	<dd><span class="score {% score_class country.in_practice_score %}">{{ country.in_practice_score }}</span></dd>
 				            </dl>
 			            </div>
 					</div>
@@ -44,7 +45,7 @@
 							Irish id organic, as coffee lungo café au lait cup spoon rich pumpkin spice. Con panna espresso pumpkin spice cup mocha and frappuccino. Grinder est fair trade acerbic extraction half and half espresso café au lait strong and french press.
 						</p>
 					</div>
-				
+
 				</div>
 				<div class="columns small-4">
 					<aside class="aside-content-block meta-nav-indicators">
@@ -69,15 +70,15 @@
 								<ul class="accordion" data-accordion>
 									{% regroup object.indicator_scores.all by indicator.subsection.section as section_list %}
 									{% for section in section_list %}
+									  {% section_agg country section.grouper as section_score %}
 									  <li class="accordion-navigation">
-									    
 										<a class="expand" href="#panel-{{ section.grouper.number }}">expand button!</a>
-										<div class="section four">
+										<div class="section {% score_class section_score.score %}">
 											<h4>{{ section.grouper.name }}</h4>
 											<a href="http://caitlinweber.com">More about category</a>
 											<dl class="composite score">
 												<dt>composite</dt>
-												<dd>36</dd>
+												<dd>{{ section_score.score }}</dd>
 											</dl>
 											<dl class="breakdown">
 								            	<dt>In law</dt>
@@ -85,15 +86,13 @@
 								            	<dt>In practice</dt>
 								            	<dd><span class="score four">56</span></dd>
 								            </dl>
-								            
 							            </div>
-
 									    <div id="panel-{{ section.grouper.number }}" class="content active">
 									      <ul class="accordion" data-accordion>
 									      	{% regroup section.list by indicator.subsection as subsection_list %}
 									      	{% for subsection in subsection_list %}
 									      		<li class="accordion-navigation">
-											    		
+
 													<a class="expand" href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">expand button!</a>
 														<div class="section four">
 											    			<h5>{{ subsection.grouper.name }}</h5>
@@ -102,7 +101,7 @@
 											    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="content ">
 											      		{% for indicator_score in subsection.list %}
 											                <span class="indicator-num">{{ indicator_score.indicator.number }}</span>
-											                    
+
 										                    <h6>{{ indicator_score.indicator.name }}</h6>
 										                    <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a>
 										                    <dl>
@@ -114,17 +113,12 @@
 										                    	</dd>
 										                    </dl>
 										                    <div class="comment">
-											                    <p>
-											                    	Comment
-											                    </p>
+											                    <p>{{ indicator_score.comment }}</p>
 										                    </div>
 										                    <div class="sources">
-										                    	<ul>
-											                    	<li>source 1</li>
-											                    	<li>source 2</li>
-										                    	</ul>
+										                    	<p>{{ indicator_score.sources }}</p>
 										                    </div>
-											                    
+
 								        				{% endfor %}
 											    		</div>
 											  		</li>
