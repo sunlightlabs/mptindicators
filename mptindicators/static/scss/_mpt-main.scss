@@ -158,6 +158,12 @@ a:hover, a:focus {
 	float: left;
 	// background-color: $clr-yellow-base; *** To Test floating
 }
+.mpt-content-area.index .column+.column:last-child, .columns+.columns:last-child {
+	float: left;
+}
+.mpt-content-area.title {
+	background-color: $clr-green-base; 
+}
 .page-content {
 	padding: 30px 20px;
 }
@@ -736,7 +742,14 @@ dl.breakdown {
 	position: absolute;
 	top: 0;
 	height: 100%;
-	width: 100%
+	width: 100%;
+	color: #ffffff;
+	font-family: $font-sans;
+	p{
+		font-size: .9rem;
+		line-height: 1rem;
+		text-align: center;
+	}
 }
 .fact-one, .fact-two, .fact-three {
 	position: absolute;
@@ -745,19 +758,37 @@ dl.breakdown {
 	top: 0;
 	left: 0;
 	background: $clr-sec-blue-base;
-	width: 160px;
-	height: 160px;
-	border-radius: 80px;
+	width: 170px;
+	height: 170px;
+	border-radius: 85px;
 	padding: 23px;
+	p .highlight {
+		font-size: 3.4rem;
+		display: block;
+		line-height: 3rem;
+	}
 }
 .fact-two {
 	bottom: 0;
 	left: 0;
-	background: $clr-yellow-base;
 	width: 214px;
 	height: 214px;
 	border-radius: 107px;
 	padding: 23px;
+	background: rgb(232,213,0); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(232,213,0,1) 0%, rgba(232,213,0,1) 50%, rgba(248,228,11,1) 50%, rgba(248,228,11,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(232,213,0,1)), color-stop(50%,rgba(232,213,0,1)), color-stop(50%,rgba(248,228,11,1)), color-stop(100%,rgba(248,228,11,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(232,213,0,1) 0%,rgba(232,213,0,1) 50%,rgba(248,228,11,1) 50%,rgba(248,228,11,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(232,213,0,1) 0%,rgba(232,213,0,1) 50%,rgba(248,228,11,1) 50%,rgba(248,228,11,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(232,213,0,1) 0%,rgba(232,213,0,1) 50%,rgba(248,228,11,1) 50%,rgba(248,228,11,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(232,213,0,1) 0%,rgba(232,213,0,1) 50%,rgba(248,228,11,1) 50%,rgba(248,228,11,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8d500', endColorstr='#f8e40b',GradientType=0 ); /* IE6-9 */
+
+	p .highlight {
+		font-size: 3.4rem;
+		display: block;
+		line-height: 3rem;
+	}
 }
 .fact-three {
 	top: 40%;
@@ -793,6 +824,9 @@ select {
 	&:hover {
 		background-color: $clr-blue-dark;
 	}
+}
+.num-list {
+	list-style-type: number;
 }
 
 
