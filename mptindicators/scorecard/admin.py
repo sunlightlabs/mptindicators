@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (Region, Country, Section, Subsection, Indicator,
-    IndicatorScore)
+    IndicatorScore, Aggregate)
 
 
 class IndicatorScoreInline(admin.TabularInline):
@@ -33,3 +33,8 @@ class IndicatorAdmin(admin.ModelAdmin):
     inlines = [IndicatorScoreInline]
     list_display = ("number", "name", "subsection")
     list_display_links = ("number", "name")
+
+
+@admin.register(Aggregate)
+class AggregateAdmin(admin.ModelAdmin):
+    list_display = ("country", "section", "subsection", "score")

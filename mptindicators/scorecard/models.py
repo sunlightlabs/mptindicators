@@ -1,3 +1,5 @@
+import random
+from collections import defaultdict
 from django.db import models
 
 
@@ -14,7 +16,12 @@ class Region(models.Model):
 class Country(models.Model):
     slug = models.SlugField()
     name = models.CharField(max_length=255)
+    code = models.CharField(max_length=2, blank=True)
     region = models.ForeignKey(Region, related_name='countries', blank=True, null=True)
+
+    aggregate_score = models.PositiveSmallIntegerField(blank=True, null=True)
+    in_law_score = models.PositiveSmallIntegerField(blank=True, null=True)
+    in_practice_score = models.PositiveSmallIntegerField(blank=True, null=True)
 
     class Meta:
         ordering = ('name',)
@@ -85,3 +92,12 @@ class IndicatorScore(models.Model):
 
     class Meta:
         ordering = ('country__name', 'indicator__number')
+
+
+class Aggregate(models.Model):
+    country = models.ForeignKey(Country, related_name="aggregates")
+    section = models.ForeignKey(
+        Section, related_name="aggregates", blank=True, null=True)
+    subsection = models.ForeignKey(
+        Subsection, related_name="aggregates", blank=True, null=True)
+    score = models.PositiveSmallIntegerField(blank=True, null=True)
