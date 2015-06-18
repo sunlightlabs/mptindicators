@@ -73,10 +73,10 @@ a:hover, a:focus {
 
 /* GENERAL - social media */
 .twitter {
-	background: url(../img/twitter.png) center top no-repeat;
+	background: url(../img/twitter.png) center center no-repeat;
 }
 .twitter.color {
-	background: url(../img/twitter-color.png) center top no-repeat;	
+	background: url(../img/twitter-color.png) center center no-repeat;	
 }
 .facebook{
 	background: url(../img/facebook.png) center top no-repeat;
@@ -85,7 +85,7 @@ a:hover, a:focus {
 	background-position: 10px center;
 }
 .email {
-	background: url(../img/email.png) center top no-repeat;
+	background: url(../img/email.png) center center no-repeat;
 }
 .button.twitter {
 	background-color: #00aced;
@@ -114,6 +114,10 @@ a:hover, a:focus {
 		display: block;
 		text-indent: -9999em;
 	}
+	.button.small {
+		margin: 0;
+		padding: 14px 22px;
+	}
 }
 
 
@@ -124,10 +128,9 @@ a:hover, a:focus {
 		height: 96px;
 	}
 	.social-share ul {
-		float: right;
 		display: table-cell;
 		vertical-align: middle;
-		height: 100%;
+		height: 96px;
 	}
 	.indicator-num {
 		display: table-cell;
@@ -147,6 +150,9 @@ a:hover, a:focus {
 		padding-left: 40px;
 		display: table-cell;
 		vertical-align: middle;
+		&.alpha {
+			font-size: 1.7rem;
+		}
 		span {
 			font-size: 45%;
 			display: block;
@@ -160,6 +166,7 @@ a:hover, a:focus {
 }
 .mpt-content-area.index .column+.column:last-child, .columns+.columns:last-child {
 	float: left;
+
 }
 .mpt-content-area.title {
 	background-color: $clr-green-base; 
@@ -181,6 +188,7 @@ a:hover, a:focus {
 
 		li{
 			display: inline-block;
+			margin-right: 20px;
 		}
 		li:last-of-type {
 			float: right;
@@ -421,6 +429,15 @@ a:hover, a:focus {
 		background: url('../img/download.png') left center no-repeat;
 	}
 }
+.meta-nav-indicators.inline {
+	h3 {
+		float: left;
+		padding-right: 20px;
+	}
+	&.aside-content-block.inline ul {
+		display: block;
+	}
+}
 .mpt-side-nav .meta-nav-indicators {
 	margin: 20px;
 	background-color: $clr-green-base;
@@ -445,7 +462,7 @@ a:hover, a:focus {
 	margin-right: 85px;
 	padding-right: .6%;
 
-	h3 {
+	h4 {
 		float: left;
 		line-height: 3.4rem;
 	}
