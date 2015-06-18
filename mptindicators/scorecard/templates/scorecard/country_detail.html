@@ -22,7 +22,7 @@
 				                <span class="ticks"></span>
 				            </span>
 
-				            <h3>{{ country.name }}</h3>
+				            <h4>{{ country.name }}</h4>
 				            <dl class="breakdown">
 				            	<dt>In law</dt>
 				            	<dd><span class="score {% score_class country.in_law_score %}">{{ country.in_law_score }}</span></dd>
@@ -88,41 +88,50 @@
 								            </dl>
 							            </div>
 									    <div id="panel-{{ section.grouper.number }}" class="content active">
-									      <ul class="accordion" data-accordion>
-									      	{% regroup section.list by indicator.subsection as subsection_list %}
-									      	{% for subsection in subsection_list %}
-									      		<li class="accordion-navigation">
+										    <ul class="accordion" data-accordion>
+										      	{% regroup section.list by indicator.subsection as subsection_list %}
+										      	{% for subsection in subsection_list %}
+										      		<li class="accordion-navigation">
 
-													<a class="expand" href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">expand button!</a>
+														<a class="expand" href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">expand button!</a>
 														<div class="section four">
 											    			<h5>{{ subsection.grouper.name }}</h5>
 											    			<a href="">More about category</a>
 											    		</div>
-											    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="content ">
-											      		{% for indicator_score in subsection.list %}
-											                <span class="indicator-num">{{ indicator_score.indicator.number }}</span>
+											    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="indicator content ">
+												    		<ul class="accordion" data-accordion>
+													      		{% for indicator_score in subsection.list %}
+													      			<li class="accordion-navigation">
+													      				<a class="expand" href="#panel-{{ indicator_score.indicator.number }}">expand button!</a>
+														                <div class="section four">
+															                <span class="indicator-num">{{ indicator_score.indicator.number }}</span>
 
-										                    <h6>{{ indicator_score.indicator.name }}</h6>
-										                    <a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a>
-										                    <dl>
-										                    	<dt>
-										                    		Score
-										                    	</dt>
-										                    	<dd>
-										                    	{{ indicator_score.score }}
-										                    	</dd>
-										                    </dl>
-										                    <div class="comment">
-											                    <p>{{ indicator_score.comment }}</p>
-										                    </div>
-										                    <div class="sources">
-										                    	<p>{{ indicator_score.sources }}</p>
-										                    </div>
+													                   	 	<h6>{{ indicator_score.indicator.name }}</h6>
+													                    	<a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a>
+														                    <dl>
+														                    	<dt>
+														                    		Score
+														                    	</dt>
+														                    	<dd>
+														                    	{{ indicator_score.score }}
+														                    	</dd>
+														                    </dl>
+														                </div>
+													                    <div id="panel-{{ indicator_score.indicator.number }}" class="indicator content ">
+														                    <div class="comment">
+															                    <p>{{ indicator_score.comment }}</p>
+														                    </div>
+														                    <div class="sources">
+														                    	<p>{{ indicator_score.sources }}</p>
+														                    </div>
+														                </div>
+													                </li>
 
-								        				{% endfor %}
+										        				{% endfor %}
+										        			</ul>
 											    		</div>
-											  		</li>
-									      	{% endfor %}
+												  	</li>
+										      	{% endfor %}
 												</ul>
 									    </div>
 									  </li>

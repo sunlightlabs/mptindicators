@@ -715,6 +715,11 @@ dl.breakdown {
 	}
 
 }
+.country-indicators .accordion .indicator.content li {
+	.section, .content {
+		padding: 20px 0 20px 35px;
+	}
+}
 
 .country-indicators .accordion .accordion .accordion-navigation>a {
 	color: $clr-text;
