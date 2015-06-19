@@ -1,4 +1,5 @@
 {% extends "scorecard/base.html" %}
+{% load scorecard_tags %}
 
 {% block pagetitle %}<h2 class="alpha">{{ object.name }}</h2>{% endblock %}
 
@@ -9,7 +10,7 @@
             <div class="row">
                 <div class="columns small-8 indicator-scores">
                     <h3>Integrity Indicator Scores</h3>
-                    <form> 
+                    <form>
                         <select>
                             <option value="husker">Alphabetically</option>
                             <option value="starbuck">Ascending</option>
@@ -17,27 +18,22 @@
                         </select>
                     </form>
                     <ul class="clearfix">
-                        {% for indicator_score in object.indicator_scores.all %}
-                            <li>
-                                <div class="country-score no-score">
+                    	{% for country in countries %}
+                    		{% subsection_agg country object as agg %}
+                    		<li>
+                    			<div class="country-score {% score_class agg.score %}">
                                     <dl class="score composite">
-                                    <dt>composite</dt>
-                                    <dd>36</dd>
+                                    <dt class="text-replace">composite</dt>
+                                    <dd>{{ agg.score }}</dd>
                                     </dl>
                                     <div class="country-meta clearfix">
                                         <span class="chart">
-                                            <span class="count">{{ indicator_score.score }}</span>
-                                            <span class="index" style="width: 63%"></span>
+                                            <span class="count">{{ agg.score }}</span>
+                                            <span class="index" style="width: {{ agg.score }}%"></span>
                                             <span class="ticks"></span>
                                         </span>
-                                    
-                                        <h3>{{ indicator_score.country }}</h3>
-                                        <dl class="breakdown">
-                                            <dt>In law</dt>
-                                            <dd><span class="score two">23</span></dd>
-                                            <dt>In practice</dt>
-                                            <dd><span class="score four">56</span></dd>
-                                        </dl>
+
+                                        <h4><a href="{% url 'scorecard_country' country.code %}">{{ country.name }}</a></h4>
                                     </div>
                                 </div>
                             </li>
