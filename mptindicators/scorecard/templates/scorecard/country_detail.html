@@ -65,7 +65,7 @@
 										<a class="expand" href="#panel-{{ section.grouper.number }}">expand button!</a>
 										<div class="section {% score_class section_score.score %}">
 											<h4>{{ section.grouper.name }}</h4>
-											<a href="http://caitlinweber.com">More about category</a>
+											<a href="{% url 'scorecard_section' section.grouper.number %}">More about category</a>
 											<dl class="composite score">
 												<dt>composite</dt>
 												<dd>{{ section_score.score }}</dd>
@@ -88,13 +88,13 @@
 														<a class="expand" href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">expand button!</a>
 														<div class="section">
 											    			<h5>{{ subsection.grouper.name }}</h5>
-											    			<a href="">More about category</a>
+											    			<a href="{% url 'scorecard_subsection' section.grouper.number subsection.grouper.number %}">More about category</a>
 											    		</div>
 											    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="indicator content ">
 												    		<ul class="accordion" data-accordion>
 													      		{% for indicator_score in subsection.list %}
 													      			<li class="accordion-navigation">
-													      				<a class="expand" href="#panel-{{ indicator_score.indicator.number }}">expand button!</a>
+													      				<a class="expand" href="#panel-ind{{ indicator_score.indicator.number }}">expand button!</a>
 														                <div class="section clearfix">
 															                <span class="indicator-num">{{ indicator_score.indicator.number }}</span>
 															                <dl>
@@ -111,7 +111,7 @@
 														                    </dl>
 													                   	 	<h6>{{ indicator_score.indicator.name }}<a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a></h6>
 														                </div>
-													                    <div id="panel-{{ indicator_score.indicator.number }}" class="content ">
+													                    <div id="panel-ind{{ indicator_score.indicator.number }}" class="content ">
 														                    <div class="comment">
 															                    {{ indicator_score.comment|markdown }}
 														                    </div>
