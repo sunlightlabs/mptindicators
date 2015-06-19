@@ -17,7 +17,10 @@ a {
 a:hover, a:focus {
 	color: #568c49;
 }
-
+.text-replace {
+	display: block;
+	text-indent: -9999em;
+}
 .alpha {
 	font-family: $font-serif;
 	color: #fff;
@@ -625,7 +628,7 @@ dl.breakdown {
 		display: inline-block;
 		font-weight: bold;
 	}
-	h5 {
+	h5, h6 {
 		display: inline-block;
 		font-weight: normal;
 	}
@@ -691,10 +694,15 @@ dl.breakdown {
 			font-size: .8rem;
 			text-transform: uppercase;
 			font-family: $font-sans;
-		}	
+		}
+		.indicator-num {
+			line-height: 1em;
+		}
 	}
 	.accordion .section {
 		background-color: $clr-blue-base;
+		border-bottom: 2px solid $clr-blue-light;
+
 	}
 	.indicator-num {
 		background: $clr-green-text;
@@ -715,10 +723,38 @@ dl.breakdown {
 	}
 
 }
-.country-indicators .accordion .indicator.content li {
-	.section, .content {
-		padding: 20px 0 20px 35px;
+.country-indicators .accordion .indicator.content {
+	li {
+		.content {
+			padding: 20px 0 20px 103px;
+		}
+		.section {
+			padding: 0 0 0 35px;
+			border-bottom: 2px solid $clr-blue-light;
+		}
 	}
+	.indicator-num {
+		background-color: $clr-text;
+		color: $clr-blue-light;
+		font-family: $font-sans;
+		line-height: 1.7em;
+		font-size: 1.125rem;
+		width: 31px;
+		height: inherit;
+		float: left;
+		display: block;
+		margin: 15px 7px 15px 0;
+	}
+	h6 {
+		display: block;
+		margin: 20px 10px 10px 0;
+		a {
+			margin-left: 5px;
+		}
+	}
+}
+.country-indicators .accordion .accordion .accordion .accordion-navigation>a.expand {
+	margin: 27px 9px 0 37px;
 }
 
 .country-indicators .accordion .accordion .accordion-navigation>a {

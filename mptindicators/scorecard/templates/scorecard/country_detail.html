@@ -80,12 +80,14 @@
 												<dt>composite</dt>
 												<dd>{{ section_score.score }}</dd>
 											</dl>
+											<!--
 											<dl class="breakdown">
 								            	<dt>In law</dt>
 								            	<dd><span class="score two">23</span></dd>
 								            	<dt>In practice</dt>
 								            	<dd><span class="score four">56</span></dd>
 								            </dl>
+								            -->
 							            </div>
 									    <div id="panel-{{ section.grouper.number }}" class="content active">
 										    <ul class="accordion" data-accordion>
@@ -94,7 +96,7 @@
 										      		<li class="accordion-navigation">
 
 														<a class="expand" href="#panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}">expand button!</a>
-														<div class="section four">
+														<div class="section">
 											    			<h5>{{ subsection.grouper.name }}</h5>
 											    			<a href="">More about category</a>
 											    		</div>
@@ -103,21 +105,21 @@
 													      		{% for indicator_score in subsection.list %}
 													      			<li class="accordion-navigation">
 													      				<a class="expand" href="#panel-{{ indicator_score.indicator.number }}">expand button!</a>
-														                <div class="section four">
+														                <div class="section clearfix">
 															                <span class="indicator-num">{{ indicator_score.indicator.number }}</span>
-
-													                   	 	<h6>{{ indicator_score.indicator.name }}</h6>
-													                    	<a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a>
-														                    <dl>
-														                    	<dt>
+															                <dl>
+														                    	<dt class="text-replace">
 														                    		Score
 														                    	</dt>
 														                    	<dd>
 														                    	{{ indicator_score.score }}
 														                    	</dd>
 														                    </dl>
+													                   	 	<h6>{{ indicator_score.indicator.name }}<a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a></h6>
+													                    	
+														                    
 														                </div>
-													                    <div id="panel-{{ indicator_score.indicator.number }}" class="indicator content ">
+													                    <div id="panel-{{ indicator_score.indicator.number }}" class="content ">
 														                    <div class="comment">
 															                    <p>{{ indicator_score.comment }}</p>
 														                    </div>
