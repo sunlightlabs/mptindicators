@@ -19,28 +19,33 @@
                     </form>
                     <ul class="clearfix">
                         {% for indicator_score in object.indicator_scores.all %}
-                            <li>
-                                <div class="country-score no-score">
-                                    <dl class="score composite">
-                                    <dt>composite</dt>
-                                    <dd>36</dd>
-                                    </dl>
-                                    <div class="country-meta clearfix">
-                                        <span class="chart">
-                                            <span class="count">{{ indicator_score.score }}</span>
-                                            <span class="index" style="width: 63%"></span>
-                                            <span class="ticks"></span>
-                                        </span>                                    
-                                        <h4>{{ indicator_score.country }}</h4>
-                                        <dl class="breakdown">
-                                            <dt>In law</dt>
-                                            <dd><span class="score two">23</span></dd>
-                                            <dt>In practice</dt>
-                                            <dd><span class="score four">56</span></dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </li>
+                        	{% with indicator_score.country as country %}
+	                            <li>
+	                                <div class="country-score {% score_class indicator_score.score %}">
+	                                    <dl class="score composite">
+	                                    <dt>composite</dt>
+	                                    <dd>{{ indicator_score.score }}</dd>
+	                                    </dl>
+	                                    <div class="country-meta clearfix">
+	                                        <span class="chart">
+	                                            <span class="count">{{ indicator_score.score }}</span>
+	                                            <span class="index" style="width: {{ indicator_score.score }}%"></span>
+	                                            <span class="ticks"></span>
+	                                        </span>
+
+	                                        <h4><a href="{% url 'scorecard_country' country.code %}">{{ country.name }}</a></h4>
+	                                        <!--
+	                                        <dl class="breakdown">
+	                                            <dt>In law</dt>
+	                                            <dd><span class="score two">23</span></dd>
+	                                            <dt>In practice</dt>
+	                                            <dd><span class="score four">56</span></dd>
+	                                        </dl>
+	                                        -->
+	                                    </div>
+	                                </div>
+	                            </li>
+                            {% endwith %}
                         {% endfor %}
                     </ul>
                 </div>
