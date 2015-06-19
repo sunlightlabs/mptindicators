@@ -1,3 +1,4 @@
+import csv
 import re
 from collections import defaultdict, namedtuple
 from decimal import Decimal, ROUND_HALF_UP
@@ -121,6 +122,14 @@ def get_aggregates(sheet):
     return aggs
 
 
+def get_findings():
+    findings = {}
+    with open('data/findings.csv') as infile:
+        dr = csv.DictReader(infile)
+        findings = {r['Country'].strip(): r['Findings'].strip() for r in dr}
+    return findings
+
+
 class Command(BaseCommand):
 
     help = 'Import scorecard data from master spreadsheet'
@@ -150,8 +159,14 @@ class Command(BaseCommand):
         # load aggregates
         #
 
-        print "loading aggregates..."
+        print "loading findings..."
+        findings = get_findings()
 
+        #
+        # load aggregates
+        #
+
+        print "loading aggregates..."
         aggregates = get_aggregates(agg_sheet)
 
         #
@@ -169,7 +184,8 @@ class Command(BaseCommand):
                                    slug=slugify(record.name),
                                    aggregate_score=int(aggs['composite']),
                                    in_law_score=int(aggs['in_law']),
-                                   in_practice_score=int(aggs['in_practice']))
+                                   in_practice_score=int(aggs['in_practice']),
+                                   findings=findings.get(record.name, ''))
 
         #
         # load sections

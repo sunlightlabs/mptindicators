@@ -85,7 +85,7 @@
 						    	<a href="{% url 'scorecard_section' section.number %}">{{ section.name }}</a>
 						    </div>
 
-							
+
 						    <div id="nav-{{ section.number }}" class="content active">
 						    	<ul class="accordion" data-accordion>
 						    		{% for subsection in section.subsections.all %}
@@ -227,7 +227,7 @@
 				<div class="nav-country content" id="panel2">
 					<ul>
 						{% for country in countries %}
-							<li><a href="{% url 'scorecard_country' country.slug %}">{{ country.name }}</a></li>
+							<li><a href="{% url 'scorecard_country' country.code %}">{{ country.name }}</a></li>
 						{% endfor %}
 					</ul>
 				</div>

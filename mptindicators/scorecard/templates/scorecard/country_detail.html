@@ -1,4 +1,5 @@
 {% extends "scorecard/base.html" %}
+{% load md2 %}
 {% load scorecard_tags %}
 
 {% block pagetitle %}<h2 class="alpha">{{ object.name }}</h2>{% endblock %}
@@ -32,18 +33,7 @@
 			            </div>
 					</div>
 					<div class="country-summary">
-						<p>
-							Robust kopi-luwak acerbic breve robust qui crema mazagran medium. Ut, instant brewed espresso, organic irish that beans chicory. White qui plunger pot cultivar saucer grinder robusta.
-						</p>
-						<p>
-							Dark fair trade, wings rich et fair trade est rich. Irish, ut, aged acerbic saucer steamed body turkish. Robusta java, turkish body breve est seasonal.
-						</p>
-						<p>
-							Siphon, turkish, organic brewed, percolator, et to go, qui rich cortado café au lait froth. Et extra beans, filter, foam caramelization galão acerbic whipped aftertaste carajillo that. Latte foam percolator crema, coffee caffeine strong whipped sugar.
-						</p>
-						<p>
-							Irish id organic, as coffee lungo café au lait cup spoon rich pumpkin spice. Con panna espresso pumpkin spice cup mocha and frappuccino. Grinder est fair trade acerbic extraction half and half espresso café au lait strong and french press.
-						</p>
+						{{ country.findings|markdown }}
 					</div>
 
 				</div>
@@ -109,14 +99,18 @@
 										                    		Score
 										                    	</dt>
 										                    	<dd>
-										                    	{{ indicator_score.score }}
+										                    	{% if indicator_score.score == None %}
+										                    		--
+										                    	{% else %}
+										                    		{{ indicator_score.score }}
+										                    	{% endif %}
 										                    	</dd>
 										                    </dl>
 										                    <div class="comment">
-											                    <p>{{ indicator_score.comment }}</p>
+											                    {{ indicator_score.comment|markdown }}
 										                    </div>
 										                    <div class="sources">
-										                    	<p>{{ indicator_score.sources }}</p>
+										                    	{{ indicator_score.sources|markdown }}
 										                    </div>
 
 								        				{% endfor %}

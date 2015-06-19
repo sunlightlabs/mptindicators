@@ -1,6 +1,7 @@
 {% extends "scorecard/base.html" %}
+{% load scorecard_tags %}
 
-{% block pagetitle %}<span class="indicator-num">36.</span>  <h2 class="alpha">In practice, to what extent can journalists <span>and citizens easily access the financial information of third party actors, including the political spending of those actors in support of political parties and individual candidates?</span></h2>{% endblock %}
+{% block pagetitle %}<span class="indicator-num">{{ indicator.number }}.</span>  <h2 class="alpha">In practice, to what extent can journalists <span>and citizens easily access the financial information of third party actors, including the political spending of those actors in support of political parties and individual candidates?</span></h2>{% endblock %}
 
 {% block content %}
 <div class="mpt-content-area row full-width index">
@@ -9,7 +10,7 @@
             <div class="row">
                 <div class="columns small-8 indicator-scores">
                     <h3>Integrity Indicator Scores</h3>
-                    <form> 
+                    <form>
                         <select>
                             <option value="husker">Alphabetically</option>
                             <option value="starbuck">Ascending</option>
@@ -30,7 +31,7 @@
                                             <span class="index" style="width: 63%"></span>
                                             <span class="ticks"></span>
                                         </span>
-                                    
+
                                         <h3>{{ indicator_score.country }}</h3>
                                         <dl class="breakdown">
                                             <dt>In law</dt>

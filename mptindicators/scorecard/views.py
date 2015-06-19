@@ -17,6 +17,8 @@ class CountryList(MPTView, ListView):
 
 class CountryDetail(MPTView, DetailView):
     model = Country
+    slug_field = 'code'
+    slug_url_kwarg = 'code'
 
 
 class IndicatorList(MPTView, ListView):
