@@ -18,6 +18,7 @@ class Country(models.Model):
     name = models.CharField(max_length=255)
     code = models.CharField(max_length=2, blank=True)
     region = models.ForeignKey(Region, related_name='countries', blank=True, null=True)
+    findings = models.TextField(blank=True)
 
     aggregate_score = models.PositiveSmallIntegerField(blank=True, null=True)
     in_law_score = models.PositiveSmallIntegerField(blank=True, null=True)

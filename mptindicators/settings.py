@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     # 'debug_toolbar',
     'djangobower',
     'grunt',
+    'django_markdown2',
 )
 
 MIDDLEWARE_CLASSES = (

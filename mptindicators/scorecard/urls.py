@@ -15,7 +15,7 @@ class MPTTemplateView(TemplateView):
 
 urlpatterns = [
     url(r'^countries/$', CountryList.as_view(), name='scorecard_countries'),
-    url(r'^countries/(?P<slug>[\w-]+)/$', CountryDetail.as_view(), name='scorecard_country'),
+    url(r'^countries/(?P<code>[\w-]+)/$', CountryDetail.as_view(), name='scorecard_country'),
     url(r'^indicators/$', IndicatorList.as_view(), name='scorecard_indicators'),
     url(r'^sections/$', SectionList.as_view(), name='scorecard_sections'),
     url(r'^sections/(?P<section>\d)/$', SectionDetail.as_view(), name='scorecard_section'),
