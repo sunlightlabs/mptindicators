@@ -886,7 +886,12 @@ select {
 .num-list {
 	list-style-type: number;
 }
-
+.contributors {
+	li::after{
+		content: ", "
+		margin-left: 0;
+	}
+}
 
 //  Mixin: accordion-navigation( $bg, $hover-bg, $active-bg, $padding, $active_class,  $font-color, $font-size, $font-family) {
 //    @params $bg-color: [ color or string ]: Specify the background color for the navigation element
