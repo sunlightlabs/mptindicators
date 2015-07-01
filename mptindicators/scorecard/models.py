@@ -19,6 +19,7 @@ class Country(models.Model):
     code = models.CharField(max_length=2, blank=True)
     region = models.ForeignKey(Region, related_name='countries', blank=True, null=True)
     findings = models.TextField(blank=True)
+    electoral_summary = models.TextField(blank=True)
 
     aggregate_score = models.PositiveSmallIntegerField(blank=True, null=True)
     in_law_score = models.PositiveSmallIntegerField(blank=True, null=True)
@@ -72,7 +73,7 @@ class Indicator(models.Model):
     subsection = models.ForeignKey(Subsection, related_name='indicators')
     number = models.PositiveSmallIntegerField(default=0)
     name = models.TextField()
-    description = models.TextField(blank=True)
+    criteria = models.TextField(blank=True)
     comment = models.TextField(blank=True)
     references = models.TextField(blank=True)
     type = models.PositiveSmallIntegerField(choices=TYPES, default=UNKNOWN_TYPE)
