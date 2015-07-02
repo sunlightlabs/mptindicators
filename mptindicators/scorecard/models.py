@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import random
 from collections import defaultdict
 from django.db import models
@@ -94,6 +95,11 @@ class IndicatorScore(models.Model):
 
     class Meta:
         ordering = ('country__name', 'indicator__number')
+
+    @property
+    def rendered_sources(self):
+        lines = [l.strip() for l in self.sources.split('\n')]
+        return '\n'.join('* {}'.format(l) for l in lines if l)
 
 
 class Aggregate(models.Model):
