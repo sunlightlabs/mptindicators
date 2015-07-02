@@ -1,4 +1,6 @@
 .DS_Store
+mptindicators/static/scss/app.css
+.sass-cache/
 bower_components/
 node_modules/
 static_root/
