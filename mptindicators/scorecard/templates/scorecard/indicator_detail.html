@@ -31,7 +31,7 @@
 	                                <div class="country-score {% score_class indicator_score.score %}">
 	                                    <dl class="score composite">
 	                                    <dt class="text-replace">composite</dt>
-	                                    <dd>{{ indicator_score.score }}</dd>
+	                                    <dd>{% if indicator_score.score == None %}--{% else %}{{ indicator_score.score }}{% endif %}</dd>
 	                                    </dl>
 	                                    <div class="country-meta clearfix">
 	                                        <span class="chart">
