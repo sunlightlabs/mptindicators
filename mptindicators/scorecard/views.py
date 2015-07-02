@@ -1,5 +1,10 @@
-from django.shortcuts import render
+import unicodecsv as csv
+from contextlib import closing
+from cStringIO import StringIO
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, DetailView, ListView
+from django.utils.text import slugify
 from .models import Country, Section, Subsection, Indicator
 
 
@@ -75,3 +80,53 @@ class IndicatorDetail(MPTView, DetailView):
         context['subsection'] = self.object.subsection
         context['section'] = self.object.subsection.section
         return context
+
+
+#
+# data download views
+#
+
+class CountryData(DetailView):
+
+    def get(self, request, *args, **kwargs):
+        country = get_object_or_404(Country, code=kwargs['code'])
+
+        with closing(StringIO()) as bffr:
+
+            writer = csv.writer(bffr)
+
+            writer.writerow(
+                ('indicator', 'question', 'type', 'score',
+                 'section', 'section_name', 'subsection', 'subsection_name'))
+
+            for score in country.indicator_scores.select_related():
+
+                indicator = score.indicator
+                subsection = indicator.subsection
+                section = subsection.section
+
+                row = (
+                    indicator.number,
+                    indicator.name,
+                    indicator.get_type_display(),
+                    score.score,
+                    section.number,
+                    section.name,
+                    subsection.number,
+                    subsection.name,
+                )
+
+                writer.writerow(row)
+
+            content = bffr.getvalue()
+
+        filename = 'indicators_{}.csv'.format(slugify(country.name))
+
+        resp = HttpResponse(content, content_type='text/csv')
+        resp['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+
+        return resp
+
+
+
+
