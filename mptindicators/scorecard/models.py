@@ -33,6 +33,10 @@ class Country(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def gi_name(self):
+        return self.name.lower().replace(' ', '-')
+
 
 class Section(models.Model):
     number = models.PositiveSmallIntegerField(default=0)
