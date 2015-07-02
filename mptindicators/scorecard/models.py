@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import random
 from collections import defaultdict
 from django.db import models
@@ -19,6 +20,7 @@ class Country(models.Model):
     code = models.CharField(max_length=2, blank=True)
     region = models.ForeignKey(Region, related_name='countries', blank=True, null=True)
     findings = models.TextField(blank=True)
+    electoral_summary = models.TextField(blank=True)
 
     aggregate_score = models.PositiveSmallIntegerField(blank=True, null=True)
     in_law_score = models.PositiveSmallIntegerField(blank=True, null=True)
@@ -30,6 +32,10 @@ class Country(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def gi_name(self):
+        return self.name.lower().replace(' ', '-')
 
 
 class Section(models.Model):
@@ -72,7 +78,7 @@ class Indicator(models.Model):
     subsection = models.ForeignKey(Subsection, related_name='indicators')
     number = models.PositiveSmallIntegerField(default=0)
     name = models.TextField()
-    description = models.TextField(blank=True)
+    criteria = models.TextField(blank=True)
     comment = models.TextField(blank=True)
     references = models.TextField(blank=True)
     type = models.PositiveSmallIntegerField(choices=TYPES, default=UNKNOWN_TYPE)
@@ -93,6 +99,11 @@ class IndicatorScore(models.Model):
 
     class Meta:
         ordering = ('country__name', 'indicator__number')
+
+    @property
+    def rendered_sources(self):
+        lines = [l.strip() for l in self.sources.split('\n')]
+        return '\n'.join('* {}'.format(l) for l in lines if l)
 
 
 class Aggregate(models.Model):

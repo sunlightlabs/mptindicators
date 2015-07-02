@@ -2,6 +2,12 @@
 {% load md2 %}
 {% load scorecard_tags %}
 
+{% block og %}
+	<meta property="og:url" content="http://data.moneypoliticstransparency.org{% url 'scorecard_country' country.code %}">
+	<meta property="og:title" content="{{ country.name }} Scorecard">
+	<meta property="og:description" content="Money, Politics and Transparency aims to generate research, analysis and global norms that civic organizations, elected officials, regulators and the media can use to build more transparent political financing systems in any country.">
+{% endblock %}
+
 {% block pagetitle %}<h2 class="alpha">{{ object.name }}</h2>{% endblock %}
 
 {% block content %}
@@ -42,7 +48,7 @@
 						<h3>Learn more</h3>
 						<ul>
 							<li><a class="icon download" href="{% url 'scorecard_methodology' %}">Download data</a></li>
-							<li><a class="icon country-details" href="{% url 'scorecard_contributors' %}">Country details</a></li>
+							<li><a class="icon country-details" href="https://www.globalintegrity.org/research/{{ country.gi_name }}/">Country details</a></li>
 
 						</ul>
 					</aside>
@@ -128,22 +134,11 @@
 												{% endfor %}
 											</ul>
 										</div>
-										<div class="electoral-summary content" id="summary">
-											<p>
-												Robust kopi-luwak acerbic breve robust qui crema mazagran medium. Ut, instant brewed espresso, organic irish that beans chicory. White qui plunger pot cultivar saucer grinder robusta.
-											</p>
-											<p>
-												Dark fair trade, wings rich et fair trade est rich. Irish, ut, aged acerbic saucer steamed body turkish. Robusta java, turkish body breve est seasonal.
-											</p>
-											<p>
-												Siphon, turkish, organic brewed, percolator, et to go, qui rich cortado café au lait froth. Et extra beans, filter, foam caramelization galão acerbic whipped aftertaste carajillo that. Latte foam percolator crema, coffee caffeine strong whipped sugar.
-											</p>
-											<p>
-												Irish id organic, as coffee lungo café au lait cup spoon rich pumpkin spice. Con panna espresso pumpkin spice cup mocha and frappuccino. Grinder est fair trade acerbic extraction half and half espresso café au lait strong and french press.
-											</p>
-										</div>
 									{% endfor %}
-						</div>
+								</div>
+								<div class="electoral-summary content" id="summary">
+									{{ country.electoral_summary|markdown }}
+								</div>
 				</div>
 			</div>
 		</div>

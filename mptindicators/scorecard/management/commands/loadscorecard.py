@@ -25,11 +25,11 @@ SECTIONS = {
 #
 
 CountryRecord = namedtuple('CountryRecord',
-    ('name', 'column', 'code'))
+    ('name', 'column', 'code', 'electoral_summary'))
 SectionRecord = namedtuple('SectionRecord',
     ('section', 'subsection', 'title', 'row'))
 QuestionRecord = namedtuple('QuestionRecord',
-    ('number', 'text', 'description', 'comment', 'row', 'col', 'type'))
+    ('number', 'text', 'criteria', 'comment', 'row', 'col', 'type'))
 ScoreRecord = namedtuple('ScoreRecord',
     ('country', 'question', 'score', 'comment', 'sources', 'row', 'col'))
 
@@ -49,7 +49,8 @@ def countries_iter(sheet):
             if name == 'Korea (Republic of)':
                 name = 'South Korea'
             code = COUNTRIES.get(name, None)
-            yield CountryRecord(name, col, code)
+            electoral_summary = sheet.cell(2, col).value.strip()
+            yield CountryRecord(name, col, code, electoral_summary)
 
 
 def questions_iter(sheet):
@@ -58,7 +59,7 @@ def questions_iter(sheet):
         try:
             number = int(cell.value)
             text = sheet.cell(row, col + 1).value.strip()
-            description = sheet.cell(row + 1, col + 1).value.strip()
+            criteria = sheet.cell(row + 1, col + 1).value.strip()
             comment = sheet.cell(row + 2, col + 1).value.strip()
 
             if text.startswith('In law'):
@@ -70,7 +71,8 @@ def questions_iter(sheet):
             else:
                 type = 0
 
-            yield QuestionRecord(number, text, description, comment, row, col, type)
+            yield QuestionRecord(
+                number, text, criteria, comment, row, col, type)
         except:
             pass
 
@@ -185,7 +187,8 @@ class Command(BaseCommand):
                                    aggregate_score=int(aggs['composite']),
                                    in_law_score=int(aggs['in_law']),
                                    in_practice_score=int(aggs['in_practice']),
-                                   findings=findings.get(record.name, ''))
+                                   findings=findings.get(record.name, ''),
+                                   electoral_summary=record.electoral_summary or '')
 
         #
         # load sections
@@ -253,7 +256,7 @@ class Command(BaseCommand):
             Indicator.objects.create(subsection=subsection,
                                      number=record.number,
                                      name=record.text,
-                                     description=record.description,
+                                     criteria=record.criteria,
                                      comment=record.comment,
                                      references='',
                                      type=record.type)
