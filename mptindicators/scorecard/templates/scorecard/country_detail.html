@@ -2,6 +2,12 @@
 {% load md2 %}
 {% load scorecard_tags %}
 
+{% block og %}
+	<meta property="og:url" content="http://data.moneypoliticstransparency.org{% url 'scorecard_country' country.code %}">
+	<meta property="og:title" content="{{ country.name }} Scorecard">
+	<meta property="og:description" content="Money, Politics and Transparency aims to generate research, analysis and global norms that civic organizations, elected officials, regulators and the media can use to build more transparent political financing systems in any country.">
+{% endblock %}
+
 {% block pagetitle %}<h2 class="alpha">{{ object.name }}</h2>{% endblock %}
 
 {% block content %}
@@ -130,11 +136,9 @@
 										</div>
 									{% endfor %}
 								</div>
-
-
-										<div class="electoral-summary content" id="summary">
-											{{ country.electoral_summary|markdown }}
-										</div>
+								<div class="electoral-summary content" id="summary">
+									{{ country.electoral_summary|markdown }}
+								</div>
 				</div>
 			</div>
 		</div>
