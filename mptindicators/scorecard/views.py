@@ -56,6 +56,11 @@ class SubsectionDetail(MPTView, DetailView):
     def get_queryset(self):
         return Subsection.objects.prefetch_related("indicators").select_related("section")
 
+    def get_context_data(self, **kwargs):
+        context = super(SubsectionDetail, self).get_context_data(**kwargs)
+        context['section'] = self.object.section
+        return context
+
 
 class IndicatorDetail(MPTView, DetailView):
     model = Indicator
@@ -64,3 +69,9 @@ class IndicatorDetail(MPTView, DetailView):
 
     def get_queryset(self):
         return Indicator.objects.prefetch_related("indicator_scores").select_related("subsection__section")
+
+    def get_context_data(self, **kwargs):
+        context = super(IndicatorDetail, self).get_context_data(**kwargs)
+        context['subsection'] = self.object.subsection
+        context['section'] = self.object.subsection.section
+        return context
