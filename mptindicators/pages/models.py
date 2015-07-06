@@ -4,8 +4,6 @@ import markdown2
 from django.conf import settings
 from django.db import models
 
-from . import validators
-
 
 class Page(models.Model):
 
