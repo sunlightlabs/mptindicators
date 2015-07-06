@@ -1,4 +1,6 @@
 {% extends "scorecard/base.html" %}
+{% load pages_tags %}
+{% load scorecard_tags %}
 
 {% block sidebar %}
 {% endblock %}
@@ -28,6 +30,7 @@
 		<div class="page-content">
 			<div class="row">
 				<div class="columns small-4">
+<<<<<<< HEAD
 					<h3>Indicators</h3>
 					<p>
 						Each integrity indicator is composed of three components:
@@ -37,18 +40,15 @@
 						<li>An explanatory comment</li>
 						<li>A list of sources that provides the evidence upon which the score and comment are based</li>
 					</ul>
+=======
+					{% chunk 'home-indicators' %}
+>>>>>>> eb58342d8920049cec8640fed026012b9f5e0f4c
 				</div>
 				<div class="columns small-4">
-					<h3>Research Methodology</h3>
-					<p>
-						The research on the MPT Integrity Indicators was conducted between July and December 2014.  The period of study for the research is January 2013 – July 2014, or where applicable, the most recent national level elections held within a country.  Global Integrity worked closely with locally based experts and reviewers to gather the data, fact check the scores, comments, and sources, and compile each country scorecard.
-					</p>
+					{% chunk 'home-methodology' %}
 				</div>
 				<div class="columns small-4">
-					<h3>Analyzing Results</h3>
-					<p>
-						The MPT dataset documents the diversity of political finance systems across the world.  Indicator scores enable comparisons across countries, while comments and sources for each indicator provide a unique window into the realities of regulation and enforcement in each country covered.
-					</p>
+					{% chunk 'home-results' %}
 				</div>
 			</div>
 			<div class="row">
@@ -56,7 +56,7 @@
 					<aside class="aside-content-block meta-nav-indicators inline">
 						<h3>Learn more</h3>
 						<ul>
-							
+
 							<li><a href="{% url 'scorecard_methodology' %}">Methodology</a></li>
 							<li><a href="{% url 'scorecard_contributors' %}">Contributors</a></li>
 							<li><a href="{% url 'scorecard_faq' %}">FAQ</a></li>
@@ -69,8 +69,13 @@
 
 			<div class="row">
 				<div class="columns small-8  indicator-scores">
+<<<<<<< HEAD
 					<h3>Indicator Scores</h3>
                     <form> 
+=======
+					<h3>Integrity Indicator Scores</h3>
+                    <form>
+>>>>>>> eb58342d8920049cec8640fed026012b9f5e0f4c
                         <select>
                             <option value="husker">Alphabetically</option>
                             <option value="starbuck">Ascending</option>
@@ -78,121 +83,31 @@
                         </select>
                     </form>
                     <ul class="clearfix">
-	                    <li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-					            
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-					            
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-					            
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-					            
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-					            
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
+                    	{% for country in countries %}
+                        	<li>
+                                <div class="country-score {% score_class country.aggregate_score %}">
+                                    <dl class="score composite">
+                                    <dt class="text-replace">composite</dt>
+                                    <dd>{% if country.aggregate_score == None %}--{% else %}{{ country.aggregate_score }}{% endif %}</dd>
+                                    </dl>
+                                    <div class="country-meta clearfix">
+                                        <span class="chart">
+                                            <span class="count">{{ country.aggregate_score }}</span>
+                                            <span class="index" style="width: {{ country.aggregate_score }}%"></span>
+                                            <span class="ticks"></span>
+                                        </span>
+
+                                        <h4><a href="{% url 'scorecard_country' country.code %}">{{ country.name }}</a></h4>
+                                        <dl class="breakdown">
+							            	<dt>In law</dt>
+							            	<dd><span class="score {% score_class country.in_law_score %}">{{ country.in_law_score }}</span></dd>
+							            	<dt>In practice</dt>
+							            	<dd><span class="score {% score_class country.in_practice_score %}">{{ country.in_practice_score }}</span></dd>
+							            </dl>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
 					</ul>
 				</div>
 				<div class="columns small-4">
@@ -209,7 +124,7 @@
 							<li>Monitoring and Enforcement</li>
 						</ul>
 						<p>
-							A country’s in law score is the unweighted average of the scores on all 23 de jure indicators in a country scorecard: it provides an indication of how stringently a country’s laws regulate political finance.  The in practice score is the unweighted average of the scores on all 20 de facto indicators.  This measure assesses practical enforcement within a country.  The composite score is the average of all scores on a given country scorecard, weighted by each of the scorecard’s five sections.  
+							A country’s in law score is the unweighted average of the scores on all 23 de jure indicators in a country scorecard: it provides an indication of how stringently a country’s laws regulate political finance.  The in practice score is the unweighted average of the scores on all 20 de facto indicators.  This measure assesses practical enforcement within a country.  The composite score is the average of all scores on a given country scorecard, weighted by each of the scorecard’s five sections.
 						</p>
 						<p>
 							Note that quantitative scores fail to capture the scope of an indicator answer or full country scorecard, as do aggregated scores.  Data users should always refer to the comments and sources in order to grasp what a given score or scores signify at the country level.

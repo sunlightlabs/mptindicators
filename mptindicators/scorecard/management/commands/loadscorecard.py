@@ -232,7 +232,7 @@ class Command(BaseCommand):
                 for subsection in section.subsections.all():
                     key = '{}.{}'.format(section.number, subsection.number)
                     aggs = aggregates.get(country.name)
-                    val = int(aggs[key]) if aggs and 'key' in aggs else None
+                    val = int(aggs[key]) if aggs and key in aggs else None
                     Aggregate.objects.create(country=country,
                                              section=section,
                                              subsection=subsection,

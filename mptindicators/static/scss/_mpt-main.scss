@@ -79,7 +79,7 @@ a:hover, a:focus {
 	background: url(../img/twitter.png) center center no-repeat;
 }
 .twitter.color {
-	background: url(../img/twitter-color.png) center center no-repeat;	
+	background: url(../img/twitter-color.png) center center no-repeat;
 }
 .facebook{
 	background: url(../img/facebook.png) center top no-repeat;
@@ -172,7 +172,7 @@ a:hover, a:focus {
 
 }
 .mpt-content-area.title {
-	background-color: $clr-green-base; 
+	background-color: $clr-green-base;
 }
 .page-content {
 	padding: 30px 20px;
@@ -256,7 +256,7 @@ a:hover, a:focus {
 				background-position: right bottom;
 			}
 	  }
-	  
+
 	}
 	.content {
 		@include accordion-content($bg:inherit);
@@ -351,7 +351,7 @@ a:hover, a:focus {
 	:-moz-placeholder {
 	  /* Firefox 18- */
 	  color: $clr-green-text;
-	  font-style: italic; 
+	  font-style: italic;
 	}
 
 	::-moz-placeholder {
@@ -411,7 +411,7 @@ a:hover, a:focus {
 		color: #ffffff;
 		background-color: rgba(0,0,0,0.025);
 	}
-	
+
 }
 .meta-nav-indicators {
 	font-family: $font-sans;
@@ -497,25 +497,25 @@ a:hover, a:focus {
 		display: block;
 		height: 18px;
 		top: -4px;
-		background: -webkit-gradient(linear, left top, right top, 
-			color-stop(0%,rgba(255,255,255,0)), 
-			color-stop(19.6%,rgba(255,255,255,0)), 
-			color-stop(19.6%,rgba(255,255,255,1)), 
-			color-stop(20.5%,rgba(255,255,255,1)), 
-			color-stop(20.5%,rgba(255,255,255,0)), 
-			color-stop(39.5%,rgba(255,255,255,0)), 
-			color-stop(39.5%,rgba(255,255,255,1)), 
-			color-stop(40.5%,rgba(255,255,255,1)), 
+		background: -webkit-gradient(linear, left top, right top,
+			color-stop(0%,rgba(255,255,255,0)),
+			color-stop(19.6%,rgba(255,255,255,0)),
+			color-stop(19.6%,rgba(255,255,255,1)),
+			color-stop(20.5%,rgba(255,255,255,1)),
+			color-stop(20.5%,rgba(255,255,255,0)),
+			color-stop(39.5%,rgba(255,255,255,0)),
+			color-stop(39.5%,rgba(255,255,255,1)),
+			color-stop(40.5%,rgba(255,255,255,1)),
 			color-stop(40.5%,rgba(255,255,255,0)),
-			color-stop(59.5%,rgba(255,255,255,0)), 
-			color-stop(59.5%,rgba(255,255,255,1)), 
-			color-stop(60.5%,rgba(255,255,255,1)), 
-			color-stop(60.5%,rgba(255,255,255,0)), 
-			color-stop(79.5%,rgba(255,255,255,0)), 
-			color-stop(79.5%,rgba(255,255,255,1)), 
-			color-stop(80.4%,rgba(255,255,255,1)), 
-			color-stop(80.4%,rgba(255,255,255,0)), 
-			color-stop(100%,rgba(255,255,255,0))); 
+			color-stop(59.5%,rgba(255,255,255,0)),
+			color-stop(59.5%,rgba(255,255,255,1)),
+			color-stop(60.5%,rgba(255,255,255,1)),
+			color-stop(60.5%,rgba(255,255,255,0)),
+			color-stop(79.5%,rgba(255,255,255,0)),
+			color-stop(79.5%,rgba(255,255,255,1)),
+			color-stop(80.4%,rgba(255,255,255,1)),
+			color-stop(80.4%,rgba(255,255,255,0)),
+			color-stop(100%,rgba(255,255,255,0)));
 		/* Chrome,Safari4+ */
 	}
 }
@@ -584,7 +584,7 @@ dl.breakdown {
 		}
 		&.five {
 			background-color: $clr-chart-five;
-		}	
+		}
 	}
 }
 .score, .index {
@@ -888,7 +888,7 @@ select {
 }
 .contributors {
 	li::after{
-		content: ", "
+		content: ", ";
 		margin-left: 0;
 	}
 }

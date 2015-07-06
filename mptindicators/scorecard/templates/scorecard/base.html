@@ -68,11 +68,11 @@
 		</header>
 		<div class="mpt-side-nav">
 			<ul class="tabs" data-tab>
-			  <li class="tab-title active"><a href="#panel1">Indicators</a></li>
-			  <li class="tab-title"><a href="#panel2">Countries</a></li>
+			  <li class="tab-title {% if not country %}active{% endif %}"><a href="#panel1">Indicators</a></li>
+			  <li class="tab-title {% if country %}active{% endif %}"><a href="#panel2">Countries</a></li>
 			</ul>
 			<div class="tabs-content">
-				<div class="nav-indicators content active" id="panel1">
+				<div class="nav-indicators content {% if not country %}active{% endif %}" id="panel1">
 					<form class="search">
 					    <!--  <label>Search Documentation</label> -->
 					    <input id="autocomplete" type="search" placeholder="Search indicators" autocomplete="off">
@@ -83,25 +83,25 @@
 
 
 					<ul class="side-nav accordion" data-accordion>
-					  {% for section in sections %}
+					  {% for s in sections %}
 						  <li class="accordion-navigation">
-						    <a class="expand" href="#nav-{{ section.number }}">expand button!</a>
+						    <a class="expand" href="#nav-{{ s.number }}">expand button!</a>
 						    <div class="section">
-						    	<a href="{% url 'scorecard_section' section.number %}">{{ section.name }}</a>
+						    	<a href="{% url 'scorecard_section' s.number %}">{{ s.name }}</a>
 						    </div>
 
 
-						    <div id="nav-{{ section.number }}" class="content active">
+						    <div id="nav-{{ s.number }}" class="content {% if section and section.number == s.number %}active{% endif %}{% if not section and s.number == 1 %}active{% endif %}">
 						    	<ul class="accordion" data-accordion>
-						    		{% for subsection in section.subsections.all %}
+						    		{% for ss in s.subsections.all %}
 							    		<li class="accordion-navigation">
-								    		<a class="expand" href="#nav-{{ section.number }}-{{ subsection.number }}">expand button!</a>
+								    		<a class="expand" href="#nav-{{ s.number }}-{{ ss.number }}">expand button!</a>
 								    		<div class="section">
-												<a href="{% url 'scorecard_subsection' section.number subsection.number %}">{{ subsection.name }}</a>
+												<a href="{% url 'scorecard_subsection' s.number ss.number %}">{{ ss.name }}</a>
 											</div>
-								    		<div id="nav-{{ section.number }}-{{ subsection.number }}" class="content">
+								    		<div id="nav-{{ s.number }}-{{ ss.number }}" class="content {% if subsection and subsection.number == ss.number %}active{% endif %}{% if not section and ss.number == 1 %}active{% endif %}">
 								     			<ul>
-								     				{% for indicator in subsection.indicators.all %}
+								     				{% for indicator in ss.indicators.all %}
 								     					<li>
 								     						<a href="{% url 'scorecard_indicator' indicator.number %}">
 								     							<span class="indicator-num">{{ indicator.number }}</span> {{ indicator.name }}
@@ -116,120 +116,9 @@
 						    </div>
 						  </li>
 					  {% endfor %}
-
-					  <!--
-					  <li class="accordion-navigation">
-					    <a class="expand" href="#nav1">expand button!</a>
-							<a class="section" href="#">Direct Public Funding</a>
-					    <div id="nav1" class="content active">
-					      <ul class="accordion" data-accordion>
-							  <li class="accordion-navigation">
-							    <a class="expand" href="#nav1a">expand button!</a>
-								<a class="section" href="#">Subsection 1b</a>
-							    <div id="nav1a" class="content">
-							     	<ul>
-							     		<li><a href=""><span class="indicator-num">1</span> Indicator number 1</a></li>
-							     		<li><a href=""><span class="indicator-num">2</span> Indicator number 2</a></li>
-							     		<li><a href=""><span class="indicator-num">3</span> Indicator number 3</a></li>
-							     		<li><a href=""><span class="indicator-num">4</span> Indicator number 4</a></li>
-							     		<li><a href=""><span class="indicator-num">5</span> Indicator number 5</a></li>
-							     		<li><a href=""><span class="indicator-num">6</span> Indicator number 6</a></li>
-							     	</ul>
-							    </div>
-							  </li>
-							  <li class="accordion-navigation">
-							    <a class="expand" href="#nav1b">expand button!</a>
-								<a class="section" href="#">Subsection 2b</a>
-							    <div id="nav1b" class="content">
-							    	<ul>
-							     		<li><a href=""><span class="indicator-num">7</span> Indicator number 1</a></li>
-							     		<li><a href=""><span class="indicator-num">8</span> Indicator number 2</a></li>
-							     		<li><a href=""><span class="indicator-num">9</span> Indicator number 3</a></li>
-							     		<li><a href=""><span class="indicator-num">10</span> Indicator number 4</a></li>
-							     		<li><a href=""><span class="indicator-num">11</span> Indicator number 5</a></li>
-							     		<li><a href=""><span class="indicator-num">12</span> Indicator number 6</a></li>
-							     	</ul>
-							    </div>
-							  </li>
-							</ul>
-					    </div>
-					  </li>
-					  <li class="accordion-navigation">
-					    <a class="expand" href="#nav2">expand button!</a>
-						<a class="section" href="#">Second section</a>
-					    <div id="nav2" class="content">
-					      <ul class="accordion" data-accordion>
-							  <li class="accordion-navigation">
-							    <a class="expand" href="#nav2a">expand button!</a>
-								<a class="section" href="#">Subsection 1b</a>
-							    <div id="nav2a" class="content">
-							     	<ul>
-							     		<li><a href=""><span class="indicator-num">1</span> Indicator number 1</a></li>
-							     		<li><a href=""><span class="indicator-num">2</span> Indicator number 2</a></li>
-							     		<li><a href=""><span class="indicator-num">3</span> Indicator number 3</a></li>
-							     		<li><a href=""><span class="indicator-num">4</span> Indicator number 4</a></li>
-							     		<li><a href=""><span class="indicator-num">5</span> Indicator number 5</a></li>
-							     		<li><a href=""><span class="indicator-num">6</span> Indicator number 6</a></li>
-							     	</ul>
-							    </div>
-							  </li>
-							  <li class="accordion-navigation">
-							    <a class="expand" href="#nav2b">expand button!</a>
-								<a class="section" href="#">Subsection 2b</a>
-							    <div id="nav2b" class="content">
-							    	<ul>
-							     		<li><a href=""><span class="indicator-num">7</span> Indicator number 1</a></li>
-							     		<li><a href=""><span class="indicator-num">8</span> Indicator number 2</a></li>
-							     		<li><a href=""><span class="indicator-num">9</span> Indicator number 3</a></li>
-							     		<li><a href=""><span class="indicator-num">10</span> Indicator number 4</a></li>
-							     		<li><a href=""><span class="indicator-num">11</span> Indicator number 5</a></li>
-							     		<li><a href=""><span class="indicator-num">12</span> Indicator number 6</a></li>
-							     	</ul>
-							    </div>
-							  </li>
-							</ul>
-					    </div>
-					  </li>
-					  <li class="accordion-navigation">
-					    <a class="expand" href="#nav3">expand button!</a>
-						<a class="section" href="#">Third Section</a>
-					    <div id="nav3" class="content">
-					      <ul class="accordion" data-accordion>
-							  <li class="accordion-navigation">
-							    <a class="expand" href="#nav3a">expand button!</a>
-								<a class="section" href="#">Subsection 1b</a>
-							    <div id="nav3a" class="content">
-							     	<ul>
-							     		<li><a href=""><span class="indicator-num">1</span> Indicator number 1</a></li>
-							     		<li><a href=""><span class="indicator-num">2</span> Indicator number 2</a></li>
-							     		<li><a href=""><span class="indicator-num">3</span> Indicator number 3</a></li>
-							     		<li><a href=""><span class="indicator-num">4</span> Indicator number 4</a></li>
-							     		<li><a href=""><span class="indicator-num">5</span> Indicator number 5</a></li>
-							     		<li><a href=""><span class="indicator-num">6</span> Indicator number 6</a></li>
-							     	</ul>
-							    </div>
-							  </li>
-							  <li class="accordion-navigation">
-							    <a class="expand" href="#nav3b">expand button!</a>
-								<a class="section" href="#">Subsection 2b</a>
-							    <div id="nav3b" class="content">
-							    	<ul>
-							     		<li><a href=""><span class="indicator-num">7</span> Indicator number 1</a></li>
-							     		<li><a href=""><span class="indicator-num">8</span> Indicator number 2</a></li>
-							     		<li><a href=""><span class="indicator-num">9</span> Indicator number 3</a></li>
-							     		<li><a href=""><span class="indicator-num">10</span> Indicator number 4</a></li>
-							     		<li><a href=""><span class="indicator-num">11</span> Indicator number 5</a></li>
-							     		<li><a href=""><span class="indicator-num">12</span> Indicator number 6</a></li>
-							     	</ul>
-							    </div>
-							  </li>
-							</ul>
-					    </div>
-					  </li>
-					  -->
 					</ul>
 				</div>
-				<div class="nav-country content" id="panel2">
+				<div class="nav-country content {% if country %}active{% endif %}" id="panel2">
 					<ul>
 						{% for country in countries %}
 							<li><a href="{% url 'scorecard_country' country.code %}">{{ country.name }}</a></li>
@@ -301,6 +190,7 @@
 			    toggleable: true
 			  }
 			});
-		</script
+		</script>
+		{% block js %}{% endblock %}
 	</body>
 </html>

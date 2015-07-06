@@ -30,7 +30,7 @@
                     			<div class="country-score {% score_class agg.score %}">
                                     <dl class="score composite">
                                     <dt class="text-replace">composite</dt>
-                                    <dd>{{ agg.score }}</dd>
+                                    <dd>{% if agg.score == None %}--{% else %}{{ agg.score }}{% endif %}</dd>
                                     </dl>
                                     <div class="country-meta clearfix">
                                         <span class="chart">

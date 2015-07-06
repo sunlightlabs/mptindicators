@@ -2,7 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 from .models import Country, Section
 from .views import (CountryList, CountryDetail, SectionList,
-    IndicatorList, SectionDetail, SubsectionDetail, IndicatorDetail)
+    IndicatorList, SectionDetail, SubsectionDetail, IndicatorDetail,
+    CountryData)
 
 
 class MPTTemplateView(TemplateView):
@@ -14,13 +15,22 @@ class MPTTemplateView(TemplateView):
 
 
 urlpatterns = [
-    url(r'^countries/$', CountryList.as_view(), name='scorecard_countries'),
-    url(r'^countries/(?P<code>[\w-]+)/$', CountryDetail.as_view(), name='scorecard_country'),
-    url(r'^indicators/$', IndicatorList.as_view(), name='scorecard_indicators'),
-    url(r'^sections/$', SectionList.as_view(), name='scorecard_sections'),
-    url(r'^sections/(?P<section>\d)/$', SectionDetail.as_view(), name='scorecard_section'),
-    url(r'^sections/(?P<section>\d)/(?P<subsection>\d)/$', SubsectionDetail.as_view(), name='scorecard_subsection'),
-    url(r'^indicators/(?P<number>\d{1,2})/$', IndicatorDetail.as_view(), name='scorecard_indicator'),
+    url(r'^countries/$',
+        CountryList.as_view(), name='scorecard_countries'),
+    url(r'^countries/(?P<code>[\w-]+)/$',
+        CountryDetail.as_view(), name='scorecard_country'),
+    url(r'^countries/(?P<code>[\w-]+)/data/$',
+        CountryData.as_view(), name='scorecard_country_data'),
+    url(r'^indicators/$',
+        IndicatorList.as_view(), name='scorecard_indicators'),
+    url(r'^sections/$',
+        SectionList.as_view(), name='scorecard_sections'),
+    url(r'^sections/(?P<section>\d)/$',
+        SectionDetail.as_view(), name='scorecard_section'),
+    url(r'^sections/(?P<section>\d)/(?P<subsection>\d)/$',
+        SubsectionDetail.as_view(), name='scorecard_subsection'),
+    url(r'^indicators/(?P<number>\d{1,2})/$',
+        IndicatorDetail.as_view(), name='scorecard_indicator'),
 ]
 
 

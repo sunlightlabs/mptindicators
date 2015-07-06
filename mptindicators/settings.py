@@ -10,7 +10,10 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+TMP_DIR = os.path.join(BASE_DIR, 'tmp')
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mptindicators',
+    'mptindicators.pages',
     'mptindicators.scorecard',
     # 'debug_toolbar',
     'djangobower',
@@ -62,11 +66,12 @@ WSGI_APPLICATION = 'mptindicators.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+DEFAULT_DB = 'sqlite:///{}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
+
+print DEFAULT_DB
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(default=DEFAULT_DB),
 }
 
 # Internationalization

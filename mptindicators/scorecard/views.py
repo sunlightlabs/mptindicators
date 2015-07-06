@@ -1,5 +1,10 @@
-from django.shortcuts import render
+import unicodecsv as csv
+from contextlib import closing
+from cStringIO import StringIO
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, DetailView, ListView
+from django.utils.text import slugify
 from .models import Country, Section, Subsection, Indicator
 
 
@@ -56,6 +61,11 @@ class SubsectionDetail(MPTView, DetailView):
     def get_queryset(self):
         return Subsection.objects.prefetch_related("indicators").select_related("section")
 
+    def get_context_data(self, **kwargs):
+        context = super(SubsectionDetail, self).get_context_data(**kwargs)
+        context['section'] = self.object.section
+        return context
+
 
 class IndicatorDetail(MPTView, DetailView):
     model = Indicator
@@ -63,4 +73,78 @@ class IndicatorDetail(MPTView, DetailView):
     slug_url_kwarg = "number"
 
     def get_queryset(self):
-        return Indicator.objects.prefetch_related("indicator_scores").select_related("subsection__section")
+        qs = Indicator.objects.prefetch_related(
+            "indicator_scores").select_related("subsection__section")
+        return qs
+
+    def get_context_data(self, **kwargs):
+
+        context = super(IndicatorDetail, self).get_context_data(**kwargs)
+        context['subsection'] = self.object.subsection
+        context['section'] = self.object.subsection.section
+
+        ordering = self.request.GET.get('o')
+        indicator_scores = self.object.indicator_scores.all()
+
+        if ordering == 'name_asc':
+            indicator_scores = indicator_scores.order_by('country__name')
+        if ordering == 'name_desc':
+            indicator_scores = indicator_scores.order_by('-country__name')
+        if ordering == 'score_asc':
+            indicator_scores = indicator_scores.order_by('score', 'country__name')
+        if ordering == 'score_desc':
+            indicator_scores = indicator_scores.order_by('-score', 'country__name')
+
+        context['indicator_scores'] = indicator_scores
+
+        return context
+
+
+#
+# data download views
+#
+
+class CountryData(DetailView):
+
+    def get(self, request, *args, **kwargs):
+        country = get_object_or_404(Country, code=kwargs['code'])
+
+        with closing(StringIO()) as bffr:
+
+            writer = csv.writer(bffr)
+
+            writer.writerow(
+                ('indicator', 'question', 'type', 'score',
+                 'section', 'section_name', 'subsection', 'subsection_name'))
+
+            for score in country.indicator_scores.select_related():
+
+                indicator = score.indicator
+                subsection = indicator.subsection
+                section = subsection.section
+
+                row = (
+                    indicator.number,
+                    indicator.name,
+                    indicator.get_type_display(),
+                    score.score,
+                    section.number,
+                    section.name,
+                    subsection.number,
+                    subsection.name,
+                )
+
+                writer.writerow(row)
+
+            content = bffr.getvalue()
+
+        filename = 'indicators_{}.csv'.format(slugify(country.name))
+
+        resp = HttpResponse(content, content_type='text/csv')
+        resp['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+
+        return resp
+
+
+
+
