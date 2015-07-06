@@ -16,11 +16,6 @@ class MPTView(View):
         return context
 
 
-class IndexView(MPTView):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'scorecard/index.html')
-
-
 class CountryList(MPTView, ListView):
     model = Country
 
