@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mptindicators',
+    'mptindicators.pages',
     'mptindicators.scorecard',
     # 'debug_toolbar',
     'djangobower',
