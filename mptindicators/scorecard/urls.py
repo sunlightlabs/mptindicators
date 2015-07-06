@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from .models import Country, Section
 from .views import (CountryList, CountryDetail, SectionList,
     IndicatorList, SectionDetail, SubsectionDetail, IndicatorDetail,
-    CountryData)
+    CountryData, IndexView)
 
 
 class MPTTemplateView(TemplateView):

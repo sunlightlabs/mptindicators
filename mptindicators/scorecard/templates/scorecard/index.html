@@ -1,5 +1,6 @@
 {% extends "scorecard/base.html" %}
 {% load pages_tags %}
+{% load scorecard_tags %}
 
 {% block sidebar %}
 {% endblock %}
@@ -65,121 +66,31 @@
                         </select>
                     </form>
                     <ul class="clearfix">
-	                    <li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
+                    	{% for country in countries %}
+                        	<li>
+                                <div class="country-score {% score_class country.aggregate_score %}">
+                                    <dl class="score composite">
+                                    <dt class="text-replace">composite</dt>
+                                    <dd>{% if country.aggregate_score == None %}--{% else %}{{ country.aggregate_score }}{% endif %}</dd>
+                                    </dl>
+                                    <div class="country-meta clearfix">
+                                        <span class="chart">
+                                            <span class="count">{{ country.aggregate_score }}</span>
+                                            <span class="index" style="width: {{ country.aggregate_score }}%"></span>
+                                            <span class="ticks"></span>
+                                        </span>
 
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
-						<li>
-							<div class="country-score four">
-								<dl class="score composite">
-								<dt>composite</dt>
-								<dd>36</dd>
-								</dl>
-								<div class="country-meta clearfix">
-									<span class="chart">
-						                <span class="count">36</span>
-						                <span class="index" style="width: 63%"></span>
-						                <span class="ticks"></span>
-						            </span>
-
-						            <h4>Bangladesh</h3>
-						            <dl class="breakdown">
-						            	<dt>In law</dt>
-						            	<dd><span class="score two">23</span></dd>
-						            	<dt>In practice</dt>
-						            	<dd><span class="score four">56</span></dd>
-						            </dl>
-					            </div>
-							</div>
-						</li>
+                                        <h4><a href="{% url 'scorecard_country' country.code %}">{{ country.name }}</a></h4>
+                                        <dl class="breakdown">
+							            	<dt>In law</dt>
+							            	<dd><span class="score {% score_class country.in_law_score %}">{{ country.in_law_score }}</span></dd>
+							            	<dt>In practice</dt>
+							            	<dd><span class="score {% score_class country.in_practice_score %}">{{ country.in_practice_score }}</span></dd>
+							            </dl>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
 					</ul>
 				</div>
 				<div class="columns small-4">
