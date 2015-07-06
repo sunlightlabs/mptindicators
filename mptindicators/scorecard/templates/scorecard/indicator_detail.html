@@ -18,14 +18,15 @@
                 <div class="columns small-8 indicator-scores">
                     <h3>Integrity Indicator Scores</h3>
                     <form>
-                        <select>
-                            <option value="husker">Alphabetically</option>
-                            <option value="starbuck">Ascending</option>
-                            <option value="hotdog">Descending</option>
+                        <select name="o">
+                            <option value="name_asc">Country A-Z</option>
+                            <option value="name_desc">Country Z-A</option>
+                            <option value="score_asc">Score 0-100</option>
+                            <option value="score_desc">Score 100-0</option>
                         </select>
                     </form>
                     <ul class="clearfix">
-                        {% for indicator_score in object.indicator_scores.all %}
+                        {% for indicator_score in indicator_scores %}
                         	{% with indicator_score.country as country %}
 	                            <li>
 	                                <div class="country-score {% score_class indicator_score.score %}">

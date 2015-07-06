@@ -73,12 +73,30 @@ class IndicatorDetail(MPTView, DetailView):
     slug_url_kwarg = "number"
 
     def get_queryset(self):
-        return Indicator.objects.prefetch_related("indicator_scores").select_related("subsection__section")
+        qs = Indicator.objects.prefetch_related(
+            "indicator_scores").select_related("subsection__section")
+        return qs
 
     def get_context_data(self, **kwargs):
+
         context = super(IndicatorDetail, self).get_context_data(**kwargs)
         context['subsection'] = self.object.subsection
         context['section'] = self.object.subsection.section
+
+        ordering = self.request.GET.get('o')
+        indicator_scores = self.object.indicator_scores.all()
+
+        if ordering == 'name_asc':
+            indicator_scores = indicator_scores.order_by('country__name')
+        if ordering == 'name_desc':
+            indicator_scores = indicator_scores.order_by('-country__name')
+        if ordering == 'score_asc':
+            indicator_scores = indicator_scores.order_by('score', 'country__name')
+        if ordering == 'score_desc':
+            indicator_scores = indicator_scores.order_by('-score', 'country__name')
+
+        context['indicator_scores'] = indicator_scores
+
         return context
 
 
