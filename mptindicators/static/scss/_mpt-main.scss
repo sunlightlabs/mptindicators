@@ -268,9 +268,32 @@ a:hover, a:focus {
 		@include accordion-content($bg:inherit);
 		padding-right: 0;
 		&.active {
-			padding: .2rem;
+			padding: .2rem 0 .2rem .2rem;
 		}
 	}
+	li li li.current {
+		background-color: $clr-text;
+	    position: relative;
+	    font-weight: bold;
+	    &:after{
+		    content:"";
+		    width:0;
+		    height:0;
+		    border-top:20px solid transparent;
+		    border-bottom:20px solid transparent;
+		    border-left:20px solid  $clr-text;
+		    position: absolute;
+		    right: -19px;
+			top: 0;
+		}
+		.indicator-num {
+			color: $clr-text;
+		}
+	}
+
+
+
+
 	.accordion-navigation>a.expand {
 		background: url('../img/expand-large.png') left top no-repeat;
 		text-indent: -9999em;
