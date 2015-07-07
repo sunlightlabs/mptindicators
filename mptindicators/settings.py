@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'djangobower',
     'grunt',
     'django_markdown2',
+    'gunicorn',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -67,8 +68,6 @@ WSGI_APPLICATION = 'mptindicators.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DEFAULT_DB = 'sqlite:///{}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-
-print DEFAULT_DB
 
 DATABASES = {
     'default': dj_database_url.config(default=DEFAULT_DB),
