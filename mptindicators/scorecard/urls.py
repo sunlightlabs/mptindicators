@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from .models import Country, Section
 from .views import (CountryList, CountryDetail, SectionList,
     IndicatorList, SectionDetail, SubsectionDetail, IndicatorDetail,
-    CountryData)
+    CountryData, IndexView)
 
 
 class MPTTemplateView(TemplateView):
@@ -43,6 +43,5 @@ urlpatterns += [
         template_name='scorecard/faq.html'), name='scorecard_faq'),
     url(r'^methodology/$', MPTTemplateView.as_view(
         template_name='scorecard/methodology.html'), name='scorecard_methodology'),
-    url(r'^$', MPTTemplateView.as_view(
-        template_name='scorecard/index.html'), name='scorecard'),
+    url(r'^$', IndexView.as_view(), name='scorecard'),
 ]

@@ -57,16 +57,17 @@
 
 			<div class="row">
 				<div class="columns small-8  indicator-scores">
-					<h3>Indicator Scores</h3>
+					<h3 id="indicator-scores">Indicator Scores</h3>
                     <form>
-                        <select>
-                            <option value="husker">Alphabetically</option>
-                            <option value="starbuck">Ascending</option>
-                            <option value="hotdog">Descending</option>
+                        <select name="o">
+                            <option value="name_asc" {% if not ordering or ordering == 'name_asc' %}selected{% endif %}>Country A-Z</option>
+                            <option value="name_desc" {% if ordering == 'name_desc' %}selected{% endif %}>Country Z-A</option>
+                            <option value="score_asc" {% if ordering == 'score_asc' %}selected{% endif %}>Score 0-100</option>
+                            <option value="score_desc" {% if ordering == 'score_desc' %}selected{% endif %}>Score 100-0</option>
                         </select>
                     </form>
                     <ul class="clearfix">
-                    	{% for country in countries %}
+                    	{% for country in indicator_countries %}
                         	<li>
                                 <div class="country-score {% score_class country.aggregate_score %}">
                                     <dl class="score composite">
@@ -118,4 +119,15 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+
+{% block js %}
+	<script>
+		$(document).ready(function() {
+			$('select[name=o]').change(function() {
+				var path = window.location.pathname;
+				window.location = path + '?o=' + this.value + '#indicator-scores';
+			});
+		});
+	</script>
 {% endblock %}

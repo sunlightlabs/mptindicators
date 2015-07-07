@@ -3,7 +3,7 @@ from contextlib import closing
 from cStringIO import StringIO
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import View, DetailView, ListView
+from django.views.generic import View, DetailView, ListView, TemplateView
 from django.utils.text import slugify
 from .models import Country, Section, Subsection, Indicator
 
@@ -13,6 +13,32 @@ class MPTView(View):
         context = super(MPTView, self).get_context_data(**kwargs)
         context['countries'] = Country.objects.all()
         context['sections'] = Section.objects.all()
+        return context
+
+
+class IndexView(MPTView, TemplateView):
+
+    template_name = 'scorecard/index.html'
+
+    def get_context_data(self, **kwargs):
+
+        context = super(IndexView, self).get_context_data(**kwargs)
+        qs = context['countries']
+
+        ordering = self.request.GET.get('o')
+
+        if ordering == 'name_asc':
+            qs = qs.order_by('name')
+        if ordering == 'name_desc':
+            qs = qs.order_by('-name')
+        if ordering == 'score_asc':
+            qs = qs.order_by('aggregate_score', 'name')
+        if ordering == 'score_desc':
+            qs = qs.order_by('-aggregate_score', 'name')
+
+        context['ordering'] = ordering
+        context['indicator_countries'] = qs
+
         return context
 
 
@@ -95,6 +121,7 @@ class IndicatorDetail(MPTView, DetailView):
         if ordering == 'score_desc':
             indicator_scores = indicator_scores.order_by('-score', 'country__name')
 
+        context['ordering'] = ordering
         context['indicator_scores'] = indicator_scores
 
         return context
