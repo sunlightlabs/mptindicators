@@ -190,6 +190,12 @@
 			    toggleable: true
 			  }
 			});
+			$(document).ready(function() {
+				$('a.expand-all').click(function(ev) {
+					ev.preventDefault();
+					$('li.accordion-navigation div.content').addClass('active');
+				})
+			});
 		</script>
 		{% block js %}{% endblock %}
 	</body>
