@@ -11,6 +11,12 @@ p{
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+ul, ol {
+	font-size: 18px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-left: 40px;
+}
 a {
 	color: #8fba3e;
 }
@@ -775,6 +781,44 @@ dl.breakdown {
 		}
 	}
 }
+.sub-content {
+	padding: 30px;
+	background-color: $clr-blue-dark;
+	ol {
+		font-size: 15px;
+	}
+}
+.country-indicators .sub-content {
+	p {
+		font-size: 15px;
+	}
+	border-bottom: 2px solid $clr-blue-base;
+}
+.country-indicators .accordion .indicator.content .sub-content h6 {
+	margin-bottom: 0;
+}
+.source {
+	-ms-word-break: break-all;
+
+     /* Be VERY careful with this, breaks normal words wh_erever */
+     word-break: break-all;
+
+     /* Non standard for webkit */
+     word-break: break-word;
+
+-webkit-hyphens: auto;
+   -moz-hyphens: auto;
+        hyphens: auto;
+}
+.aside-content-block .sub-content {
+	margin-bottom: 20px;
+	margin-left: -20px;
+    margin-right: -20px;
+	p {
+		margin-bottom: 1px;
+		font-weight: bold;
+	}
+}
 .tabs-content .content.electoral-summary {
 	padding: 30px;
 	background: $clr-blue-base;
@@ -857,6 +901,9 @@ dl.breakdown {
 	border-radius: 90px;
 	padding: 23px;
 }
+.intro-text li{
+	margin-bottom: 10px;
+}
 
 .indicator-scores {
 	ul {
@@ -887,6 +934,9 @@ select {
 	list-style-type: number;
 }
 .contributors {
+	li {
+		margin-bottom: 10px;
+	}
 	li::after{
 		content: ", ";
 		margin-left: 0;
