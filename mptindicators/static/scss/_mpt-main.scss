@@ -817,7 +817,7 @@ dl.breakdown {
 .country-indicators .accordion .indicator.content .sub-content h6 {
 	margin-bottom: 0;
 }
-.source {
+.sources {
 	-ms-word-break: break-all;
 
      /* Be VERY careful with this, breaks normal words wh_erever */
@@ -826,9 +826,9 @@ dl.breakdown {
      /* Non standard for webkit */
      word-break: break-word;
 
--webkit-hyphens: auto;
-   -moz-hyphens: auto;
-        hyphens: auto;
+	-webkit-hyphens: auto;
+	   -moz-hyphens: auto;
+	        hyphens: auto;
 }
 .aside-content-block .sub-content {
 	margin-bottom: 20px;
