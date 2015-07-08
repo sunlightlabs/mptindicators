@@ -78,9 +78,6 @@
 				<div class="nav-indicators content {% if not country %}active{% endif %}" id="panel1">
 					<form class="search">
 					    <!--  <label>Search Documentation</label> -->
-					    <input id="autocomplete" type="search" placeholder="Search indicators" autocomplete="off">
-					    <button></button>
-					    <br/><br/>
 					    <select id="autocomplete_chosen" type="select" data-placeholder="Search indicators" autocomplete="off" multiple>
 					    	{% for s in sections %}
 						    	{% for ss in s.subsections.all %}
