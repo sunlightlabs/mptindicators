@@ -346,17 +346,22 @@ a:hover, a:focus {
 }
 
 .nav-indicators .search {
-	input{
+	input, select {
 		box-shadow: none;
 		background-color: inherit;
 		border: 0;
-		border-bottom: 2px solid white;
 		margin: 0 10px 0 20px;
 		width: 210px;
 		display: inline-block;
 		font-family: $font-serif;
-		font-family: italic;
+		font-style: italic;
 		color: $clr-green-text;
+	}
+	.chosen-container {
+		margin: 0 10px 0 20px;
+	}
+	input#autocomplete {
+		border-bottom: 2px solid white;
 	}
 	button {
 		background: url('../img/search.png') center top no-repeat;
