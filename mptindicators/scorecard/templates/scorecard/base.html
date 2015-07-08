@@ -82,8 +82,8 @@
 					    	{% for s in sections %}
 						    	{% for ss in s.subsections.all %}
 							    	{% for indicator in ss.indicators.all %}
-										<option value={{indicator.id}}>
-											{{ indicator.id }}. {{ indicator.name }}
+										<option value={{ indicator.number }}>
+											{{ indicator.number }}. {{ indicator.name }}
 							    		</option>
 									{% endfor %}
 								{% endfor %}
@@ -116,7 +116,7 @@
 								     			<ul>
 								     				{% for indicator in ss.indicators.all %}
 								     					<li>
-								     						<a href="{% url 'scorecard_indicator' indicator.number %}">
+								     						<a href="{% url 'scorecard_indicator' indicator.number %}" data-indicator="{{ indicator.number }}">
 								     							<span class="indicator-num">{{ indicator.number }}</span> {{ indicator.name }}
 								     						</a>
 								     					</li>
