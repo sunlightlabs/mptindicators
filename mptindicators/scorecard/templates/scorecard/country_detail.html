@@ -85,7 +85,7 @@
 								            </dl>
 								            -->
 							            </div>
-									    <div id="panel-{{ section.grouper.number }}" class="content active">
+									    <div id="panel-{{ section.grouper.number }}" class="content">
 										    <ul class="accordion" data-accordion>
 										      	{% regroup section.list by indicator.subsection as subsection_list %}
 										      	{% for subsection in subsection_list %}
@@ -99,7 +99,7 @@
 											    		<div id="panel-{{ section.grouper.number }}-{{ subsection.grouper.number }}" class="indicator content ">
 												    		<ul class="accordion" data-accordion>
 													      		{% for indicator_score in subsection.list %}
-													      			<li class="accordion-navigation">
+													      			<li class="accordion-navigation" id="indicator_{{indicator_score.indicator.number}}">
 													      				<a class="expand" href="#panel-ind{{ indicator_score.indicator.number }}">expand button!</a>
 														                <div class="section clearfix">
 															                <span class="indicator-num">{{ indicator_score.indicator.number }}</span>

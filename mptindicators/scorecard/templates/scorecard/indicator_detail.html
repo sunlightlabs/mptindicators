@@ -41,7 +41,7 @@
 	                                            <span class="ticks"></span>
 	                                        </span>
 
-	                                        <h4><a href="{% url 'scorecard_country' country.code %}">{{ country.name }}</a></h4>
+	                                        <h4><a href="{% url 'scorecard_country' country.code %}?expand=true#indicator_{{ indicator_score.indicator.number }}">{{ country.name }}</a></h4>
 	                                    </div>
 	                                </div>
 	                            </li>
