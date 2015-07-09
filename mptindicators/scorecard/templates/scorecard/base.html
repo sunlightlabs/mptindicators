@@ -36,13 +36,13 @@
 
 		<link rel="stylesheet" href="{% static 'css/app.css' %}">
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 		<script src="{% static 'foundation/js/vendor/modernizr.js' %}"></script>
 		<script src="{% static 'foundation/js/vendor/jquery.js' %}"></script>
 		<script src="{% static 'foundation/js/vendor/fastclick.js' %}"></script>
 		<script src="{% static 'foundation/js/foundation.min.js' %}"></script>
+		<script src="{% static 'chosen/chosen.jquery.min.js' %}"></script>
 		<script src="{% static 'js/app.js' %}"></script>
-		<script src="{% static 'js/chosen.jquery.js' %}"></script>
+		<script src="{% static 'js/accordion.js' %}"></script>
 
 		<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 		<script type="text/javascript" src="//use.typekit.net/djk1gww.js"></script>
@@ -82,8 +82,8 @@
 					    	{% for s in sections %}
 						    	{% for ss in s.subsections.all %}
 							    	{% for indicator in ss.indicators.all %}
-										<option value={{indicator.id}}>
-											{{ indicator.id }}. {{ indicator.name }}
+										<option value={{ indicator.number }}>
+											{{ indicator.number }}. {{ indicator.name }}
 							    		</option>
 									{% endfor %}
 								{% endfor %}
@@ -92,7 +92,7 @@
 					    <button></button>
 					</form>
 
-					<a class="expand-all"><span>expand-icon</span>Expand All</a>
+					<a class="expand-all"><span class="icon">expand-icon</span><span id="expander_text">Expand All</span></a>
 
 
 					<ul class="side-nav accordion" data-accordion>
@@ -116,7 +116,7 @@
 								     			<ul>
 								     				{% for indicator in ss.indicators.all %}
 								     					<li>
-								     						<a href="{% url 'scorecard_indicator' indicator.number %}">
+								     						<a href="{% url 'scorecard_indicator' indicator.number %}" data-indicator="{{ indicator.number }}">
 								     							<span class="indicator-num">{{ indicator.number }}</span> {{ indicator.name }}
 								     						</a>
 								     					</li>
@@ -186,30 +186,6 @@
             </div>
 		</div>
 		{% endblock %}
-		<script>
-		  $(document).foundation();
-		</script>
-		<script>
-			$(document).foundation({
-			  accordion: {
-			    // specify the class used for accordion panels
-			    content_class: 'content',
-			    // specify the class used for active (or open) accordion panels
-			    active_class: 'active',
-			    // allow multiple accordion panels to be active at the same time
-			    multi_expand: true,
-			    // allow accordion panels to be closed by clicking on their headers
-			    // setting to false only closes accordion panels when another is opened
-			    toggleable: true
-			  }
-			});
-			$(document).ready(function() {
-				$('a.expand-all').click(function(ev) {
-					ev.preventDefault();
-					$('li.accordion-navigation div.content').addClass('active');
-				})
-			});
-		</script>
 		{% block js %}{% endblock %}
 	</body>
 </html>

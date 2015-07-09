@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 import random
 from collections import defaultdict
 from django.db import models
-
+import re
 
 class Region(models.Model):
     name = models.CharField(max_length=255)
@@ -89,6 +89,22 @@ class Indicator(models.Model):
     def __unicode__(self):
         return self.name
 
+    def headerfy_name(self):
+        header_hash = defaultdict(lambda: '')
+        max_header_length = 63
+        for idx, n in enumerate(self.name):
+            length_of_current_word = len(re.search("(\S*)", self.name[idx:-1]).groups()[0])
+            if idx + length_of_current_word < max_header_length:
+                header_hash['header'] += self.name[idx]
+            else:
+                header_hash['subheader'] += self.name[idx]
+        return header_hash
+
+    def header(self):
+        return self.headerfy_name()['header']
+
+    def subheader(self):
+        return self.headerfy_name()['subheader']
 
 class IndicatorScore(models.Model):
     indicator = models.ForeignKey(Indicator, related_name="indicator_scores")

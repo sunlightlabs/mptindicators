@@ -103,4 +103,5 @@ BOWER_COMPONENTS_ROOT = BASE_DIR
 
 BOWER_INSTALLED_APPS = (
     'foundation',
+    'chosen'
 )
