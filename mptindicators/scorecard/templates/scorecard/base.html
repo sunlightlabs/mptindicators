@@ -42,6 +42,7 @@
 		<script src="{% static 'foundation/js/foundation.min.js' %}"></script>
 		<script src="{% static 'chosen/chosen.jquery.min.js' %}"></script>
 		<script src="{% static 'js/app.js' %}"></script>
+		<script src="{% static 'js/accordion.js' %}"></script>
 
 		<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 		<script type="text/javascript" src="//use.typekit.net/djk1gww.js"></script>
@@ -91,7 +92,7 @@
 					    <button></button>
 					</form>
 
-					<a class="expand-all"><span>expand-icon</span>Expand All</a>
+					<a class="expand-all"><span class="icon">expand-icon</span><span id="expander_text">Expand All</span></a>
 
 
 					<ul class="side-nav accordion" data-accordion>
@@ -185,30 +186,6 @@
             </div>
 		</div>
 		{% endblock %}
-		<script>
-		  $(document).foundation();
-		</script>
-		<script>
-			$(document).foundation({
-			  accordion: {
-			    // specify the class used for accordion panels
-			    content_class: 'content',
-			    // specify the class used for active (or open) accordion panels
-			    active_class: 'active',
-			    // allow multiple accordion panels to be active at the same time
-			    multi_expand: true,
-			    // allow accordion panels to be closed by clicking on their headers
-			    // setting to false only closes accordion panels when another is opened
-			    toggleable: true
-			  }
-			});
-			$(document).ready(function() {
-				$('a.expand-all').click(function(ev) {
-					ev.preventDefault();
-					$('li.accordion-navigation div.content').addClass('active');
-				})
-			});
-		</script>
 		{% block js %}{% endblock %}
 	</body>
 </html>
