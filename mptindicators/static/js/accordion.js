@@ -22,16 +22,21 @@ var getActiveIndicator = function() {
 	return indicator_matches === null ? 1 : parseInt(indicator_matches[1]);
 };
 
+var shouldExpandIndicator = function() {
+	return window.location.search.match(/expand=true/) !== null;
+};
+
+var showIndicator = function(indicator, expand_indicator) {
+	indicator_container = $("#indicator_" + indicator);
+	indicator_container.parents(".accordion-navigation div.content").addClass('active');
+	if (expand_indicator) {
+		indicator_container.children("a").trigger("click");
+	}
+};
+
 var onIndicatorPage = function() {
 	return window.location.pathname.match("countries") !== null;
 };
-
-var showIndicator = function(indicator) {
-	indicator_container = $("#indicator_" + indicator);
-	indicator_container.parents(".accordion-navigation div.content").addClass('active');
-	indicator_container.children("a").trigger("click");
-};
-
 
 $(document).ready(function() {
 	$(document).foundation({
@@ -53,6 +58,6 @@ $(document).ready(function() {
 
 	if (onIndicatorPage()) {
 		indicator = getActiveIndicator();
-		showIndicator(indicator);
+		showIndicator(indicator, shouldExpandIndicator());
 	}
 });
