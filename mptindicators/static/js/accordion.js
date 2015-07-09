@@ -1,3 +1,5 @@
+// Dealing with various kinds of accordion nonsense
+
 var setExpanderText = function() {
 	expander_text = $('#expander_text');
 	if (expander_text.parent("a").hasClass("active")) {
@@ -15,26 +17,42 @@ var toggleAccordion = function(is_opened) {
 	}
 };
 
-// for dealing with accordion nonsense
+var getActiveIndicator = function() {
+	indicator_matches = window.location.hash.match(/\#indicator_(\d*)/);
+	return indicator_matches === null ? 1 : parseInt(indicator_matches[1]);
+};
+
+var onIndicatorPage = function() {
+	return window.location.pathname.match("countries") !== null;
+};
+
+var showIndicator = function(indicator) {
+	indicator_container = $("#indicator_" + indicator);
+	indicator_container.parents(".accordion-navigation div.content").addClass('active');
+	indicator_container.children("a").trigger("click");
+};
+
+
 $(document).ready(function() {
 	$(document).foundation({
 	  accordion: {
-	    // specify the class used for accordion panels
 	    content_class: 'content',
-	    // specify the class used for active (or open) accordion panels
 	    active_class: 'active',
-	    // allow multiple accordion panels to be active at the same time
 	    multi_expand: true,
-	    // allow accordion panels to be closed by clicking on their headers
-	    // setting to false only closes accordion panels when another is opened
 	    toggleable: true
 	  }
 	});
-	setExpanderText();
+
+	// Deal with expand all button
 	$('a.expand-all').click(function(ev) {
 		ev.preventDefault();
 		$(this).toggleClass('active');
 		setExpanderText();
 		toggleAccordion($(this).hasClass('active'));
 	});
+
+	if (onIndicatorPage()) {
+		indicator = getActiveIndicator();
+		showIndicator(indicator);
+	}
 });
