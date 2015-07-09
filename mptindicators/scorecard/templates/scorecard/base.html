@@ -97,7 +97,7 @@
 
 					<ul class="side-nav accordion" data-accordion>
 					  {% for s in sections %}
-						  <li class="accordion-navigation">
+						  <li class="accordion-navigation {% if section and section.number == s.number %}active{% endif %}{% if not section and s.number == 1 %}active{% endif %}">
 						    <a class="expand" href="#nav-{{ s.number }}">expand button!</a>
 						    <div class="section">
 						    	<a href="{% url 'scorecard_section' s.number %}">{{ s.name }}</a>
@@ -108,7 +108,7 @@
 						    	<ul class="accordion" data-accordion>
 						    		{% for ss in s.subsections.all %}
 							    		<li class="accordion-navigation">
-								    		<a class="expand" href="#nav-{{ s.number }}-{{ ss.number }}">expand button!</a>
+								    		<a class="expand {% if subsection and subsection.number == ss.number %}active{% endif %}{% if not section and ss.number == 1 %}active{% endif %}" href="#nav-{{ s.number }}-{{ ss.number }}">expand button!</a>
 								    		<div class="section">
 												<a href="{% url 'scorecard_subsection' s.number ss.number %}">{{ ss.name }}</a>
 											</div>
