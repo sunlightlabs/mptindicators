@@ -55,11 +55,13 @@
                     </aside>
                     <aside class="aside-content-block meta-nav-indicators">
                         <h3>Scoring Criteria</h3>
-                        <div class="sub-content">
-                            <p>
-                                Narrative results can be viewed on country pages for scoreless indicators.
-                            </p>
-                        </div>
+                        {% if indicator.type == indicator.OPEN_TYPE %}
+                            <div class="sub-content">
+                                <p>
+                                    Narrative results can be viewed on country pages for scoreless indicators.
+                                </p>
+                            </div>
+                        {% endif %}                        
                         {{ indicator.criteria|markdown }}
                     </aside>
                 </div>
