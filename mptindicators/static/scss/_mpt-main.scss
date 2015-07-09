@@ -261,13 +261,12 @@ a:hover, a:focus {
 	margin-left: 20px;
 	.accordion-navigation {
 		@include accordion-navigation($bg:$clr-green-dark, $hover-bg:rgba(0,0,0,0.025), $active-bg:inherit, $font-color:$clr-green-text, $padding:5px, $font-size:.8rem);
-		&.active>.expand{
+		&.active>.expand, .accordion-navigation.active a.expand{
 	  		background-position: right top;
 			&:hover {
 				background-position: right bottom;
 			}
 	  }
-
 	}
 	.content {
 		@include accordion-content($bg:inherit);
