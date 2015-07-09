@@ -67,7 +67,7 @@ a:hover, a:focus {
 	height: 2.25em;
 	position: relative;
 	z-index: 200;
-	margin: 0;
+	margin: 0 20px 0 0;
 }
 .top-bar-section ul.meta-nav li>a {
 	text-transform: uppercase;
@@ -77,6 +77,11 @@ a:hover, a:focus {
 	-webkit-transition: background-color 300ms ease-out;
 	-moz-transition: background-color 300ms ease-out;
 	transition: background-color 300ms ease-out;
+}
+.top-bar-section li:not(.has-form) a:not(.button) {
+	text-align: center;
+	min-width: 96px;
+	padding: 0 0;
 }
 .small-12 {
 	min-width: 700px;
@@ -639,7 +644,7 @@ dl.breakdown {
 		background-color: $clr-chart-five;
 	}
 	.no-score & {
-		background-color: $clr-blue-base;
+		background-color: $clr-blue-dark;
 	}
 }
 .no-score .index {
