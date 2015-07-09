@@ -56,6 +56,9 @@ a:hover, a:focus {
 	background: inherit;
 	background-color: inherit;
 }
+.top-bar-section li.logo:not(.has-form) a:not(.button):hover {
+	background-color: $clr-blue-base;
+}
 .logo h1 {
 	background: url('../img/mpt-logo.png') center center no-repeat;
 	display: block;
