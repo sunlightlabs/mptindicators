@@ -6,3 +6,4 @@ node_modules/
 static_root/
 *.pyc
 *.sqlite3
+mptindicators/local_settings.py
