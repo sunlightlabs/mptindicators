@@ -41,6 +41,7 @@ class Country(models.Model):
 class Section(models.Model):
     number = models.PositiveSmallIntegerField(default=0)
     name = models.CharField(max_length=255, blank=True)
+    findings = models.TextField(blank=True)
 
     class Meta:
         ordering = ('number',)
