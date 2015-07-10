@@ -105,3 +105,9 @@ BOWER_INSTALLED_APPS = (
     'foundation',
     'chosen'
 )
+
+try:
+    from local_settings import *
+except:
+    print("Couldn't load local settings file. Using mptindicators/settings.py")
+
