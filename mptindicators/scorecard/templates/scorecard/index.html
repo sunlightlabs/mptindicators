@@ -1,4 +1,5 @@
 {% extends "scorecard/base.html" %}
+{% load staticfiles %}
 {% load pages_tags %}
 {% load scorecard_tags %}
 
@@ -11,7 +12,7 @@
 <div class="mpt-content-area row full-width index">
     <div class="small-12 columns map-intro">
 		<div class="map-content">
-			<img src="../../static/img/map.svg">
+			<img src="{% static 'img/map.svg' %}">
 			<div class="map-notes">
 				<div class="fact-one">
 					<p>Each country scorecard consists of <span class="highlight">50</span> indicator questions.</p>
