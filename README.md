@@ -2,6 +2,10 @@
 
 A project of [Money, Politics and Transparency](http://moneypoliticstransparency.org).
 
+## Chunks
+
+Some of the words shown on the website are stored in a file called chunks.json, whose contents are saved to the database. To initialize an install with this copy, run `python manage.py loaddata data/chunks.json`.
+
 ## Static Assets
 
 ### Setup
