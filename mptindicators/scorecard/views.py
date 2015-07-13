@@ -13,8 +13,30 @@ class MPTView(View):
         context = super(MPTView, self).get_context_data(**kwargs)
         context['countries'] = Country.objects.all()
         context['sections'] = Section.objects.all()
+
         return context
 
+
+class MPTOrderedView(MPTView):
+    def get_context_data(self, **kwargs):
+        context = super(MPTOrderedView, self).get_context_data(**kwargs)
+        context['ordering'] = self.request.GET.get('o')
+
+        return context
+
+
+class MPTSectionView(MPTOrderedView):
+    def get_context_data(self, **kwargs):
+        context = super(MPTSectionView, self).get_context_data(**kwargs)
+        if context['ordering'] == 'name_asc':
+            context['countries'] = context['countries'].order_by('name')
+        if context['ordering'] == 'name_desc':
+            context['countries'] = context['countries'].order_by('-name')
+        # if context['ordering'] == 'score_asc':
+        #     context['countries'] = countries.order_by('score', 'country__name')
+        # if context['ordering'] == 'score_desc':
+        #     context['countries'] = countries.order_by('-score', 'country__name')
+        return context
 
 class IndexView(MPTView, TemplateView):
 
@@ -63,7 +85,7 @@ class SectionList(MPTView, ListView):
         return Section.objects.prefetch_related("subsections__indicators")
 
 
-class SectionDetail(MPTView, DetailView):
+class SectionDetail(MPTSectionView, DetailView):
     model = Section
     slug_field = "number"
     slug_url_kwarg = "section"
@@ -72,7 +94,7 @@ class SectionDetail(MPTView, DetailView):
         return Section.objects.prefetch_related("subsections__indicators")
 
 
-class SubsectionDetail(MPTView, DetailView):
+class SubsectionDetail(MPTSectionView, DetailView):
     model = Subsection
     slug_field = "number"
     slug_url_kwarg = "subsection"
@@ -90,10 +112,11 @@ class SubsectionDetail(MPTView, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SubsectionDetail, self).get_context_data(**kwargs)
         context['section'] = self.object.section
+
         return context
 
 
-class IndicatorDetail(MPTView, DetailView):
+class IndicatorDetail(MPTOrderedView, DetailView):
     model = Indicator
     slug_field = "number"
     slug_url_kwarg = "number"
@@ -109,19 +132,17 @@ class IndicatorDetail(MPTView, DetailView):
         context['subsection'] = self.object.subsection
         context['section'] = self.object.subsection.section
 
-        ordering = self.request.GET.get('o')
         indicator_scores = self.object.indicator_scores.all()
 
-        if ordering == 'name_asc':
+        if context['ordering'] == 'name_asc':
             indicator_scores = indicator_scores.order_by('country__name')
-        if ordering == 'name_desc':
+        if context['ordering'] == 'name_desc':
             indicator_scores = indicator_scores.order_by('-country__name')
-        if ordering == 'score_asc':
+        if context['ordering'] == 'score_asc':
             indicator_scores = indicator_scores.order_by('score', 'country__name')
-        if ordering == 'score_desc':
+        if context['ordering'] == 'score_desc':
             indicator_scores = indicator_scores.order_by('-score', 'country__name')
 
-        context['ordering'] = ordering
         context['indicator_scores'] = indicator_scores
 
         return context
