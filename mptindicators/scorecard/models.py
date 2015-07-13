@@ -33,6 +33,9 @@ class Country(models.Model):
     def __unicode__(self):
         return self.name
 
+    def aggregate_score_for_chart(self):
+        return self.aggregate_score if self.aggregate_score > 0 else 1
+
     @property
     def gi_name(self):
         return self.name.lower().replace(' ', '-')
@@ -117,6 +120,9 @@ class IndicatorScore(models.Model):
     class Meta:
         ordering = ('country__name', 'indicator__number')
 
+    def score_for_chart(self):
+        return self.score if self.score > 0 else 1
+
     @property
     def rendered_sources(self):
         lines = [l.strip() for l in self.sources.split('\n')]
@@ -130,3 +136,6 @@ class Aggregate(models.Model):
     subsection = models.ForeignKey(
         Subsection, related_name="aggregates", blank=True, null=True)
     score = models.PositiveSmallIntegerField(blank=True, null=True)
+
+    def score_for_chart(self):
+        return self.score if self.score > 0 else 1
