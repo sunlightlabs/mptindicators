@@ -70,14 +70,3 @@
     </div>
 </div>
 {% endblock %}
-
-{% block js %}
-	<script>
-		$(document).ready(function() {
-			$('select[name=o]').change(function() {
-				var path = window.location.pathname;
-				window.location = path + '?o=' + this.value;
-			});
-		});
-	</script>
-{% endblock %}
