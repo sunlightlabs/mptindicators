@@ -1,5 +1,6 @@
 {% extends "scorecard/base.html" %}
 {% load scorecard_tags %}
+{% load md2 %}
 
 {% block og %}
 	<meta property="og:url" content="http://data.moneypoliticstransparency.org{% url 'scorecard_subsection' subsection.section.number subsection.number %}">
@@ -53,7 +54,7 @@
                     <aside class="aside-content-block meta-nav-indicators">
                         <h3>Key Findings</h3>
                         <p>
-                            {{ object.section.findings }}
+                            {{ object.section.findings|markdown }}
                         </p>
                     </aside>
                 </div>
