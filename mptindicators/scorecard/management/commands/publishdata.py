@@ -1,11 +1,14 @@
 import datetime
 import os
+import shutil
 import unicodecsv as csv
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
-from mptindicators.scorecard.models import Country, Section, Indicator
+from mptindicators.scorecard.models import Country, Section, Indicator, IndicatorScore
+from zipfile import ZipFile
 
 TMP_DIR = settings.TMP_DIR
+DATA_DIR = os.path.join(settings.BASE_DIR, 'data')
 
 
 def write_countries(path):
@@ -66,13 +69,11 @@ def write_scores(path):
     with open(path, 'w') as outfile:
         writer = csv.writer(outfile)
         writer.writerow(
-            ('number', 'name', 'section', 'subsection',
-             'type', 'criteria', 'comment'))
+            ('country', 'indicator', 'score', 'comment', 'sources'))
 
-        for i in Indicator.objects.all().select_related():
-            row = (i.number, i.name,
-                   i.subsection.number, i.subsection.section.number,
-                   i.type, i.criteria, i.comment)
+        for i in IndicatorScore.objects.all().select_related():
+            row = (i.country_id, i.indicator_id,
+                   i.score, i.comment, i.sources)
             writer.writerow(row)
 
 
@@ -80,10 +81,9 @@ class Command(BaseCommand):
 
     help = 'Create data archive and publish to S3'
 
-    # def add_arguments(self, parser):
-    #     parser.add_argument('path')
-
     def handle(self, *args, **options):
+
+        # get path stuff set up
 
         if not os.path.exists(TMP_DIR):
             os.mkdir(TMP_DIR)
@@ -94,51 +94,29 @@ class Command(BaseCommand):
         if not os.path.exists(archive_path):
             os.mkdir(archive_path)
 
+        # write data
+
         write_countries(archive_path)
         write_sections(archive_path)
         write_indicators(archive_path)
         write_scores(archive_path)
 
+        # copy Excel spreadsheet
+
+        src_path = os.path.join(DATA_DIR, 'mpt-indicators.xls')
+        dst_path = os.path.join(archive_path, 'mpt-indicators.xls')
+
+        shutil.copyfile(src_path, dst_path)
+
+        # zip it
+
+        zip_path = os.path.join(TMP_DIR, 'mpt_data.zip')
+
+        with ZipFile(zip_path, 'w') as zf:
+            for filename in os.listdir(archive_path):
+                zf.write(os.path.join(archive_path, filename), filename)
 
 
+        # cleanup
 
-
-
-
-
-
-"""
-            writer = csv.writer(bffr)
-
-            writer.writerow(
-                ('indicator', 'question', 'type', 'score',
-                 'section', 'section_name', 'subsection', 'subsection_name'))
-
-            for score in country.indicator_scores.select_related():
-
-                indicator = score.indicator
-                subsection = indicator.subsection
-                section = subsection.section
-
-                row = (
-                    indicator.number,
-                    indicator.name,
-                    indicator.get_type_display(),
-                    score.score,
-                    section.number,
-                    section.name,
-                    subsection.number,
-                    subsection.name,
-                )
-
-                writer.writerow(row)
-
-            content = bffr.getvalue()
-
-        filename = 'indicators_{}.csv'.format(slugify(country.name))
-
-        resp = HttpResponse(content, content_type='text/csv')
-        resp['Content-Disposition'] = 'attachment; filename={}'.format(filename)
-
-        return resp
-"""
+        shutil.rmtree(archive_path)

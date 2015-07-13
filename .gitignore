@@ -4,6 +4,7 @@ mptindicators/static/scss/app.css
 bower_components/
 node_modules/
 static_root/
+tmp/
 *.pyc
 *.sqlite3
 mptindicators/local_settings.py
