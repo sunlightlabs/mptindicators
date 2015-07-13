@@ -1,10 +1,19 @@
 $(document).ready(function(){
+	// Autocomplete
 	$("#autocomplete_chosen").chosen({width: "210px"});
 	$("#autocomplete_chosen").change(function() {
 	  $('.search-field').hide();
 	  window.location.replace("/indicators/" + $(this).val() + "/");
 	});
 	style_current_indicator();
+
+	// Country sorting
+    $(document).ready(function() {
+      $('select[name=o]').change(function() {
+        var path = window.location.pathname;
+        window.location = path + '?o=' + this.value;
+      });
+    });
 });
 
 get_current_indicator = function() {
