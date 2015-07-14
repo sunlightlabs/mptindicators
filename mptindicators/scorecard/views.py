@@ -21,14 +21,14 @@ class MPTOrderedView(MPTView):
     def get_context_data(self, **kwargs):
         context = super(MPTOrderedView, self).get_context_data(**kwargs)
         context['ordering'] = self.request.GET.get('o')
-        if 'section' not in context:
-            context['section'] = self.object.section
         return context
 
 
 class MPTSectionView(MPTOrderedView):
     def get_context_data(self, **kwargs):
         context = super(MPTSectionView, self).get_context_data(**kwargs)
+        if 'section' not in context:
+            context['section'] = self.object.section
         context['aggregates'] = Aggregate.objects.filter(
             section=context['section'],
             subsection=context.get('subsection', None))
