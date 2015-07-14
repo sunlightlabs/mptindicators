@@ -27,6 +27,8 @@ urlpatterns = [
         SectionList.as_view(), name='scorecard_sections'),
     url(r'^sections/(?P<section>\d)/$',
         SectionDetail.as_view(), name='scorecard_section'),
+    url(r'^sections/4/1.*',
+        SectionDetail.as_view(), {'pk': 4}),
     url(r'^sections/(?P<section>\d)/(?P<subsection>\d)/$',
         SubsectionDetail.as_view(), name='scorecard_subsection'),
     url(r'^indicators/(?P<number>\d{1,2})/$',
