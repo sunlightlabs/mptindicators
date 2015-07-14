@@ -1,6 +1,7 @@
 {% extends "scorecard/base.html" %}
 {% load md2 %}
 {% load scorecard_tags %}
+{% load staticfiles %}
 
 {% block og %}
 	<meta property="og:url" content="http://data.moneypoliticstransparency.org{% url 'scorecard_country' country.code %}">
@@ -155,4 +156,7 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block js %}
+	<script type="text/javascript" src="{% static 'js/sources.js' %}"></script>
 {% endblock %}
