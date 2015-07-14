@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, DetailView, ListView, TemplateView
 from django.utils.text import slugify
-from .models import Country, Section, Subsection, Indicator
+from .models import Country, Section, Subsection, Indicator, Aggregate
 
 
 class MPTView(View):
@@ -21,22 +21,33 @@ class MPTOrderedView(MPTView):
     def get_context_data(self, **kwargs):
         context = super(MPTOrderedView, self).get_context_data(**kwargs)
         context['ordering'] = self.request.GET.get('o')
-
+        if 'section' not in context:
+            context['section'] = self.object.section
         return context
 
 
 class MPTSectionView(MPTOrderedView):
     def get_context_data(self, **kwargs):
         context = super(MPTSectionView, self).get_context_data(**kwargs)
+        context['aggregates'] = Aggregate.objects.filter(
+            section=context['section'],
+            subsection=context.get('subsection', None))
         if context['ordering'] == 'name_asc':
-            context['countries'] = context['countries'].order_by('name')
-        if context['ordering'] == 'name_desc':
-            context['countries'] = context['countries'].order_by('-name')
-        # if context['ordering'] == 'score_asc':
-        #     context['countries'] = countries.order_by('score', 'country__name')
-        # if context['ordering'] == 'score_desc':
-        #     context['countries'] = countries.order_by('-score', 'country__name')
+            context['aggregates'] = context['aggregates'].order_by(
+                'country__name')
+        elif context['ordering'] == 'name_desc':
+            context['aggregates'] = context['aggregates'].order_by(
+                '-country__name')
+        elif context['ordering'] == 'score_asc':
+            context['aggregates'] = context['aggregates'].order_by(
+                'score',
+                'country__name')
+        elif context['ordering'] == 'score_desc':
+            context['aggregates'] = context['aggregates'].order_by(
+                '-score',
+                'country__name')
         return context
+
 
 class IndexView(MPTView, TemplateView):
 
@@ -112,7 +123,6 @@ class SubsectionDetail(MPTSectionView, DetailView):
     def get_context_data(self, **kwargs):
         context = super(SubsectionDetail, self).get_context_data(**kwargs)
         context['section'] = self.object.section
-
         return context
 
 

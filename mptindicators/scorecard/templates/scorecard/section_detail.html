@@ -26,22 +26,21 @@
                         </select>
                     </form>
                     <ul class="clearfix">
-                        {% for country in countries %}
-                    		{% section_agg country object as agg %}
+                        {% for aggregate in aggregates %}
                     		<li>
-                    			<div class="country-score {% score_class agg.score %}">
+                    			<div class="country-score {% score_class aggregate.score %}">
                                     <dl class="score composite">
                                     <dt class="text-replace">composite</dt>
-                                    <dd>{{ agg.score }}</dd>
+                                    <dd>{{ aggregate.score }}</dd>
                                     </dl>
                                     <div class="country-meta clearfix">
                                         <span class="chart">
-                                            <span class="count">{{ agg.score }}</span>
-                                            <span class="index" style="width: {{ agg.score_for_chart }}%"></span>
+                                            <span class="count">{{ aggregate.score }}</span>
+                                            <span class="index" style="width: {{ aggregate.score_for_chart }}%"></span>
                                             <span class="ticks"></span>
                                         </span>
 
-                                        <h4><a href="/path/to/pdf/analysis">{{ country.name }}</a></h4>
+                                        <h4><a href="">{{ aggregate.country.name }}</a></h4>
                                     </div>
                                 </div>
                             </li>
