@@ -40,7 +40,7 @@
                                             <span class="ticks"></span>
                                         </span>
 
-                                        <h4><a href="">{{ aggregate.country.name }}</a></h4>
+                                        <h4><a href="{% url 'scorecard_country' aggregate.country.code %}">{{ aggregate.country.name }}</a></h4>
                                     </div>
                                 </div>
                             </li>
@@ -48,8 +48,11 @@
                     </ul>
                 </div>
                 <div class="columns small-4">
-                    <aside class="aside-content-block meta-nav-indicators inline">
-                        <a class="icon download" href="{% url 'scorecard_methodology' %}">Download PDF analysis</a>
+                    <aside class="aside-content-block meta-nav-indicators">
+                        <ul class="no-bullet">
+                            <li><a class="icon download" href="http://assets.sunlightfoundation.com.s3.amazonaws.com/mpt/MPT-Campaign-Finance-Indicators-Key-Findings.pdf">Download PDF analysis</a></li>
+                            <li><a class="icon download" href="http://assets.sunlightfoundation.com.s3.amazonaws.com/mpt/bulk.zip">Download full dataset</a></li>
+                        </ul>
                     </aside>
                     <aside class="aside-content-block meta-nav-indicators">
                         <h3>Key Findings</h3>
