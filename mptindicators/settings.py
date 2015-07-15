@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'grunt',
     'django_markdown2',
     'gunicorn',
+    'raven.contrib.django.raven_compat'
 )
 
 MIDDLEWARE_CLASSES = (
