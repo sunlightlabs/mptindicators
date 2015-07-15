@@ -18,7 +18,7 @@ $(document).ready(function(){
     // Share stuff
     $(".facebook").click(function() {
     	FB.ui({
-		  method: 'share_open_graph',
+		  method: 'share',
 		  link: window.location.href
 		}, function(response){});
     });
