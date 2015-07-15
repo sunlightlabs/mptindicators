@@ -19,7 +19,7 @@ $(document).ready(function(){
     $(".facebook").click(function() {
     	FB.ui({
 		  method: 'share',
-		  link: window.location.href
+		  href: window.location.href
 		}, function(response){});
     });
 });
