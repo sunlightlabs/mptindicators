@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// Autocomplete
-	$("#autocomplete_chosen").chosen({width: "210px"});
+	$("#autocomplete_chosen").chosen({width: "210px", search_contains: true});
 	$("#autocomplete_chosen").change(function() {
 	  $('.search-field').hide();
 	  window.location.replace("/indicators/" + $(this).val() + "/");
