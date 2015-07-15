@@ -14,6 +14,14 @@ $(document).ready(function(){
         window.location = path + '?o=' + this.value;
       });
     });
+
+    // Share stuff
+    $(".facebook").click(function() {
+    	FB.ui({
+		  method: 'feed',
+		  link: window.location.href
+		}, function(response){});
+    });
 });
 
 get_current_indicator = function() {
