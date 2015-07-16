@@ -22,6 +22,11 @@ $(document).ready(function(){
 		  href: window.location.href
 		}, function(response){});
     });
+
+    // Take to country page when someone clicks on a country-score cell
+    $(".indicator-scores .country-score").click(function(e) {
+    	window.location = $(this).find("a").attr('href');
+    });
 });
 
 get_current_indicator = function() {

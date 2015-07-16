@@ -565,6 +565,11 @@ a:hover, a:focus {
 			color-stop(100%,rgba(241,249,251,0)));
 		/* Chrome,Safari4+ */
 	}
+	.indicator-scores & {
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
 .composite.score {
 	width: 85px;
