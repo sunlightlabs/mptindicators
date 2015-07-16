@@ -33,7 +33,7 @@ class Country(models.Model):
     def __unicode__(self):
         return self.name
 
-    def aggregate_score_for_chart(self):
+    def aggregate_score_chart_width(self):
         return self.aggregate_score if self.aggregate_score > 0 else 1
 
     @property
@@ -120,7 +120,7 @@ class IndicatorScore(models.Model):
     class Meta:
         ordering = ('country__name', 'indicator__number')
 
-    def score_for_chart(self):
+    def score_chart_width(self):
         return self.score if self.score > 0 else 1
 
     @property
@@ -137,5 +137,5 @@ class Aggregate(models.Model):
         Subsection, related_name="aggregates", blank=True, null=True)
     score = models.PositiveSmallIntegerField(blank=True, null=True)
 
-    def score_for_chart(self):
+    def score_chart_width(self):
         return self.score if self.score > 0 else 1
