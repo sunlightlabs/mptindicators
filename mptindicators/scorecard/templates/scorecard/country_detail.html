@@ -109,11 +109,7 @@
 														                    		Score
 														                    	</dt>
 														                    	<dd>
-														                    	{% if indicator_score.score == None %}
-														                    		--
-														                    	{% else %}
-														                    		{{ indicator_score.score }}
-														                    	{% endif %}
+														                    		{{ indicator_score.score_for_display }}
 														                    	</dd>
 														                    </dl>
 													                   	 	<h6>{{ indicator_score.indicator.name }}<a href="{% url 'scorecard_indicator' indicator_score.indicator.number %}">More about indicator</a></h6>

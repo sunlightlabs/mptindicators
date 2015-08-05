@@ -110,6 +110,7 @@ class Indicator(models.Model):
     def subheader(self):
         return self.headerfy_name()['subheader']
 
+
 class IndicatorScore(models.Model):
     indicator = models.ForeignKey(Indicator, related_name="indicator_scores")
     country = models.ForeignKey(Country, related_name="indicator_scores")
@@ -123,10 +124,29 @@ class IndicatorScore(models.Model):
     def score_chart_width(self):
         return self.score if self.score > 0 else 1
 
+    def score_for_display(self):
+        if self.score is None:
+            return '--'
+        if self.indicator.type == Indicator.IN_LAW_TYPE:
+            return self.in_law_score()
+        else:
+            return self.score
+
+    def in_law_score(self):
+        return {
+            0: 'NO',
+            50: 'MODERATE',
+            100: 'YES'
+        }[self.score]
+
     @property
     def rendered_sources(self):
         lines = [l.strip() for l in self.sources.split('\n')]
         return '\n'.join('* {}'.format(l) for l in lines if l)
+
+    @property
+    def is_in_law(self):
+        return self.indicator.type == Indicator.IN_LAW_TYPE
 
 
 class Aggregate(models.Model):

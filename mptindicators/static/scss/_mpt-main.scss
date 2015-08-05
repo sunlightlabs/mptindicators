@@ -593,6 +593,9 @@ a:hover, a:focus {
 		text-transform: uppercase;
 		font-weight: 200;
 		font-size: .8rem;
+		&.in_law {
+			font-weight: 700;
+		}
 	}
 }
 dl.breakdown {

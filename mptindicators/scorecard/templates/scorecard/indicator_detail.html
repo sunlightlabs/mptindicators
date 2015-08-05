@@ -30,10 +30,17 @@
                         	{% with indicator_score.country as country %}
 	                            <li>
 	                                <div class="country-score {% score_class indicator_score.score %}">
-	                                    <dl class="score composite">
-	                                    <dt class="text-replace">composite</dt>
-	                                    <dd>{% if indicator_score.score == None %}--{% else %}{{ indicator_score.score }}{% endif %}</dd>
-	                                    </dl>
+	                                    {% if indicator_score.is_in_law %}
+                                            <dl class="score composite">
+                                                <dt class="in_law">{{ indicator_score.score_for_display }}</dt>
+                                                <dd>--</dd>
+                                            </dl>                                            
+                                        {% else %}
+                                            <dl class="score composite">
+                                                <dt class="text-replace">composite</dt>
+                                                <dd>{{ indicator_score.score_for_display }}</dd>
+                                            </dl>
+                                        {% endif %}
 	                                    <div class="country-meta clearfix">
 	                                        <span class="chart">
 	                                            <span class="count">{{ indicator_score.score }}</span>
