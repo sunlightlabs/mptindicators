@@ -59,15 +59,17 @@
 
 			<div class="row">
 				<div class="columns small-8  indicator-scores">
+                                    <div class="clearfix">
 					<h3 id="indicator-scores">Indicator Scores</h3>
-                    <form>
-                        <select name="o">
-                            <option value="name_asc" {% if not ordering or ordering == 'name_asc' %}selected{% endif %}>Country A-Z</option>
-                            <option value="name_desc" {% if ordering == 'name_desc' %}selected{% endif %}>Country Z-A</option>
-                            <option value="score_asc" {% if ordering == 'score_asc' %}selected{% endif %}>Score 0-100</option>
-                            <option value="score_desc" {% if ordering == 'score_desc' %}selected{% endif %}>Score 100-0</option>
-                        </select>
-                    </form>
+                                        <form>
+                                            <select name="o">
+                                                <option value="name_asc" {% if not ordering or ordering == 'name_asc' %}selected{% endif %}>Country A-Z</option>
+                                                <option value="name_desc" {% if ordering == 'name_desc' %}selected{% endif %}>Country Z-A</option>
+                                                <option value="score_asc" {% if ordering == 'score_asc' %}selected{% endif %}>Score 0-100</option>
+                                                <option value="score_desc" {% if ordering == 'score_desc' %}selected{% endif %}>Score 100-0</option>
+                                            </select>
+                                        </form>
+                                    </div>
                     <ul class="clearfix">
                     	{% for country in indicator_countries %}
                         	<li>
