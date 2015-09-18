@@ -25,6 +25,14 @@ class Country(models.Model):
     aggregate_score = models.PositiveSmallIntegerField(blank=True, null=True)
     in_law_score = models.PositiveSmallIntegerField(blank=True, null=True)
     in_practice_score = models.PositiveSmallIntegerField(blank=True, null=True)
+ 
+    # apparently the names of countries drifted from Global Integrity's names,
+    # so simply replacing whitespace with hyphens won't always work. this is a
+    # map for fixing this ad-hoc.
+    GI_NAME_VARIANTS = {
+        'united-states-of-america': 'united-states',
+        'trinidad-&-tobago': 'trinidad-and-tobago'
+    }
 
     class Meta:
         ordering = ('name',)
@@ -38,7 +46,8 @@ class Country(models.Model):
 
     @property
     def gi_name(self):
-        return self.name.lower().replace(' ', '-')
+        gi_slug = self.name.lower().replace(' ', '-')
+        return self.GI_NAME_VARIANTS.get(gi_slug, gi_slug)
 
 
 class Section(models.Model):
